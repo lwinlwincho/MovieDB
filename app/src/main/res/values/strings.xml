@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">MovieBD</string>
+    <string name="img_description">Descriptions</string>
+    <string name="img_date">Date</string>
+    <string name="movie1">Movie1</string>
+    <string name="movie2">Movie2</string>
+    <string name="movie3">Movie3</string>
+    <string name="movie4">Movie4</string>
+    <string name="movie5">Movie5</string>
+    <string name="movie6">Movie6</string>
+    <string name="movie7">Movie7</string>
+    <string name="movie8">Movie8</string>
+    <string name="movie9">Movie9</string>
+    <string name="movie10">Movie10</string>
+
+    <string name="date1">Date1</string>
+    <string name="date2">Date2</string>
+    <string name="date3">Date3</string>
+    <string name="date4">Date4</string>
+    <string name="date5">Date5</string>
+    <string name="date6">Date6</string>
+    <string name="date7">Date7</string>
+    <string name="date8">Date8</string>
+    <string name="date9">Date9</string>
+    <string name="date10">Date10</string>
+
+</resources>

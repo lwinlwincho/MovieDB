@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">MovieBD</string>
-    <string name="img_description">Descriptions</string>
-    <string name="img_date">Date</string>
     <string name="movie1">Movie1</string>
     <string name="movie2">Movie2</string>
     <string name="movie3">Movie3</string>
@@ -23,5 +21,19 @@
     <string name="date8">Date8</string>
     <string name="date9">Date9</string>
     <string name="date10">Date10</string>
+
+    <string name="description1">This Movie is movie1.jaioeafhhahf fa jfahfafjkahdhfaa a fuwjiofaufjkajf9a</string>
+    <string name="description2">This Movie is movie2.jaioeafhhahf fa jfahfafjkahdhfaa a fuwjiofaufjkajf9a</string>
+    <string name="description3">This Movie is movie3.jaioeafhhahf fa jfahfafjkahdhfaa a fuwjiofaufjkajf9a</string>
+    <string name="description4">This Movie is movie4.jaioeafhhahf fa jfahfafjkahdhfaa a fuwjiofaufjkajf9a</string>
+    <string name="description5">This Movie is movie5.jaioeafhhahf fa jfahfafjkahdhfaa a fuwjiofaufjkajf9a</string>
+    <string name="description6">This Movie is movie6.jaioeafhhahf fa jfahfafjkahdhfaa a fuwjiofaufjkajf9a</string>
+    <string name="description7">This Movie is movie7.jaioeafhhahf fa jfahfafjkahdhfaa a fuwjiofaufjkajf9a</string>
+    <string name="description8">This Movie is movie8.jaioeafhhahf fa jfahfafjkahdhfaa a fuwjiofaufjkajf9a</string>
+    <string name="description9">This Movie is movie9.jaioeafhhahf fa jfahfafjkahdhfaa a fuwjiofaufjkajf9a</string>
+    <string name="description10">This Movie is movie10.jaioeafhhahf fa jfahfafjkahdhfaa a fuwjiofaufjkajf9a</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

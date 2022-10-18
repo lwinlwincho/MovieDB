@@ -1,9 +1,11 @@
 package com.llc.moviebd.data
 
+import android.content.ClipData
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.llc.moviebd.databinding.MovieListBinding
+import com.llc.moviebd.databinding.FragmentFavouriteMovieBinding.inflate
+import com.llc.moviebd.databinding.ItemMovieBinding
 
 interface Delegate {
     fun onClickListener(model: MovieModel)
@@ -15,29 +17,31 @@ class ItemAdapter(
     private val delegate: Delegate
 ) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
-    private var movieList: List<MovieModel> = emptyList()
+    //The first create movie list with empty
+    private var movieListPoster: List<MovieModel> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val binding = MovieListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ItemViewHolder(binding, delegate)
+
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item: MovieModel = movieList[position]
+        val item: MovieModel = movieListPoster[position]
         holder.bind(item)
     }
 
     override fun getItemCount(): Int {
-        return movieList.size
+        return movieListPoster.size
     }
 
     //for livedata observe
     fun setMovieList(setList: List<MovieModel>) {
-        movieList = setList
+        movieListPoster = setList
         notifyDataSetChanged()
     }
 
-    class ItemViewHolder(val binding: MovieListBinding, private val delegate: Delegate) :
+    class ItemViewHolder(private val binding:ItemMovieBinding, private val delegate: Delegate) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MovieModel) {
             binding.imgPoster.setImageResource(item.image)

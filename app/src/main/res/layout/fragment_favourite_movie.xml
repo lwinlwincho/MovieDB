@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".data.movie_poster.MovieListFragment">
 
-   <androidx.recyclerview.widget.RecyclerView
-       android:id="@+id/rv_movie_list"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:background="@color/white"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_favourite_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"/>
 
 </FrameLayout>

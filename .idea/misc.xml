@@ -3,10 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/MovieBD/app/src/main/res/drawable/bg_favorite_round_shape.xml" value="0.1" />
+        <entry key="..\:/MovieBD/app/src/main/res/drawable/bg_favorite_shape.xml" value="0.1" />
+        <entry key="..\:/MovieBD/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.1" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_favourite_movie.xml" value="0.1" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_movie_detail.xml" value="0.1" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_movie_list.xml" value="0.1" />
-        <entry key="..\:/MovieBD/app/src/main/res/layout/movie_list.xml" value="0.1" />
+        <entry key="..\:/MovieBD/app/src/main/res/layout/movie_list.xml" value="0.16" />
       </map>
     </option>
   </component>

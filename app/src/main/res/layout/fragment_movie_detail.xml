@@ -5,27 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragment.MovieDetailFragment">
+    android:padding="15dp"
+    tools:context=".movie_detail.MovieDetailFragment">
 
-    <ImageView
-        android:id="@+id/imv_detail"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:src="@tools:sample/avatars" />
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/txt_movie_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/imv_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:src="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/txt_movie_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/img_description"
-        android:textSize="18sp"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txt_movie_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17sp" />
 
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txt_movie_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>

@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
-        android:name="com.llc.moviebd.movie_detail.MovieDetailFragment"
+        android:name="com.llc.moviebd.data.movie_detail.MovieDetailFragment"
         android:label="fragment_movie_detail"
         tools:layout="@layout/fragment_movie_detail" >
         <argument

@@ -7,6 +7,10 @@
     android:orientation="vertical"
     android:padding="15dp"
     tools:context=".data.movie_detail.MovieDetailFragment">
+    <ProgressBar
+        android:id="@+id/detail_progress_bar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"/>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"

@@ -6,11 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.llc.moviebd.data.model.MovieModel
-import com.llc.moviebd.data.movie_poster.MovieListFragmentDirections
 import com.llc.moviebd.databinding.FragmentFavouriteMovieBinding
 
 class FavouriteMovieFragment : Fragment(),FavouriteClickListener {
@@ -44,11 +41,9 @@ class FavouriteMovieFragment : Fragment(),FavouriteClickListener {
         }
 
         favouriteMovieViewModel.favEvent.observe(viewLifecycleOwner){ favMovieList->
-            favItemAdapter.setFavouriteList(favMovieList)
+           // favItemAdapter.setFavouriteList(favMovieList)
             //favItemAdapter.submitList(favMovieList)
         }
-
-        binding.rvFavouriteList.setHasFixedSize(true)
 
         /*binding.imvFavourite.setImageResource(favArgs.favouriteMovieModel.image)
         binding.txtMovieFavourite.text=getString(favArgs.favouriteMovieModel.title)

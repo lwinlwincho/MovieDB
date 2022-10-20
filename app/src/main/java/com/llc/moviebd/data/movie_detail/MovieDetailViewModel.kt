@@ -3,14 +3,27 @@ package com.llc.moviebd.data.movie_detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.llc.moviebd.network.MoviePhoto
+import androidx.lifecycle.viewModelScope
+import com.llc.moviebd.data.data_result.MovieDetailEvent
+import com.llc.moviebd.network.MovieAPI
+import kotlinx.coroutines.launch
 
 class MovieDetailViewModel : ViewModel() {
 
-    private val _detailEvent = MutableLiveData<MoviePhoto>()
-    val detailEvent: LiveData<MoviePhoto> = _detailEvent
+    private val _detailUIEvent = MutableLiveData<MovieDetailEvent>()
+    val detailUIEvent: LiveData<MovieDetailEvent> = _detailUIEvent
 
+    fun getMovieDetail(movieId: String) {
 
+        viewModelScope.launch {
+            _detailUIEvent.postValue(MovieDetailEvent.Loading)
+            try {
+                val result = MovieAPI.retrofitService.loadMovieDeatil(movieId.toInt())
+                _detailUIEvent.postValue(MovieDetailEvent.Success(result!!))
+            } catch (e: Exception) {
+                _detailUIEvent.postValue(MovieDetailEvent.Error(e.message.toString()))
+            }
+        }
 
-
+    }
 }

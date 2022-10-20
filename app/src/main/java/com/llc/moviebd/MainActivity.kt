@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.recyclerview.widget.RecyclerView
-import com.llc.moviebd.data.ItemAdapter
 import com.llc.moviebd.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

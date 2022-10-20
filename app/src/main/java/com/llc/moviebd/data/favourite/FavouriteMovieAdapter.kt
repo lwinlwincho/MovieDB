@@ -2,9 +2,13 @@ package com.llc.moviebd.data.favourite
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.llc.moviebd.data.model.MovieModel
+import com.llc.moviebd.data.movie_poster.MovieItemAdapter
 import com.llc.moviebd.databinding.ItemMovieBinding
+import com.llc.moviebd.extension.loadFromUrl
+import com.llc.moviebd.network.IMAGE_URL
 
 
 interface FavouriteClickListener {
@@ -13,33 +17,24 @@ interface FavouriteClickListener {
 }
 
 class FavouriteMovieAdapter(private val favouriteClickListener: FavouriteClickListener) :
-    RecyclerView.Adapter<FavouriteMovieAdapter.FavouriteMovieViewHolder>() {
+    ListAdapter<MovieModel, FavouriteMovieAdapter.FavouriteMovieViewHolder>(MovieItemAdapter.DiffCallBack) {
 
     private var favouriteMovieList: List<MovieModel> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouriteMovieViewHolder {
 
-        val binding = ItemMovieBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
+        return FavouriteMovieViewHolder(
+            ItemMovieBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
         )
-        return FavouriteMovieViewHolder(binding, favouriteClickListener)
-
-
-      /*  val binding =
-            LayoutInflater.from(parent.context).inflate(R.layout.movie_list, parent, false)
-        return FavouriteMovieViewHolder(binding,favouriteClickListener)
-*/
     }
 
     override fun onBindViewHolder(holder: FavouriteMovieViewHolder, position: Int) {
         val favouriteItem: MovieModel = favouriteMovieList[position]
-        return holder.favouriteBind(favouriteItem)
-    }
-
-    override fun getItemCount(): Int {
-        return favouriteMovieList.size
+        holder.favouriteBind(favouriteItem, favouriteClickListener)
     }
 
     /*  override fun getItemCount(): Int {
@@ -47,20 +42,24 @@ class FavouriteMovieAdapter(private val favouriteClickListener: FavouriteClickLi
           notifyDataSetChanged()
       }
   */
-    fun setFavouriteList(setFavouriteList: List<MovieModel>) {
+   /* fun setFavouriteList(setFavouriteList: List<MovieModel>) {
         favouriteMovieList = setFavouriteList
         notifyDataSetChanged()
-    }
-
+    }*/
 
     class FavouriteMovieViewHolder(
-        private val binding: ItemMovieBinding,
-        private val favouriteClickListener: FavouriteClickListener
+        private val binding: ItemMovieBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun favouriteBind(favouriteItem: MovieModel) {
+        fun favouriteBind(
+            favouriteItem: MovieModel,
+            favouriteClickListener: FavouriteClickListener
+        ) {
 
+            binding.imgPoster.loadFromUrl(IMAGE_URL+favouriteItem.posterPath)
+            binding.txtPosterTitle.text=favouriteItem.title
+            binding.txtPosterDate.text=favouriteItem.releaseDate
 
-            binding.ivFavoriteMovie.setOnClickListener{
+            binding.ivFavoriteMovie.setOnClickListener {
                 favouriteClickListener.onFavouritClicked(favouriteItem)
             }
 

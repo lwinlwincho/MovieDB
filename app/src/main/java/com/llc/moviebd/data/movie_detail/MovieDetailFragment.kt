@@ -7,10 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.llc.moviebd.data.Delegate
+import com.llc.moviebd.data.data_result.MovieDetailEvent
+import com.llc.moviebd.data.model.MovieDetailModel
 import com.llc.moviebd.data.model.MovieModel
+import com.llc.moviebd.data.movie_poster.Delegate
 import com.llc.moviebd.databinding.FragmentMovieDetailBinding
-
+import com.llc.moviebd.extension.loadFromUrl
+import com.llc.moviebd.network.IMAGE_URL
 
 class MovieDetailFragment : Fragment(), Delegate {
 
@@ -20,7 +23,6 @@ class MovieDetailFragment : Fragment(), Delegate {
     val binding get() = _binding!!
 
     private val args: MovieDetailFragmentArgs by navArgs()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,40 +35,42 @@ class MovieDetailFragment : Fragment(), Delegate {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       // var imgUrl = args.moviePhoto.imgSrcUrl
+        val movieId = args.movieId
 
-        //binding.imvDetail.load(imgUrl)
-
-        /* binding.imvDetail.setImageResource(R.drawable.ic_baseline_broken_image_24)
-         binding.imvDetail.setImageResource(R.drawable.ic_baseline_double_arrow_24)*/
-        /*imgView.load(imgUri) {
-            placeholder(R.drawable.ic_baseline_double_arrow_24)
-            error(R.drawable.ic_baseline_broken_image_24)
-        }*/
-
-        /* viewModel.detailEvent.observe(viewLifecycleOwner){
-             binding.imvDetail.load(it.imgSrcUrl)
-
-         }*/
-/*
-        viewModel.photo.observe(viewLifecycleOwner){ moviePhoto->
-            binding.imvDetail.load(moviePhoto.imgSrcUrl)
+        viewModel.getMovieDetail(movieId)
+        viewModel.detailUIEvent.observe(viewLifecycleOwner) { detailResult ->
+            when (detailResult) {
+                is MovieDetailEvent.Loading -> {
+                    binding.detailProgressBar.visibility = View.VISIBLE
+                }
+                is MovieDetailEvent.Success -> {
+                    //bindDetailPoster(movieId)
+                    bindDetailMovie(detailResult.movieDetailModel)
+                    binding.detailProgressBar.visibility = View.GONE
+                }
+                is MovieDetailEvent.Error -> {
+                    binding.detailProgressBar.visibility = View.GONE
+                }
+            }
         }
-        viewModel.status.observe(viewLifecycleOwner) { movieStatus ->
-            binding.txtMovieDescription.text = movieStatus
-        }
-        viewModel.date.observe(viewLifecycleOwner) { movieDate ->
-            binding.txtMovieDetail.text = movieDate
-        }
-*/
-
-        // binding.imvDetail.setImageResource(args.movieModel.image)
         // binding.txtMovieDescription.text = getString(args.movieModel.description)
         //binding.txtMovieDetail.text = getString(args.movieModel.date)
+    }
+
+    /* private fun bindDetailPoster(movieId: String) {
+
+         binding.imvDetail.setImageResource(movieId.toInt())
+     }*/
+
+    private fun bindDetailMovie(detailDataModel: MovieDetailModel) {
+        // binding.imvDetail.loadFromUrl(detailDataModel.id.toString())
+        binding.imvDetail.loadFromUrl(IMAGE_URL + detailDataModel.poster_path)
+        binding.txtDetailDescription.text = detailDataModel.overview
+        binding.txtDetailContent.text = detailDataModel.release_date
 
     }
 
-    override fun onClickListener(model: MovieModel) {
+    override fun onClicklistener(movieModel: MovieModel) {
         TODO("Not yet implemented")
     }
 

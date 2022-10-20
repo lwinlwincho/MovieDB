@@ -1,5 +1,6 @@
 package com.llc.moviebd.network
 
+import com.llc.moviebd.data.model.MovieDetailModel
 import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.data.model.MoviesResponseModel
 import com.squareup.moshi.Moshi
@@ -7,6 +8,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 private const val API_KEY = "9c9e4b9082cd70edd1ed7afab4f198b6"
@@ -28,6 +30,12 @@ private val retrofit = Retrofit.Builder()
 interface MovieAPIService {
     @GET("upcoming")
     suspend fun getUpcomingMovie(@Query("api_key") apiKey: String = API_KEY): MoviesResponseModel<MovieModel>
+
+    @GET("{movie_id}")
+    suspend fun loadMovieDeatil(
+        @Path("movie_id") movie_id: Int,
+        @Query("api_key") api_key: String= API_KEY
+    ): MovieDetailModel?
 }
 
 object MovieAPI {

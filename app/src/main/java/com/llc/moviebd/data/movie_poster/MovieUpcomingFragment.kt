@@ -57,16 +57,16 @@ class MovieUpcomingFragment : Fragment(), Delegate {
             adapter = movieItemAdapter
         }
 
-        viewModel.uiEvent.observe(viewLifecycleOwner) { event ->
+        viewModel.movieUiEvent.observe(viewLifecycleOwner) { event ->
             when (event) {
-                is MovieEvent.Loading -> {
+                is MovieUiEvent.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                 }
-                is MovieEvent.Success -> {
+                is MovieUiEvent.Success -> {
                     movieItemAdapter.submitList(event.movieList)
                     binding.progressBar.visibility = View.GONE
                 }
-                is MovieEvent.Failure -> {
+                is MovieUiEvent.Failure -> {
                     Toast.makeText(requireContext(), event.message, Toast.LENGTH_LONG).show()
                     binding.progressBar.visibility = View.GONE
                 }

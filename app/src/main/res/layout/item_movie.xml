@@ -3,14 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    android:padding="2dp"
     android:orientation="vertical">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintVertical_bias="0.0">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -30,7 +31,7 @@
                 android:layout_below="@id/img_poster"
                 android:layout_alignBaseline="@id/img_poster"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="-68dp"
+                android:layout_marginTop="-48dp"
                 android:layout_marginEnd="18dp"
                 android:src="@drawable/ic_baseline_favorite_border_24" />
 
@@ -38,6 +39,7 @@
                 android:id="@+id/txt_poster_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_below="@id/img_poster"
                 style="bold"
                 android:textSize="17sp" />
@@ -46,7 +48,8 @@
                 android:id="@+id/txt_poster_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="13sp"
+                android:textSize="14sp"
+                android:layout_marginTop="3dp"
                 android:layout_below="@id/txt_poster_title"/>
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>

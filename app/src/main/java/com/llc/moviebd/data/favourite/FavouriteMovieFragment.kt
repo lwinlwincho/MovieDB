@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
-import com.llc.moviebd.data.MovieModel
+import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.data.movie_poster.MovieListFragmentDirections
 import com.llc.moviebd.databinding.FragmentFavouriteMovieBinding
 
@@ -20,7 +20,7 @@ class FavouriteMovieFragment : Fragment(),FavouriteClickListener {
     private var _binding:FragmentFavouriteMovieBinding?=null
     val binding get()=_binding!!
 
-    private val favArgs:FavouriteMovieFragmentArgs by navArgs()
+    //private val favArgs:FavouriteMovieFragmentArgs by navArgs()
 
     private val favItemAdapter:FavouriteMovieAdapter by lazy {
         FavouriteMovieAdapter(favouriteClickListener = this)
@@ -62,8 +62,8 @@ class FavouriteMovieFragment : Fragment(),FavouriteClickListener {
 
 
     override fun onFavouritClicked(favouriteModel: MovieModel) {
-        val action= MovieListFragmentDirections.actionMovieListFragmentToFavouriteMovieFragment(favouriteModel)
-        findNavController().navigate(action)
+       // val action= MovieListFragmentDirections.actionMovieListFragmentToFavouriteMovieFragment(favouriteModel)
+        //findNavController().navigate(action)
     }
 
 

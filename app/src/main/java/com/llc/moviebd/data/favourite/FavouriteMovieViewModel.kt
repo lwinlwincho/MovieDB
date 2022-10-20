@@ -3,7 +3,7 @@ package com.llc.moviebd.data.favourite
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.llc.moviebd.data.MovieModel
+import com.llc.moviebd.data.model.MovieModel
 
 class FavouriteMovieViewModel :ViewModel(){
 

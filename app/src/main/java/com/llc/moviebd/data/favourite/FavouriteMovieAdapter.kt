@@ -3,9 +3,7 @@ package com.llc.moviebd.data.favourite
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.llc.moviebd.R
-import com.llc.moviebd.data.MovieModel
-import com.llc.moviebd.databinding.FragmentFavouriteMovieBinding
+import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.databinding.ItemMovieBinding
 
 
@@ -61,9 +59,6 @@ class FavouriteMovieAdapter(private val favouriteClickListener: FavouriteClickLi
     ) : RecyclerView.ViewHolder(binding.root) {
         fun favouriteBind(favouriteItem: MovieModel) {
 
-            binding.imgPoster.setImageResource(favouriteItem.image)
-            binding.txtMovieTitle.text=binding.root.context.getString(favouriteItem.title)
-            binding.txtMovieDate.text=binding.root.context.getString(favouriteItem.date)
 
             binding.ivFavoriteMovie.setOnClickListener{
                 favouriteClickListener.onFavouritClicked(favouriteItem)

@@ -7,30 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import coil.load
-import com.llc.moviebd.R
 import com.llc.moviebd.data.Delegate
-import com.llc.moviebd.data.ItemAdapter
-import com.llc.moviebd.data.MovieModel
-import com.llc.moviebd.data.movie_poster.MovieListViewModel
+import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.databinding.FragmentMovieDetailBinding
-import com.llc.moviebd.network.OverViewModel
 
 
 class MovieDetailFragment : Fragment(), Delegate {
 
-    //private val viewModel: MovieListViewModel by viewModels()
-
-    private val viewModel: OverViewModel by viewModels()
+    private val viewModel: MovieDetailViewModel by viewModels()
 
     private var _binding: FragmentMovieDetailBinding? = null
     val binding get() = _binding!!
 
     private val args: MovieDetailFragmentArgs by navArgs()
 
-    private val itemAdapter: ItemAdapter by lazy {
-        ItemAdapter(listener = {}, delegate = this)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,16 +33,24 @@ class MovieDetailFragment : Fragment(), Delegate {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var movieId=args.movieModel
+       // var imgUrl = args.moviePhoto.imgSrcUrl
 
-        binding.imvDetail.setImageResource(R.drawable.ic_baseline_broken_image_24)
-        binding.imvDetail.setImageResource(R.drawable.ic_baseline_double_arrow_24)
+        //binding.imvDetail.load(imgUrl)
+
+        /* binding.imvDetail.setImageResource(R.drawable.ic_baseline_broken_image_24)
+         binding.imvDetail.setImageResource(R.drawable.ic_baseline_double_arrow_24)*/
         /*imgView.load(imgUri) {
             placeholder(R.drawable.ic_baseline_double_arrow_24)
             error(R.drawable.ic_baseline_broken_image_24)
         }*/
-        viewModel.photo.observe(viewLifecycleOwner){ movieId->
-            binding.imvDetail.load(movieId.imgSrcUrl)
+
+        /* viewModel.detailEvent.observe(viewLifecycleOwner){
+             binding.imvDetail.load(it.imgSrcUrl)
+
+         }*/
+/*
+        viewModel.photo.observe(viewLifecycleOwner){ moviePhoto->
+            binding.imvDetail.load(moviePhoto.imgSrcUrl)
         }
         viewModel.status.observe(viewLifecycleOwner) { movieStatus ->
             binding.txtMovieDescription.text = movieStatus
@@ -60,9 +58,10 @@ class MovieDetailFragment : Fragment(), Delegate {
         viewModel.date.observe(viewLifecycleOwner) { movieDate ->
             binding.txtMovieDetail.text = movieDate
         }
+*/
 
-       // binding.imvDetail.setImageResource(args.movieModel.image)
-       // binding.txtMovieDescription.text = getString(args.movieModel.description)
+        // binding.imvDetail.setImageResource(args.movieModel.image)
+        // binding.txtMovieDescription.text = getString(args.movieModel.description)
         //binding.txtMovieDetail.text = getString(args.movieModel.date)
 
     }

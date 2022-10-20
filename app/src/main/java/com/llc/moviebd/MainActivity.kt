@@ -6,7 +6,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.llc.moviebd.data.ItemAdapter
-import com.llc.moviebd.data.MovieData
 import com.llc.moviebd.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

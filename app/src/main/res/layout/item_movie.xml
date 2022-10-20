@@ -19,8 +19,8 @@
             <ImageView
                 android:id="@+id/img_poster"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:scaleY="1"
+                android:layout_height="wrap_content"
+                android:scaleType="centerInside"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <ImageView
@@ -35,7 +35,7 @@
                 android:src="@drawable/ic_baseline_favorite_border_24" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/txt_movie_title"
+                android:id="@+id/txt_poster_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/img_poster"
@@ -43,11 +43,11 @@
                 android:textSize="17sp" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/txt_movie_date"
+                android:id="@+id/txt_poster_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
-                android:layout_below="@id/txt_movie_title"/>
+                android:layout_below="@id/txt_poster_title"/>
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

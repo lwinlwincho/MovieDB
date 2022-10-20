@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/movieListFragment"
-        android:name="com.llc.moviebd.data.movie_poster.MovieListFragment"
+        android:name="com.llc.moviebd.data.movie_poster.MovieUpcomingFragment"
         android:label="fragment_movie_list"
         tools:layout="@layout/fragment_movie_list" >
         <action
@@ -23,17 +23,14 @@
         android:label="fragment_movie_detail"
         tools:layout="@layout/fragment_movie_detail" >
         <argument
-            android:name="movieModel"
-            app:argType="com.llc.moviebd.data.MovieModel" />
+            android:name="movieId"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/favouriteMovieFragment"
         android:name="com.llc.moviebd.data.favourite.FavouriteMovieFragment"
         android:label="fragment_favourite_movie"
         tools:layout="@layout/fragment_favourite_movie" >
-        <argument
-            android:name="favouriteMovieModel"
-            app:argType="com.llc.moviebd.data.MovieModel" />
     </fragment>
 </navigation>
-   <!-- com.llc.moviebd.data.MovieModel-->
+   <!-- com.llc.moviebd.data.model.MovieModel-->

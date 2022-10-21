@@ -79,7 +79,7 @@ class MovieDetailFragment : Fragment(), Delegate {
         //   binding.txtProductionCountries.text = detailDataModel.production_countries[1].name
         binding.txtReleaseDate.text = detailDataModel.release_date
         binding.txtRevenue.text = detailDataModel.revenue.toString()
-//        binding.txtSpokenLanguages.text = detailDataModel.spoken_languages[1].toString()
+        //binding.txtSpokenLanguages.text = detailDataModel.spoken_languages[1].toString()
     }
 
     override fun onClicklistener(movieModel: MovieModel) {

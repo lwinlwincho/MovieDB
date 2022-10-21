@@ -1,4 +1,4 @@
-package com.llc.moviebd.data.movie_detail
+package com.llc.moviebd.data.detail_movie
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

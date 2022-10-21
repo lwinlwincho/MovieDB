@@ -34,7 +34,7 @@ interface MovieAPIService {
     @GET("{movie_id}")
     suspend fun loadMovieDeatil(
         @Path("movie_id") movie_id: Int,
-        @Query("api_key") api_key: String= API_KEY
+        @Query("api_key") api_key: String = API_KEY
     ): MovieDetailModel?
 }
 

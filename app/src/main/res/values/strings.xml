@@ -1,39 +1,14 @@
 <resources>
     <string name="app_name">MovieBD</string>
-    <string name="movie1">Movie1</string>
-    <string name="movie2">Movie2</string>
-    <string name="movie3">Movie3</string>
-    <string name="movie4">Movie4</string>
-    <string name="movie5">Movie5</string>
-    <string name="movie6">Movie6</string>
-    <string name="movie7">Movie7</string>
-    <string name="movie8">Movie8</string>
-    <string name="movie9">Movie9</string>
-    <string name="movie10">Movie10</string>
-
-    <string name="date1">Date1</string>
-    <string name="date2">Date2</string>
-    <string name="date3">Date3</string>
-    <string name="date4">Date4</string>
-    <string name="date5">Date5</string>
-    <string name="date6">Date6</string>
-    <string name="date7">Date7</string>
-    <string name="date8">Date8</string>
-    <string name="date9">Date9</string>
-    <string name="date10">Date10</string>
-
-    <string name="description1">This Movie is movie1.jaioeafhhahf fa jfahfafjkahdhfaa a fuwjiofaufjkajf9a</string>
-    <string name="description2">This Movie is movie2.jaioeafhhahf fa jfahfafjkahdhfaa a fuwjiofaufjkajf9a</string>
-    <string name="description3">This Movie is movie3.jaioeafhhahf fa jfahfafjkahdhfaa a fuwjiofaufjkajf9a</string>
-    <string name="description4">This Movie is movie4.jaioeafhhahf fa jfahfafjkahdhfaa a fuwjiofaufjkajf9a</string>
-    <string name="description5">This Movie is movie5.jaioeafhhahf fa jfahfafjkahdhfaa a fuwjiofaufjkajf9a</string>
-    <string name="description6">This Movie is movie6.jaioeafhhahf fa jfahfafjkahdhfaa a fuwjiofaufjkajf9a</string>
-    <string name="description7">This Movie is movie7.jaioeafhhahf fa jfahfafjkahdhfaa a fuwjiofaufjkajf9a</string>
-    <string name="description8">This Movie is movie8.jaioeafhhahf fa jfahfafjkahdhfaa a fuwjiofaufjkajf9a</string>
-    <string name="description9">This Movie is movie9.jaioeafhhahf fa jfahfafjkahdhfaa a fuwjiofaufjkajf9a</string>
-    <string name="description10">This Movie is movie10.jaioeafhhahf fa jfahfafjkahdhfaa a fuwjiofaufjkajf9a</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
-
+    <string name="overview">Overview</string>
+    <string name="genres">Genres</string>
+    <string name="home_page">Home Page</string>
+    <string name="original_language">Original Language</string>
+    <string name="original_title">Original Title</string>
+    <string name="popularity">Popularity</string>
+    <string name="production_company">Production Company</string>
+    <string name="production_country">Production Country</string>
+    <string name="release_date">Release Date</string>
+    <string name="revenue">Revenue</string>
+    <string name="spoken_language">Spoken Language</string>
 </resources>

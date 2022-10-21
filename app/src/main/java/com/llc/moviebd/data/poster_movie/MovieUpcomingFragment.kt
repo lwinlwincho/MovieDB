@@ -1,4 +1,4 @@
-package com.llc.moviebd.data.movie_poster
+package com.llc.moviebd.data.poster_movie
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -59,14 +59,14 @@ class MovieUpcomingFragment : Fragment(), Delegate {
 
         viewModel.movieUiEvent.observe(viewLifecycleOwner) { event ->
             when (event) {
-                is MovieUiEvent.Loading -> {
+                is MovieUpcomingEvent.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                 }
-                is MovieUiEvent.Success -> {
+                is MovieUpcomingEvent.Success -> {
                     movieItemAdapter.submitList(event.movieList)
                     binding.progressBar.visibility = View.GONE
                 }
-                is MovieUiEvent.Failure -> {
+                is MovieUpcomingEvent.Failure -> {
                     Toast.makeText(requireContext(), event.message, Toast.LENGTH_LONG).show()
                     binding.progressBar.visibility = View.GONE
                 }

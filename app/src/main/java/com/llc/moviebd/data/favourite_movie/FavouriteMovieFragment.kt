@@ -1,4 +1,4 @@
-package com.llc.moviebd.data.favourite
+package com.llc.moviebd.data.favourite_movie
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -1,11 +1,11 @@
-package com.llc.moviebd.data.favourite
+package com.llc.moviebd.data.favourite_movie
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.llc.moviebd.data.model.MovieModel
-import com.llc.moviebd.data.movie_poster.MovieItemAdapter
+import com.llc.moviebd.data.poster_movie.MovieItemAdapter
 import com.llc.moviebd.databinding.ItemMovieBinding
 import com.llc.moviebd.extension.loadFromUrl
 import com.llc.moviebd.network.IMAGE_URL

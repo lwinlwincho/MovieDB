@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.llc.moviebd.R
 import com.llc.moviebd.data.model.MovieModel
-import com.llc.moviebd.databinding.ItemNowShowingBinding
 import com.llc.moviebd.databinding.ItemPopularBinding
 import com.llc.moviebd.extension.loadFromUrl
 import com.llc.moviebd.network.IMAGE_URL

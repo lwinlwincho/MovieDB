@@ -12,6 +12,8 @@
         <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_movie_detail.xml" value="0.22" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_movie_list.xml" value="0.1" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/item_movie.xml" value="0.18" />
+        <entry key="..\:/MovieBD/app/src/main/res/layout/item_movie_popular.xml" value="0.25" />
+        <entry key="..\:/MovieBD/app/src/main/res/layout/item_movie_showing.xml" value="0.5" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/movie_list.xml" value="0.16" />
       </map>
     </option>

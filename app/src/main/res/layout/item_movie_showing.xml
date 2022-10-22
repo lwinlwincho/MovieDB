@@ -12,6 +12,7 @@
         android:layout_height="212dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearance="@style/Theme.MovieBD.PhotoGrid"
@@ -38,6 +39,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_movie_name" />
 
     <TextView
+        android:id="@+id/tv_imdb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -46,4 +48,17 @@
         app:layout_constraintStart_toEndOf="@+id/iv_star_rate"
         app:layout_constraintTop_toTopOf="@+id/iv_star_rate"
         tools:text="9.1/10 IMDb" />
+
+    <TextView
+        android:id="@+id/popular"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:gravity="top"
+        android:text="@string/popular"
+        android:textAppearance="@style/Theme.MovieBD.Headline"
+        app:layout_constraintBaseline_toTopOf="@id/tv_imdb"
+        app:layout_constraintEnd_toEndOf="@id/tv_imdb"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="253dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

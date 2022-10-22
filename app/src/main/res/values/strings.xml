@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MovieBD</string>
+    <string name="app_name">MovieDB</string>
     <string name="overview">Overview</string>
     <string name="genres">Genres</string>
     <string name="home_page">Home Page</string>
@@ -11,4 +11,6 @@
     <string name="release_date">Release Date</string>
     <string name="revenue">Revenue</string>
     <string name="spoken_language">Spoken Language</string>
+
+    <string name="popular">Popular</string>
 </resources>

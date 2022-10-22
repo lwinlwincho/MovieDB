@@ -11,4 +11,5 @@
     <string name="release_date">Release Date</string>
     <string name="revenue">Revenue</string>
     <string name="spoken_language">Spoken Language</string>
+    <string name="vote_average_format">%1$s/10 IMDb</string>
 </resources>

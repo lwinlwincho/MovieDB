@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.llc.moviebd.data.model.MovieModel
-import com.llc.moviebd.data.poster_movie.MovieItemAdapter
+import com.llc.moviebd.ui.home.now_showing.NowShowingItemAdapter
 import com.llc.moviebd.databinding.ItemMovieBinding
 import com.llc.moviebd.extension.loadFromUrl
 import com.llc.moviebd.network.IMAGE_URL
@@ -17,7 +17,7 @@ interface FavouriteClickListener {
 }
 
 class FavouriteMovieAdapter(private val favouriteClickListener: FavouriteClickListener) :
-    ListAdapter<MovieModel, FavouriteMovieAdapter.FavouriteMovieViewHolder>(MovieItemAdapter.DiffCallBack) {
+    ListAdapter<MovieModel, FavouriteMovieAdapter.FavouriteMovieViewHolder>(NowShowingItemAdapter.DiffCallBack) {
 
     private var favouriteMovieList: List<MovieModel> = emptyList()
 

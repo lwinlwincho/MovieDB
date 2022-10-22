@@ -1,13 +1,13 @@
-package com.llc.moviebd.data.poster_movie
+package com.llc.moviebd.ui.home.now_showing
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.llc.moviebd.R
 import com.llc.moviebd.data.model.MovieModel
-import com.llc.moviebd.databinding.ItemMovieBinding
-import com.llc.moviebd.databinding.ItemMovieShowingBinding
+import com.llc.moviebd.databinding.ItemNowShowingBinding
 import com.llc.moviebd.extension.loadFromUrl
 import com.llc.moviebd.network.IMAGE_URL
 
@@ -15,8 +15,8 @@ interface Delegate {
     fun onClicklistener(movieModel: MovieModel)
 }
 
-class MovieItemAdapter(private val delegate: Delegate) :
-    ListAdapter<MovieModel, MovieItemAdapter.MovieViewHolder>(DiffCallBack) {
+class NowShowingItemAdapter(private val delegate: Delegate) :
+    ListAdapter<MovieModel, NowShowingItemAdapter.NowShowingViewHolder>(DiffCallBack) {
 
     companion object DiffCallBack : DiffUtil.ItemCallback<MovieModel>() {
 
@@ -29,28 +29,25 @@ class MovieItemAdapter(private val delegate: Delegate) :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        return MovieViewHolder(ItemMovieShowingBinding.inflate(LayoutInflater.from(parent.context)))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NowShowingViewHolder {
+        return NowShowingViewHolder(ItemNowShowingBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
-    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: NowShowingViewHolder, position: Int) {
         val movieItemPosition: MovieModel = getItem(position)
         holder.bind(movieItemPosition, delegate)
     }
 
-    /*private var movieListPoster: List<MovieModel>=emptyList()
-      fun setMovieList(setList: List<MovieModel>) {
-        movieListPoster = setList
-        notifyDataSetChanged()
-    }*/
-
-    class MovieViewHolder(private var binding: ItemMovieShowingBinding) :
+    class NowShowingViewHolder(private var binding: ItemNowShowingBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movieModel: MovieModel, delegate: Delegate) {
 
             binding.ivPoster.loadFromUrl(IMAGE_URL + movieModel.posterPath)
             binding.tvMovieName.text = movieModel.title
-            binding.tvStarRate.text = "${movieModel.vote_average}/10 IMDb"
+            binding.tvStarRate.text = binding.root.context.getString(
+                R.string.vote_average_format,
+                movieModel.vote_average.toString()
+            )
 
             binding.ivPoster.setOnClickListener() {
                 delegate.onClicklistener(movieModel)

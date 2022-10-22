@@ -10,7 +10,7 @@ import androidx.navigation.fragment.navArgs
 import com.llc.moviebd.data.data_result.MovieDetailEvent
 import com.llc.moviebd.data.model.MovieDetailModel
 import com.llc.moviebd.data.model.MovieModel
-import com.llc.moviebd.data.poster_movie.Delegate
+import com.llc.moviebd.ui.home.now_showing.Delegate
 import com.llc.moviebd.databinding.FragmentMovieDetailBinding
 import com.llc.moviebd.extension.loadFromUrl
 import com.llc.moviebd.network.IMAGE_URL

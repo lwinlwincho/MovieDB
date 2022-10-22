@@ -12,4 +12,6 @@
     <string name="revenue">Revenue</string>
     <string name="spoken_language">Spoken Language</string>
     <string name="vote_average_format">%1$s/10 IMDb</string>
+    <string name="label_filmku">FilmKu</string>
+    <string name="label_now_showing">Now Showing</string>
 </resources>

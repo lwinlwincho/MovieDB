@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.databinding.FragmentMovieListBinding
 import com.llc.moviebd.network.*
@@ -39,7 +41,7 @@ class HomeMovieListFragment : Fragment(), Delegate {
         super.onViewCreated(view, savedInstanceState)
 
         binding.rvMovieList.apply {
-            layoutManager = GridLayoutManager(requireContext(), 2)
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = nowShowingItemAdapter
         }
 

@@ -63,7 +63,8 @@
                 android:background="@color/white"
                 android:clipToPadding="false"
                 android:orientation="horizontal"
-                android:paddingHorizontal="20dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="8dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="16"
                 tools:listitem="@layout/item_now_showing" />

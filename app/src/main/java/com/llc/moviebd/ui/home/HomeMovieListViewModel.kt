@@ -25,7 +25,7 @@ class MovieUpcomingViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 //get data from web server
-                val result = MovieAPI.retrofitService.getUpcomingMovie().results
+                val result = MovieAPI.retrofitService.getNowPlaying().results
                 _movieUiEvent.value = MovieUpcomingEvent.Success(result)
             } catch (e: Exception) {
                 _movieUiEvent.value = MovieUpcomingEvent.Failure(e.message.toString())

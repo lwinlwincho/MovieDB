@@ -10,12 +10,11 @@ import androidx.navigation.fragment.navArgs
 import com.llc.moviebd.data.data_result.MovieDetailEvent
 import com.llc.moviebd.data.model.MovieDetailModel
 import com.llc.moviebd.data.model.MovieModel
-import com.llc.moviebd.data.poster_movie.Delegate
 import com.llc.moviebd.databinding.FragmentMovieDetailBinding
 import com.llc.moviebd.extension.loadFromUrl
 import com.llc.moviebd.network.IMAGE_URL
 
-class MovieDetailFragment : Fragment(), Delegate {
+class MovieDetailFragment : Fragment() {
 
     private val viewModel: MovieDetailViewModel by viewModels()
 
@@ -64,7 +63,7 @@ class MovieDetailFragment : Fragment(), Delegate {
 
         binding.imvAdult.visibility = if (detailDataModel.adult) View.VISIBLE else View.GONE
 
-        binding.txtGenres.text = detailDataModel.genres[1].name
+        binding.txtGenres.text = detailDataModel.genres.first().name
 
         binding.txtHomePage.text = detailDataModel.homepage
 
@@ -80,8 +79,5 @@ class MovieDetailFragment : Fragment(), Delegate {
         binding.txtReleaseDate.text = detailDataModel.release_date
         binding.txtRevenue.text = detailDataModel.revenue.toString()
         //binding.txtSpokenLanguages.text = detailDataModel.spoken_languages[1].toString()
-    }
-
-    override fun onClicklistener(movieModel: MovieModel) {
     }
 }

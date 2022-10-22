@@ -1,4 +1,4 @@
-package com.llc.moviebd.data.poster_movie
+package com.llc.moviebd.ui.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,39 +8,43 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.databinding.FragmentMovieListBinding
 import com.llc.moviebd.network.*
+import com.llc.moviebd.ui.home.now_showing.NowShowingItemAdapter
+import com.llc.moviebd.ui.home.popular.PopularItemAdapter
 
-class MovieUpcomingFragment : Fragment(), Delegate {
+class HomeMovieListFragment : Fragment() {
 
     private val viewModel: MovieUpcomingViewModel by viewModels()
 
     private var _binding: FragmentMovieListBinding? = null
-    val binding get() = _binding!!
+    private val binding get() = _binding!!
 
-    private val movieItemAdapter: MovieItemAdapter by lazy {
-        MovieItemAdapter(this)
+    private val nowShowingItemAdapter: NowShowingItemAdapter by lazy {
+        NowShowingItemAdapter { movieModel ->
+            goToDetails(movieModel)
+        }
     }
 
-    //YOu can use either "delegate=this" or interface can be directly use "delegate = object:Delegate{...}"
-    /*private val itemAdapter: ItemAdapter by lazy {
-        ItemAdapter(listener = {}, delegate = object :Delegate{
-            override fun onClickListener(model: MovieModel) {
-                val action=MovieListFragmentDirections.actionMovieListFragmentToMovieDetailFragment(model)
-                findNavController().navigate(action)
-            }
+    private val popularItemAdapter: PopularItemAdapter by lazy {
+        PopularItemAdapter { movieModel ->
+            goToDetails(movieModel)
         }
-        )
-    }*/
+    }
+
+    private fun goToDetails(movieModel: MovieModel) {
+        val action = HomeMovieListFragmentDirections
+            .actionMovieListFragmentToMovieDetailFragment(movieModel.id.toString())
+        findNavController().navigate(action)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentMovieListBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -48,13 +52,16 @@ class MovieUpcomingFragment : Fragment(), Delegate {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /* viewModel.uievent.observe(viewLifecycleOwner){ movieList->
-             itemAdapter.setMovieList(movieList)
-         }
- */
-        binding.rvMovieList.apply {
-            layoutManager = GridLayoutManager(requireContext(), 2)
-            adapter = movieItemAdapter
+        binding.rvNowShowingMovies.apply {
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = nowShowingItemAdapter
+        }
+
+        binding.rvPopularMovies.apply {
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            adapter = popularItemAdapter
         }
 
         viewModel.movieUiEvent.observe(viewLifecycleOwner) { event ->
@@ -63,13 +70,15 @@ class MovieUpcomingFragment : Fragment(), Delegate {
                     binding.progressBar.visibility = View.VISIBLE
                 }
                 is MovieUpcomingEvent.Success -> {
-                    movieItemAdapter.submitList(event.movieList)
+                    nowShowingItemAdapter.submitList(event.movieList)
+                    popularItemAdapter.submitList(event.movieList)
                     binding.progressBar.visibility = View.GONE
                 }
                 is MovieUpcomingEvent.Failure -> {
                     Toast.makeText(requireContext(), event.message, Toast.LENGTH_LONG).show()
                     binding.progressBar.visibility = View.GONE
                 }
+                else -> {}
             }
         }
     }
@@ -77,12 +86,5 @@ class MovieUpcomingFragment : Fragment(), Delegate {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onClicklistener(movieModel: MovieModel) {
-        val action =
-            MovieUpcomingFragmentDirections.actionMovieListFragmentToMovieDetailFragment(movieModel.id.toString())
-        findNavController().navigate(action)
-
     }
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MovieDB</string>
+    <string name="app_name">MovieBD</string>
     <string name="overview">Overview</string>
     <string name="genres">Genres</string>
     <string name="home_page">Home Page</string>
@@ -11,6 +11,8 @@
     <string name="release_date">Release Date</string>
     <string name="revenue">Revenue</string>
     <string name="spoken_language">Spoken Language</string>
-
-    <string name="popular">Popular</string>
+    <string name="vote_average_format">%1$s/10 IMDb</string>
+    <string name="label_filmku">FilmKu</string>
+    <string name="label_now_showing">Now Showing</string>
+    <string name="label_popular">Popular</string>
 </resources>

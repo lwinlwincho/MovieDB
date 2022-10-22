@@ -64,7 +64,7 @@ class MovieDetailFragment : Fragment(), Delegate {
 
         binding.imvAdult.visibility = if (detailDataModel.adult) View.VISIBLE else View.GONE
 
-        binding.txtGenres.text = detailDataModel.genres[1].name
+        binding.txtGenres.text = detailDataModel.genres.first().name
 
         binding.txtHomePage.text = detailDataModel.homepage
 

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.databinding.ItemMovieBinding
+import com.llc.moviebd.databinding.ItemMovieShowingBinding
 import com.llc.moviebd.extension.loadFromUrl
 import com.llc.moviebd.network.IMAGE_URL
 
@@ -29,7 +30,7 @@ class MovieItemAdapter(private val delegate: Delegate) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        return MovieViewHolder(ItemMovieBinding.inflate(LayoutInflater.from(parent.context)))
+        return MovieViewHolder(ItemMovieShowingBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
@@ -43,15 +44,14 @@ class MovieItemAdapter(private val delegate: Delegate) :
         notifyDataSetChanged()
     }*/
 
-    class MovieViewHolder(private var binding: ItemMovieBinding) :
+    class MovieViewHolder(private var binding: ItemMovieShowingBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movieModel: MovieModel, delegate: Delegate) {
 
-            binding.imgPoster.loadFromUrl(IMAGE_URL + movieModel.posterPath)
-            binding.txtPosterTitle.text = movieModel.title
-            binding.txtPosterDate.text = movieModel.releaseDate
+            binding.ivPoster.loadFromUrl(IMAGE_URL + movieModel.posterPath)
+            binding.tvMovieName.text = movieModel.title
 
-            binding.imgPoster.setOnClickListener() {
+            binding.ivPoster.setOnClickListener() {
                 delegate.onClicklistener(movieModel)
             }
         }

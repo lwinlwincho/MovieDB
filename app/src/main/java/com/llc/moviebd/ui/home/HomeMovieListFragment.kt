@@ -8,16 +8,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.databinding.FragmentMovieListBinding
 import com.llc.moviebd.network.*
-import com.llc.moviebd.ui.home.now_showing.Delegate
 import com.llc.moviebd.ui.home.now_showing.NowShowingItemAdapter
+import com.llc.moviebd.ui.home.popular.PopularItemAdapter
 
-class HomeMovieListFragment : Fragment(), Delegate {
+class HomeMovieListFragment : Fragment() {
 
     private val viewModel: MovieUpcomingViewModel by viewModels()
 
@@ -25,7 +23,21 @@ class HomeMovieListFragment : Fragment(), Delegate {
     private val binding get() = _binding!!
 
     private val nowShowingItemAdapter: NowShowingItemAdapter by lazy {
-        NowShowingItemAdapter(this)
+        NowShowingItemAdapter { movieModel ->
+            goToDetails(movieModel)
+        }
+    }
+
+    private val popularItemAdapter: PopularItemAdapter by lazy {
+        PopularItemAdapter { movieModel ->
+            goToDetails(movieModel)
+        }
+    }
+
+    private fun goToDetails(movieModel: MovieModel) {
+        val action = HomeMovieListFragmentDirections
+            .actionMovieListFragmentToMovieDetailFragment(movieModel.id.toString())
+        findNavController().navigate(action)
     }
 
     override fun onCreateView(
@@ -40,9 +52,16 @@ class HomeMovieListFragment : Fragment(), Delegate {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.rvMovieList.apply {
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rvNowShowingMovies.apply {
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = nowShowingItemAdapter
+        }
+
+        binding.rvPopularMovies.apply {
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            adapter = popularItemAdapter
         }
 
         viewModel.movieUiEvent.observe(viewLifecycleOwner) { event ->
@@ -52,6 +71,7 @@ class HomeMovieListFragment : Fragment(), Delegate {
                 }
                 is MovieUpcomingEvent.Success -> {
                     nowShowingItemAdapter.submitList(event.movieList)
+                    popularItemAdapter.submitList(event.movieList)
                     binding.progressBar.visibility = View.GONE
                 }
                 is MovieUpcomingEvent.Failure -> {
@@ -66,11 +86,5 @@ class HomeMovieListFragment : Fragment(), Delegate {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onClicklistener(movieModel: MovieModel) {
-        val action =
-            HomeMovieListFragmentDirections.actionMovieListFragmentToMovieDetailFragment(movieModel.id.toString())
-        findNavController().navigate(action)
     }
 }

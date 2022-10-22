@@ -1,4 +1,4 @@
-package com.llc.moviebd.ui.home.now_showing
+package com.llc.moviebd.ui.home.popular
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.llc.moviebd.R
 import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.databinding.ItemNowShowingBinding
+import com.llc.moviebd.databinding.ItemPopularBinding
 import com.llc.moviebd.extension.loadFromUrl
 import com.llc.moviebd.network.IMAGE_URL
 
-class NowShowingItemAdapter(private val onItemClickListener: (MovieModel) -> Unit) :
-    ListAdapter<MovieModel, NowShowingItemAdapter.NowShowingViewHolder>(DiffCallBack) {
+class PopularItemAdapter(private val onItemClickListener: (MovieModel) -> Unit) :
+    ListAdapter<MovieModel, PopularItemAdapter.PopularMovieViewHolder>(DiffCallBack) {
 
     companion object DiffCallBack : DiffUtil.ItemCallback<MovieModel>() {
 
@@ -25,24 +26,18 @@ class NowShowingItemAdapter(private val onItemClickListener: (MovieModel) -> Uni
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NowShowingViewHolder {
-        return NowShowingViewHolder(
-            ItemNowShowingBinding.inflate(LayoutInflater.from(parent.context)),
-            onItemClickListener
-        )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularMovieViewHolder {
+        return PopularMovieViewHolder(ItemPopularBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
-    override fun onBindViewHolder(holder: NowShowingViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PopularMovieViewHolder, position: Int) {
         val movieItemPosition: MovieModel = getItem(position)
-        holder.bind(movieItemPosition)
+        holder.bind(movieItemPosition, onItemClickListener)
     }
 
-    class NowShowingViewHolder(
-        private var binding: ItemNowShowingBinding,
-        private val onItemClickListener: (MovieModel) -> Unit
-    ) :
+    class PopularMovieViewHolder(private var binding: ItemPopularBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(movieModel: MovieModel) {
+        fun bind(movieModel: MovieModel, onItemClickListener: (MovieModel) -> Unit) {
 
             binding.ivPoster.loadFromUrl(IMAGE_URL + movieModel.posterPath)
             binding.tvMovieName.text = movieModel.title

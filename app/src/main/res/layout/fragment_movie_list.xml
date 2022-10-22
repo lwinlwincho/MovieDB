@@ -36,29 +36,64 @@
             android:src="@drawable/ic_noti_ball" />
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/tv_title_now_showing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rl_toolbar"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/label_now_showing"
-        android:textAppearance="@style/Theme.MovieBD.Headline" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_movie_list"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tv_title_now_showing"
-        android:layout_marginTop="16dp"
-        android:background="@color/white"
-        android:clipToPadding="false"
-        android:orientation="horizontal"
-        android:paddingHorizontal="20dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="16"
-        tools:listitem="@layout/item_now_showing" />
+        android:layout_below="@id/rl_toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_title_now_showing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/label_now_showing"
+                android:textAppearance="@style/Theme.MovieBD.Headline" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_now_showing_movies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_title_now_showing"
+                android:layout_marginTop="16dp"
+                android:background="@color/white"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="16"
+                tools:listitem="@layout/item_now_showing" />
+
+            <TextView
+                android:id="@+id/tv_title_popular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rv_now_showing_movies"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/label_popular"
+                android:textAppearance="@style/Theme.MovieBD.Headline" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_popular_movies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_title_popular"
+                android:layout_marginTop="16dp"
+                android:background="@color/white"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="16"
+                tools:listitem="@layout/item_popular" />
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <ProgressBar
         android:id="@+id/progress_bar"

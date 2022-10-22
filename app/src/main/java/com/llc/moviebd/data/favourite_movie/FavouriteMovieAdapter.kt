@@ -58,7 +58,6 @@ class FavouriteMovieAdapter(private val favouriteClickListener: FavouriteClickLi
             binding.imgPoster.loadFromUrl(IMAGE_URL+favouriteItem.posterPath)
             binding.txtPosterTitle.text=favouriteItem.title
             binding.txtPosterDate.text=favouriteItem.releaseDate
-
             binding.ivFavoriteMovie.setOnClickListener {
                 favouriteClickListener.onFavouritClicked(favouriteItem)
             }

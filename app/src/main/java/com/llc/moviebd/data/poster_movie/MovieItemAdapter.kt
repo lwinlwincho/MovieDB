@@ -50,6 +50,7 @@ class MovieItemAdapter(private val delegate: Delegate) :
 
             binding.ivPoster.loadFromUrl(IMAGE_URL + movieModel.posterPath)
             binding.tvMovieName.text = movieModel.title
+            binding.tvStarRate.text = "${movieModel.vote_average}/10 IMDb"
 
             binding.ivPoster.setOnClickListener() {
                 delegate.onClicklistener(movieModel)

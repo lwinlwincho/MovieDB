@@ -15,7 +15,7 @@ private const val API_KEY = "9c9e4b9082cd70edd1ed7afab4f198b6"
 
 private const val MOVIE_BASE_URL = "https://api.themoviedb.org/3/movie/"
 
-val IMAGE_URL = "https://image.tmdb.org/t/p/w500/"
+const val IMAGE_URL = "https://image.tmdb.org/t/p/w500/"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -31,8 +31,11 @@ interface MovieAPIService {
     @GET("now_playing")
     suspend fun getNowPlaying(@Query("api_key") apiKey: String = API_KEY): MoviesResponseModel<MovieModel>
 
+    @GET("popular")
+    suspend fun getPopular(@Query("api_key") api_key: String= API_KEY):MoviesResponseModel<MovieModel>
+
     @GET("{movie_id}")
-    suspend fun loadMovieDeatil(
+    suspend fun loadMovieDetail(
         @Path("movie_id") movie_id: Int,
         @Query("api_key") api_key: String = API_KEY
     ): MovieDetailModel?

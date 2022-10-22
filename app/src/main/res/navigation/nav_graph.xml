@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
-        android:name="com.llc.moviebd.data.detail_movie.MovieDetailFragment"
+        android:name="com.llc.moviebd.ui.home.detail_movie.MovieDetailFragment"
         android:label="fragment_movie_detail"
         tools:layout="@layout/fragment_movie_detail" >
         <argument
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/favouriteMovieFragment"
-        android:name="com.llc.moviebd.data.favourite_movie.FavouriteMovieFragment"
+        android:name="com.llc.moviebd.ui.home.favourite_movie.FavouriteMovieFragment"
         android:label="fragment_favourite_movie"
         tools:layout="@layout/fragment_favourite_movie" >
     </fragment>

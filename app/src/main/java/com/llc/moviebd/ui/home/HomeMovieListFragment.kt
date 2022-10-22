@@ -17,7 +17,7 @@ import com.llc.moviebd.ui.home.popular.PopularItemAdapter
 
 class HomeMovieListFragment : Fragment() {
 
-    private val viewModel: MovieUpcomingViewModel by viewModels()
+    private val viewModel: HomeMovieListViewModel by viewModels()
 
     private var _binding: FragmentMovieListBinding? = null
     private val binding get() = _binding!!
@@ -71,7 +71,6 @@ class HomeMovieListFragment : Fragment() {
                 }
                 is MovieUpcomingEvent.Success -> {
                     nowShowingItemAdapter.submitList(event.movieList)
-                    popularItemAdapter.submitList(event.movieList)
                     binding.progressBar.visibility = View.GONE
                 }
                 is MovieUpcomingEvent.Failure -> {
@@ -81,10 +80,27 @@ class HomeMovieListFragment : Fragment() {
                 else -> {}
             }
         }
+
+        viewModel.popularUiEvent.observe(viewLifecycleOwner) { popularEvent ->
+            when (popularEvent) {
+                is MovieUpcomingEvent.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+                is MovieUpcomingEvent.Success -> {
+                    popularItemAdapter.submitList(popularEvent.movieList)
+                    binding.progressBar.visibility = View.GONE
+                }
+                is MovieUpcomingEvent.Failure -> {
+                    Toast.makeText(requireContext(), popularEvent.message, Toast.LENGTH_LONG).show()
+                    binding.progressBar.visibility = View.GONE
+                }
+                else -> {}
+            }
+        }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+override fun onDestroyView() {
+    super.onDestroyView()
+    _binding = null
+}
 }

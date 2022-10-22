@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="15dp"
-    tools:context=".data.detail_movie.MovieDetailFragment">
+    tools:context=".ui.home.detail_movie.MovieDetailFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

@@ -40,8 +40,7 @@ class NowShowingItemAdapter(private val onItemClickListener: (MovieModel) -> Uni
     class NowShowingViewHolder(
         private var binding: ItemNowShowingBinding,
         private val onItemClickListener: (MovieModel) -> Unit
-    ) :
-        RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(movieModel: MovieModel) {
 
             binding.ivPoster.loadFromUrl(IMAGE_URL + movieModel.posterPath)

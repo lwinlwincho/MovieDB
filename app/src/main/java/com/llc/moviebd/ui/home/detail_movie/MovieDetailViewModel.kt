@@ -1,4 +1,4 @@
-package com.llc.moviebd.data.detail_movie
+package com.llc.moviebd.ui.home.detail_movie
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,7 +18,7 @@ class MovieDetailViewModel : ViewModel() {
         viewModelScope.launch {
             _detailUIEvent.postValue(MovieDetailEvent.Loading)
             try {
-                val result = MovieAPI.retrofitService.loadMovieDeatil(movieId.toInt())
+                val result = MovieAPI.retrofitService.loadMovieDetail(movieId.toInt())
                 _detailUIEvent.postValue(MovieDetailEvent.Success(result!!))
             } catch (e: Exception) {
                 _detailUIEvent.postValue(MovieDetailEvent.Error(e.message.toString()))

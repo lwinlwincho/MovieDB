@@ -1,4 +1,4 @@
-package com.llc.moviebd.data.detail_movie
+package com.llc.moviebd.ui.home.detail_movie
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.llc.moviebd.data.data_result.MovieDetailEvent
 import com.llc.moviebd.data.model.MovieDetailModel
-import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.databinding.FragmentMovieDetailBinding
 import com.llc.moviebd.extension.loadFromUrl
 import com.llc.moviebd.network.IMAGE_URL

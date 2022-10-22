@@ -1,4 +1,4 @@
-package com.llc.moviebd.data.favourite_movie
+package com.llc.moviebd.ui.home.favourite_movie
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

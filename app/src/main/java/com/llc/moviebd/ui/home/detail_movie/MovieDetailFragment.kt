@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.llc.moviebd.R
 import com.llc.moviebd.data.data_result.MovieDetailEvent
 import com.llc.moviebd.data.model.MovieDetailModel
 import com.llc.moviebd.databinding.FragmentMovieDetailBinding
@@ -55,13 +56,16 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun bindDetailMovie(detailDataModel: MovieDetailModel) {
-        //binding.imvDetailCover.loadFromUrl(IMAGE_URL + detailDataModel.backdrop_path)
         //binding.rating.rating = (detailDataModel.vote_average / 2).toFloat()
         //binding.imvAdult.visibility = if (detailDataModel.adult) View.VISIBLE else View.GONE
 
-        binding.ivDetail.loadFromUrl(IMAGE_URL + detailDataModel.poster_path)
+        binding.ivDetail.loadFromUrl(IMAGE_URL + detailDataModel.backdrop_path)
         binding.tvDetailName.text = detailDataModel.original_title
-        binding.tvDetailStarRate.text = detailDataModel.imdb_id
+        binding.tvDetailStarRate.text =
+            binding.root.context.getString(
+                R.string.vote_average_format,
+                detailDataModel.vote_average.toString()
+            )
         binding.tvGenres.text = detailDataModel.genres.first().name
         binding.tvLanguage.text =
             if (detailDataModel.original_language == "en") "English"

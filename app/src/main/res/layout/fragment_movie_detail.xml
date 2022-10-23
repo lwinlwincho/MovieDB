@@ -4,21 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.home.detail_movie.MovieDetailFragment">
 
-    <!-- <androidx.recyclerview.widget.RecyclerView
-         android:id="@+id/rv_genre"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_marginTop="8dp"
-         android:background="@color/white"
-         android:clipToPadding="false"
-         android:orientation="horizontal"
-         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-         app:layout_constraintStart_toStartOf="@+id/iv_star_rate"
-         app:layout_constraintTop_toBottomOf="@+id/tv_star_rate"
-         tools:itemCount="1"
-         tools:listitem="@layout/item_genres" />-->
     <RelativeLayout
         android:id="@+id/rv_progress"
         android:layout_width="match_parent"
@@ -31,181 +19,193 @@
             android:layout_centerInParent="true" />
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/iv_detail"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:alpha="0.2"
-        android:src="@drawable/ic_launcher_foreground"
+        android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tv_detail_name"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:gravity="top"
-        android:textAppearance="@style/Theme.MovieBD.DetailTitle"
-        app:layout_constraintStart_toStartOf="@+id/iv_detail"
-        app:layout_constraintTop_toBottomOf="@+id/iv_detail"
-        tools:text="Spide : NO Way Home" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/rectangle"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="24dp"
-        android:alpha="0"
-        android:background="@drawable/ic_baseline_bookmark_border_24"
-        app:layout_constraintEnd_toEndOf="@+id/iv_detail"
-        app:layout_constraintTop_toBottomOf="@+id/iv_detail" />
+            <ImageView
+                android:id="@+id/iv_detail"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:alpha="0.2"
+                android:src="@drawable/ic_launcher_foreground"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/iv_star_rate"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/ic_star_rate_24"
-        app:layout_constraintStart_toStartOf="@+id/tv_detail_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_detail_name" />
+            <TextView
+                android:id="@+id/tv_detail_name"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:gravity="top"
+                android:textAppearance="@style/Theme.MovieBD.DetailTitle"
+                app:layout_constraintStart_toStartOf="@+id/iv_detail"
+                app:layout_constraintTop_toBottomOf="@+id/iv_detail"
+                tools:text="Spide : NO Way Home" />
 
-    <TextView
-        android:id="@+id/tv_detail_star_rate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:textAppearance="@style/Theme.MovieBD.Body"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_star_rate"
-        app:layout_constraintStart_toEndOf="@+id/iv_star_rate"
-        app:layout_constraintTop_toTopOf="@+id/iv_star_rate"
-        tools:text="9.1/10 IMDb" />
+            <ImageView
+                android:id="@+id/rectangle"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="27dp"
+                android:layout_marginEnd="24dp"
+                android:alpha="0"
+                android:background="@drawable/ic_baseline_bookmark_border_24"
+                app:layout_constraintEnd_toEndOf="@+id/iv_detail"
+                app:layout_constraintTop_toBottomOf="@+id/iv_detail" />
 
-    <TextView
-        android:id="@+id/tv_genres"
-        android:layout_width="32dp"
-        android:layout_height="10dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_genres"
-        android:textAppearance="@style/Theme.MovieBD.Genres"
-        app:layout_constraintStart_toStartOf="@id/iv_star_rate"
-        app:layout_constraintTop_toBottomOf="@+id/tv_detail_star_rate"
-        tools:text="HORROR" />
+            <ImageView
+                android:id="@+id/iv_star_rate"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_star_rate_24"
+                app:layout_constraintStart_toStartOf="@+id/tv_detail_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_detail_name" />
 
-    <RelativeLayout
-        android:id="@+id/rv_length"
-        android:layout_width="109dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@id/iv_star_rate"
-        app:layout_constraintTop_toBottomOf="@id/tv_genres">
+            <TextView
+                android:id="@+id/tv_detail_star_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:textAppearance="@style/Theme.MovieBD.Body"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_star_rate"
+                app:layout_constraintStart_toEndOf="@+id/iv_star_rate"
+                app:layout_constraintTop_toTopOf="@+id/iv_star_rate"
+                tools:text="9.1/10 IMDb" />
 
-        <TextView
-            android:id="@+id/length"
-            android:layout_width="0dp"
-            android:layout_height="15dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:textAppearance="@style/Theme.MovieBD.Body"
-            android:text="@string/length" />
+            <TextView
+                android:id="@+id/tv_genres"
+                android:layout_width="32dp"
+                android:layout_height="10dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_genres"
+                android:textAppearance="@style/Theme.MovieBD.Genres"
+                app:layout_constraintStart_toStartOf="@id/iv_star_rate"
+                app:layout_constraintTop_toBottomOf="@+id/tv_detail_star_rate"
+                tools:text="HORROR" />
 
-        <TextView
-            android:id="@+id/tv_length"
-            android:layout_width="0dp"
-            android:layout_height="15dp"
-            android:layout_below="@id/length"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:textAppearance="@style/Theme.MovieBD.Body.Hours"
-            tools:text="2hr 5min" />
-    </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rv_length"
+                android:layout_width="109dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="@id/iv_star_rate"
+                app:layout_constraintTop_toBottomOf="@id/tv_genres">
 
-    <RelativeLayout
-        android:id="@+id/rv_language"
-        android:layout_width="109dp"
-        android:layout_height="34dp"
-        app:layout_constraintBottom_toBottomOf="@id/rv_length"
-        app:layout_constraintStart_toEndOf="@id/rv_length">
+                <TextView
+                    android:id="@+id/length"
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/length"
+                    android:textAppearance="@style/Theme.MovieBD.Body" />
 
-        <TextView
-            android:id="@+id/language"
-            android:layout_width="0dp"
-            android:layout_height="15dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:gravity="top"
-            android:textAppearance="@style/Theme.MovieBD.Body"
-            android:text="@string/language" />
+                <TextView
+                    android:id="@+id/tv_length"
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_below="@id/length"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:textAppearance="@style/Theme.MovieBD.Body.Hours"
+                    tools:text="2hr 5min" />
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_language"
-            android:layout_width="0dp"
-            android:layout_height="15dp"
-            android:layout_below="@id/language"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:textAppearance="@style/Theme.MovieBD.Body.Hours"
-            tools:text="English" />
+            <RelativeLayout
+                android:id="@+id/rv_language"
+                android:layout_width="109dp"
+                android:layout_height="34dp"
+                app:layout_constraintBottom_toBottomOf="@id/rv_length"
+                app:layout_constraintStart_toEndOf="@id/rv_length">
 
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/language"
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:gravity="top"
+                    android:text="@string/language"
+                    android:textAppearance="@style/Theme.MovieBD.Body" />
 
-    <RelativeLayout
-        android:id="@+id/rv_rating"
-        android:layout_width="109dp"
-        android:layout_height="34dp"
-        android:layout_marginEnd="24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/rv_length"
-        app:layout_constraintStart_toEndOf="@+id/rv_language">
+                <TextView
+                    android:id="@+id/tv_language"
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_below="@id/language"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:textAppearance="@style/Theme.MovieBD.Body.Hours"
+                    tools:text="English" />
 
-        <TextView
-            android:id="@+id/rating"
-            android:layout_width="0dp"
-            android:layout_height="15dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:gravity="top"
-            android:textAppearance="@style/Theme.MovieBD.Body"
-            android:text="@string/rating" />
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_rating"
-            android:layout_width="0dp"
-            android:layout_height="15dp"
-            android:layout_below="@id/rating"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:textAppearance="@style/Theme.MovieBD.Body.Hours"
-            tools:text="PG_13" />
-    </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rv_rating"
+                android:layout_width="109dp"
+                android:layout_height="34dp"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/rv_length"
+                app:layout_constraintStart_toEndOf="@+id/rv_language">
 
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="0dp"
-        android:layout_height="20dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="24dp"
-        android:text="@string/description"
-        android:textAppearance="@style/Theme.MovieBD.Headline"
-        app:layout_constraintStart_toStartOf="@id/rv_length"
-        app:layout_constraintTop_toBottomOf="@id/rv_length" />
+                <TextView
+                    android:id="@+id/rating"
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:gravity="top"
+                    android:text="@string/rating"
+                    android:textAppearance="@style/Theme.MovieBD.Body" />
 
-    <TextView
-        android:id="@+id/tv_description"
-        android:layout_width="0dp"
-        android:layout_height="110dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="8dp"
-        android:gravity="top"
-        android:lineSpacingExtra="7sp"
-        android:textAppearance="@style/Theme.MovieBD.Body"
-        android:translationY="-3.47sp"
-        app:layout_constraintStart_toStartOf="@id/description"
-        app:layout_constraintTop_toBottomOf="@id/description"
-        tools:text="This is. .kfjaij n  fj o jd" />
+                <TextView
+                    android:id="@+id/tv_rating"
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_below="@id/rating"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:textAppearance="@style/Theme.MovieBD.Body.Hours"
+                    tools:text="PG_13" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="24dp"
+                android:text="@string/description"
+                android:textAppearance="@style/Theme.MovieBD.Headline"
+                app:layout_constraintStart_toStartOf="@id/rv_length"
+                app:layout_constraintTop_toBottomOf="@id/rv_length" />
+
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="8dp"
+                android:gravity="top"
+                android:lineSpacingExtra="7sp"
+                android:textAppearance="@style/Theme.MovieBD.Body"
+                android:translationY="-3.47sp"
+                app:layout_constraintStart_toStartOf="@id/description"
+                app:layout_constraintTop_toBottomOf="@id/description"
+                tools:text="This is. .kfjaij n  fj o jd" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

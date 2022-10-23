@@ -33,7 +33,7 @@ class GenreItemAdapter : ListAdapter<Genre, GenreItemAdapter.GenresViewHolder>(D
     class GenresViewHolder(private val binding: ItemGenresBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(genre: Genre) {
-           // binding.tvGenres.text = genre.name
+            binding.tvGenres.text = genre.name
         }
     }
 }

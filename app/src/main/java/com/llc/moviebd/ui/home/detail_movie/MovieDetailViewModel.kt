@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.llc.moviebd.data.data_result.MovieDetailEvent
+import com.llc.moviebd.data.model.Genre
 import com.llc.moviebd.network.MovieAPI
 import kotlinx.coroutines.launch
 
@@ -13,6 +14,9 @@ class MovieDetailViewModel : ViewModel() {
     private val _detailUIEvent = MutableLiveData<MovieDetailEvent>()
     val detailUIEvent: LiveData<MovieDetailEvent> = _detailUIEvent
 
+   /* private val _genres = MutableLiveData<Genre>()
+    val genres: LiveData<Genre> = _genres
+*/
     fun getMovieDetail(movieId: String) {
 
         viewModelScope.launch {
@@ -25,4 +29,6 @@ class MovieDetailViewModel : ViewModel() {
             }
         }
     }
+
+
 }

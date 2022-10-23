@@ -31,10 +31,6 @@ class HomeMovieListViewModel : ViewModel() {
                 //get data from web server
                 val result = MovieAPI.retrofitService.getNowPlaying().results
                 _movieUiEvent.value = MovieUpcomingEvent.Success(result)
-
-               /* val popularResult=MovieAPI.retrofitService.getPopular().results
-                _popularUiEvent.value=MovieUpcomingEvent.Success(popularResult)
-*/
             } catch (e: Exception) {
                 _movieUiEvent.value = MovieUpcomingEvent.Failure(e.message.toString())
             }
@@ -48,8 +44,8 @@ class HomeMovieListViewModel : ViewModel() {
             try {
                 //get data from web server
 
-                val popularResult=MovieAPI.retrofitService.getPopular().results
-                _popularUiEvent.value=MovieUpcomingEvent.Success(popularResult)
+                val popularResult = MovieAPI.retrofitService.getPopular().results
+                _popularUiEvent.value = MovieUpcomingEvent.Success(popularResult)
 
             } catch (e: Exception) {
                 _popularUiEvent.value = MovieUpcomingEvent.Failure(e.message.toString())

@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.llc.moviebd.R
 import com.llc.moviebd.data.data_result.MovieDetailEvent
+import com.llc.moviebd.data.model.Genre
 import com.llc.moviebd.data.model.MovieDetailModel
 import com.llc.moviebd.databinding.FragmentMovieDetailBinding
 import com.llc.moviebd.extension.loadFromUrl
@@ -23,6 +25,8 @@ class MovieDetailFragment : Fragment() {
     val binding get() = _binding!!
 
     private val args: MovieDetailFragmentArgs by navArgs()
+
+    private lateinit var genreItemAdapter: GenreItemAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +57,13 @@ class MovieDetailFragment : Fragment() {
                 }
             }
         }
+
+        genreItemAdapter= GenreItemAdapter()
+        binding.rvGenres.apply {
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = genreItemAdapter
+        }
     }
 
     private fun bindDetailMovie(detailDataModel: MovieDetailModel) {
@@ -66,12 +77,14 @@ class MovieDetailFragment : Fragment() {
                 R.string.vote_average_format,
                 detailDataModel.vote_average.toString()
             )
-        binding.tvGenres.text = detailDataModel.genres.first().name
+       // binding.tvGenres.text = detailDataModel.genres.first().name
         binding.tvLanguage.text =
             if (detailDataModel.original_language == "en") "English"
             else detailDataModel.original_language
         binding.tvRating.text = (detailDataModel.vote_average / 2).toString()
         binding.tvDescription.text = detailDataModel.overview
+
+        genreItemAdapter.submitList(detailDataModel.genres)
 
     }
 }

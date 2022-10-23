@@ -25,9 +25,11 @@
 
             <ImageView
                 android:id="@+id/iv_detail"
-                android:layout_width="match_parent"
-                android:layout_height="260dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:scaleType="centerCrop"
+                android:fitsSystemWindows="true"
+                app:layout_constraintDimensionRatio="375:275"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

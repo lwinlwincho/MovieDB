@@ -48,17 +48,4 @@
         app:layout_constraintTop_toTopOf="@+id/iv_star_rate"
         tools:text="9.1/10 IMDb" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_genre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@color/white"
-        android:clipToPadding="false"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintStart_toStartOf="@+id/iv_star_rate"
-        app:layout_constraintTop_toBottomOf="@+id/tv_star_rate"
-        tools:itemCount="3"
-        tools:listitem="@layout/item_genres" />
 </androidx.constraintlayout.widget.ConstraintLayout>

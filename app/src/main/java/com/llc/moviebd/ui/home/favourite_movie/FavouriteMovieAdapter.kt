@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.llc.moviebd.data.model.MovieModel
+import com.llc.moviebd.databinding.FragmentMovieListBinding
 import com.llc.moviebd.ui.home.now_showing.NowShowingItemAdapter
-import com.llc.moviebd.databinding.ItemMovieBinding
 import com.llc.moviebd.extension.loadFromUrl
 import com.llc.moviebd.network.IMAGE_URL
 
@@ -24,7 +24,7 @@ class FavouriteMovieAdapter(private val favouriteClickListener: FavouriteClickLi
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouriteMovieViewHolder {
 
         return FavouriteMovieViewHolder(
-            ItemMovieBinding.inflate(
+            FragmentMovieListBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -48,19 +48,19 @@ class FavouriteMovieAdapter(private val favouriteClickListener: FavouriteClickLi
     }*/
 
     class FavouriteMovieViewHolder(
-        private val binding: ItemMovieBinding
+        private val binding: FragmentMovieListBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun favouriteBind(
             favouriteItem: MovieModel,
             favouriteClickListener: FavouriteClickListener
         ) {
 
-            binding.imgPoster.loadFromUrl(IMAGE_URL+favouriteItem.posterPath)
+         /*   binding.imgPoster.loadFromUrl(IMAGE_URL+favouriteItem.posterPath)
             binding.txtPosterTitle.text=favouriteItem.title
             binding.txtPosterDate.text=favouriteItem.releaseDate
             binding.ivFavoriteMovie.setOnClickListener {
                 favouriteClickListener.onFavouritClicked(favouriteItem)
-            }
+            }*/
 
 
         }

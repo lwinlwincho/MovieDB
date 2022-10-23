@@ -12,6 +12,7 @@ import com.llc.moviebd.data.model.MovieDetailModel
 import com.llc.moviebd.databinding.FragmentMovieDetailBinding
 import com.llc.moviebd.extension.loadFromUrl
 import com.llc.moviebd.network.IMAGE_URL
+import com.llc.moviebd.ui.home.genre.GenreItemAdapter
 
 class MovieDetailFragment : Fragment() {
 
@@ -54,29 +55,19 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun bindDetailMovie(detailDataModel: MovieDetailModel) {
-        // binding.imvDetail.loadFromUrl(detailDataModel.id.toString())
+        //binding.imvDetailCover.loadFromUrl(IMAGE_URL + detailDataModel.backdrop_path)
+        //binding.rating.rating = (detailDataModel.vote_average / 2).toFloat()
+        //binding.imvAdult.visibility = if (detailDataModel.adult) View.VISIBLE else View.GONE
 
-        binding.imvDetailCover.loadFromUrl(IMAGE_URL + detailDataModel.backdrop_path)
-        binding.imvDetail.loadFromUrl(IMAGE_URL + detailDataModel.poster_path)
-        binding.rating.rating = (detailDataModel.vote_average / 2).toFloat()
-
-        binding.imvAdult.visibility = if (detailDataModel.adult) View.VISIBLE else View.GONE
-
-        binding.txtGenres.text = detailDataModel.genres.first().name
-
-        binding.txtHomePage.text = detailDataModel.homepage
-
-        binding.txtOriginalLanguage.text =
+        binding.ivDetail.loadFromUrl(IMAGE_URL + detailDataModel.poster_path)
+        binding.tvDetailName.text = detailDataModel.original_title
+        binding.tvDetailStarRate.text = detailDataModel.imdb_id
+        binding.tvGenres.text = detailDataModel.genres.first().name
+        binding.tvLanguage.text =
             if (detailDataModel.original_language == "en") "English"
             else detailDataModel.original_language
+        binding.tvRating.text = (detailDataModel.vote_average / 2).toString()
+        binding.tvDescription.text = detailDataModel.overview
 
-        binding.txtOriginalTitle.text = detailDataModel.original_title
-        binding.txtOverview.text = detailDataModel.overview
-        binding.txtPopularity.text = detailDataModel.popularity.toString()
-        binding.txtProductionCompanies.text = detailDataModel.production_companies[0].name
-        //   binding.txtProductionCountries.text = detailDataModel.production_countries[1].name
-        binding.txtReleaseDate.text = detailDataModel.release_date
-        binding.txtRevenue.text = detailDataModel.revenue.toString()
-        //binding.txtSpokenLanguages.text = detailDataModel.spoken_languages[1].toString()
     }
 }

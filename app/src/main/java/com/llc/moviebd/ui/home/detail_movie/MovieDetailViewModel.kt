@@ -24,6 +24,5 @@ class MovieDetailViewModel : ViewModel() {
                 _detailUIEvent.postValue(MovieDetailEvent.Error(e.message.toString()))
             }
         }
-
     }
 }

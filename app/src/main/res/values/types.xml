@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="Theme.MovieBD.Headline">
         <item name="fontFamily">@font/merriweather_bold</item>
         <item name="android:textSize">16sp</item>
@@ -19,6 +20,13 @@
         <item name="android:textSize">12sp</item>
         <item name="android:letterSpacing">0.02</item>
         <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="Theme.MovieBD.Body.DarkBlue">
+        <item name="fontFamily">@font/mulish_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textColor">@color/dark_blue</item>
     </style>
 
     <style name="Theme.MovieBD.Body.Hours">

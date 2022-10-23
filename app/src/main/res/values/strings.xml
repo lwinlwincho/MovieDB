@@ -17,4 +17,5 @@
     <string name="label_filmku">FilmKu</string>
     <string name="label_now_showing">Now Showing</string>
     <string name="label_popular">Popular</string>
+    <string name="label_cast">Cast</string>
 </resources>

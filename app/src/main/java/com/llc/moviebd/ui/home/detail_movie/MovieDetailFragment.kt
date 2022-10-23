@@ -17,6 +17,7 @@ import com.llc.moviebd.databinding.FragmentMovieDetailBinding
 import com.llc.moviebd.extension.loadFromUrl
 import com.llc.moviebd.extension.toHourMinute
 import com.llc.moviebd.network.IMAGE_URL
+import com.llc.moviebd.ui.home.cast.CastItemAdapter
 import com.llc.moviebd.ui.home.genre.GenreItemAdapter
 
 class MovieDetailFragment : Fragment() {
@@ -28,7 +29,13 @@ class MovieDetailFragment : Fragment() {
 
     private val args: MovieDetailFragmentArgs by navArgs()
 
-    private lateinit var genreItemAdapter: GenreItemAdapter
+    private val genreItemAdapter: GenreItemAdapter by lazy {
+        GenreItemAdapter()
+    }
+
+    private val castItemAdapter: CastItemAdapter by lazy {
+        CastItemAdapter()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,20 +71,21 @@ class MovieDetailFragment : Fragment() {
                     ).show()
                 }
                 is MovieDetailEvent.Credits -> {
-                    Toast.makeText(
-                        requireContext(),
-                        detailResult.creditModel.toString(),
-                        Toast.LENGTH_LONG
-                    ).show()
+                    castItemAdapter.submitList(detailResult.creditModel.cast)
                 }
             }
         }
 
-        genreItemAdapter = GenreItemAdapter()
         binding.rvGenres.apply {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = genreItemAdapter
+        }
+
+        binding.rvCasts.apply {
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = castItemAdapter
         }
 
         binding.ivBack.setOnClickListener {

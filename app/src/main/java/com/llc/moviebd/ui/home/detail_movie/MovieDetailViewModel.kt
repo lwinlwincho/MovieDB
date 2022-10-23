@@ -28,4 +28,16 @@ class MovieDetailViewModel : ViewModel() {
             }
         }
     }
+
+    fun getCredits(movieId: String) {
+        viewModelScope.launch {
+            _detailUIEvent.postValue(MovieDetailEvent.Loading)
+            try {
+                val result = MovieAPI.retrofitService.getCredits(movieId.toInt())
+                _detailUIEvent.postValue(MovieDetailEvent.Credits(result))
+            } catch (e: Exception) {
+                _detailUIEvent.postValue(MovieDetailEvent.Error(e.message.toString()))
+            }
+        }
+    }
 }

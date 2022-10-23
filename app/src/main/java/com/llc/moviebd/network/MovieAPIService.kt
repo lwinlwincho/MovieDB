@@ -1,5 +1,6 @@
 package com.llc.moviebd.network
 
+import com.llc.moviebd.data.model.CreditModel
 import com.llc.moviebd.data.model.MovieDetailModel
 import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.data.model.MoviesResponseModel
@@ -32,13 +33,19 @@ interface MovieAPIService {
     suspend fun getNowPlaying(@Query("api_key") apiKey: String = API_KEY): MoviesResponseModel<MovieModel>
 
     @GET("popular")
-    suspend fun getPopular(@Query("api_key") api_key: String= API_KEY):MoviesResponseModel<MovieModel>
+    suspend fun getPopular(@Query("api_key") api_key: String = API_KEY): MoviesResponseModel<MovieModel>
 
     @GET("{movie_id}")
     suspend fun loadMovieDetail(
         @Path("movie_id") movie_id: Int,
         @Query("api_key") api_key: String = API_KEY
     ): MovieDetailModel?
+
+    @GET("{movie_id}/credits")
+    suspend fun getCredits(
+        @Path("movie_id") movie_id: Int,
+        @Query("api_key") apiKey: String = API_KEY
+    ): CreditModel
 }
 
 object MovieAPI {

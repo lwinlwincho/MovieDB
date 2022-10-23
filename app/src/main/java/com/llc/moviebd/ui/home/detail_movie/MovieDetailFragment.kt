@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -43,6 +44,7 @@ class MovieDetailFragment : Fragment() {
         val movieId = args.movieId
 
         viewModel.getMovieDetail(movieId)
+        viewModel.getCredits(movieId)
         viewModel.detailUIEvent.observe(viewLifecycleOwner) { detailResult ->
             when (detailResult) {
                 is MovieDetailEvent.Loading -> {
@@ -55,6 +57,18 @@ class MovieDetailFragment : Fragment() {
                 }
                 is MovieDetailEvent.Error -> {
                     binding.detailProgressBar.visibility = View.GONE
+                    Toast.makeText(
+                        requireContext(),
+                        detailResult.error,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                is MovieDetailEvent.Credits -> {
+                    Toast.makeText(
+                        requireContext(),
+                        detailResult.creditModel.toString(),
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
         }
@@ -75,10 +89,10 @@ class MovieDetailFragment : Fragment() {
         //binding.rating.rating = (detailDataModel.vote_average / 2).toFloat()
         //binding.imvAdult.visibility = if (detailDataModel.adult) View.VISIBLE else View.GONE
 
-       /* Glide.with(requireContext())
-            .load(IMAGE_URL + detailDataModel.backdrop_path)
-            .transition(DrawableTransitionOptions.withCrossFade())
-            .into(binding.ivDetail)*/
+        /* Glide.with(requireContext())
+             .load(IMAGE_URL + detailDataModel.backdrop_path)
+             .transition(DrawableTransitionOptions.withCrossFade())
+             .into(binding.ivDetail)*/
 
         binding.ivDetail.loadFromUrl(IMAGE_URL + detailDataModel.backdrop_path)
         binding.tvDetailName.text = detailDataModel.original_title

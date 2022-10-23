@@ -76,11 +76,13 @@
                 android:id="@+id/rv_genres"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/item_genres"
-                tools:itemCount="3"
                 android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintStart_toStartOf="@id/iv_star_rate"
-                app:layout_constraintTop_toBottomOf="@+id/tv_detail_star_rate"/>
+                app:layout_constraintTop_toBottomOf="@+id/tv_detail_star_rate"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_genres" />
 
             <TextView
                 android:id="@+id/length"
@@ -112,30 +114,33 @@
 
             <TextView
                 android:id="@+id/tv_length"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:textAppearance="@style/Theme.MovieBD.Body.Hours"
+                app:layout_constraintEnd_toEndOf="@+id/length"
                 app:layout_constraintStart_toStartOf="@id/length"
                 app:layout_constraintTop_toBottomOf="@id/length"
                 tools:text="2hr 5min" />
 
             <TextView
                 android:id="@+id/tv_language"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:textAppearance="@style/Theme.MovieBD.Body.Hours"
+                app:layout_constraintEnd_toEndOf="@+id/language"
                 app:layout_constraintStart_toStartOf="@id/language"
                 app:layout_constraintTop_toBottomOf="@id/language"
                 tools:text="English" />
 
             <TextView
                 android:id="@+id/tv_rating"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:textAppearance="@style/Theme.MovieBD.Body.Hours"
+                app:layout_constraintEnd_toEndOf="@+id/rating"
                 app:layout_constraintStart_toStartOf="@id/rating"
                 app:layout_constraintTop_toBottomOf="@id/rating"
                 tools:text="PG_13" />

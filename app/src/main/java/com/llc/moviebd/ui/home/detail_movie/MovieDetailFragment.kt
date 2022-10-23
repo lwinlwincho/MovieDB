@@ -10,10 +10,10 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.llc.moviebd.R
 import com.llc.moviebd.data.data_result.MovieDetailEvent
-import com.llc.moviebd.data.model.Genre
 import com.llc.moviebd.data.model.MovieDetailModel
 import com.llc.moviebd.databinding.FragmentMovieDetailBinding
 import com.llc.moviebd.extension.loadFromUrl
+import com.llc.moviebd.extension.toHourMinute
 import com.llc.moviebd.network.IMAGE_URL
 import com.llc.moviebd.ui.home.genre.GenreItemAdapter
 
@@ -58,7 +58,7 @@ class MovieDetailFragment : Fragment() {
             }
         }
 
-        genreItemAdapter= GenreItemAdapter()
+        genreItemAdapter = GenreItemAdapter()
         binding.rvGenres.apply {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -70,6 +70,11 @@ class MovieDetailFragment : Fragment() {
         //binding.rating.rating = (detailDataModel.vote_average / 2).toFloat()
         //binding.imvAdult.visibility = if (detailDataModel.adult) View.VISIBLE else View.GONE
 
+       /* Glide.with(requireContext())
+            .load(IMAGE_URL + detailDataModel.backdrop_path)
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .into(binding.ivDetail)*/
+
         binding.ivDetail.loadFromUrl(IMAGE_URL + detailDataModel.backdrop_path)
         binding.tvDetailName.text = detailDataModel.original_title
         binding.tvDetailStarRate.text =
@@ -77,14 +82,14 @@ class MovieDetailFragment : Fragment() {
                 R.string.vote_average_format,
                 detailDataModel.vote_average.toString()
             )
-       // binding.tvGenres.text = detailDataModel.genres.first().name
+        // binding.tvGenres.text = detailDataModel.genres.first().name
         binding.tvLanguage.text =
             if (detailDataModel.original_language == "en") "English"
             else detailDataModel.original_language
+        binding.tvLength.text = detailDataModel.runtime.toHourMinute()
         binding.tvRating.text = (detailDataModel.vote_average / 2).toString()
         binding.tvDescription.text = detailDataModel.overview
 
         genreItemAdapter.submitList(detailDataModel.genres)
-
     }
 }

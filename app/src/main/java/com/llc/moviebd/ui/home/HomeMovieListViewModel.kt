@@ -29,7 +29,7 @@ class HomeMovieListViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 //get data from web server
-                val result = MovieAPI.retrofitService.getNowPlaying().results
+                val result = MovieAPI.retrofitService.getNowPlaying().results.sortedByDescending { it.releaseDate }
                 _movieUiEvent.value = MovieUpcomingEvent.Success(result)
             } catch (e: Exception) {
                 _movieUiEvent.value = MovieUpcomingEvent.Failure(e.message.toString())
@@ -44,7 +44,7 @@ class HomeMovieListViewModel : ViewModel() {
             try {
                 //get data from web server
 
-                val popularResult = MovieAPI.retrofitService.getPopular().results
+                val popularResult = MovieAPI.retrofitService.getPopular().results.sortedByDescending { it.vote_average }
                 _popularUiEvent.value = MovieUpcomingEvent.Success(popularResult)
 
             } catch (e: Exception) {

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.llc.moviebd.R
@@ -63,6 +64,10 @@ class MovieDetailFragment : Fragment() {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = genreItemAdapter
+        }
+
+        binding.ivBack.setOnClickListener {
+            findNavController().navigateUp()
         }
     }
 

@@ -99,6 +99,7 @@ class HomeMovieListFragment : Fragment() {
                     binding.progressBar.visibility = View.VISIBLE
                 }
                 is MovieUpcomingEvent.Success -> {
+                    binding.scrollView.visibility = View.VISIBLE
                     nowShowingItemAdapter.submitList(event.movieList)
                     binding.progressBar.visibility = View.GONE
                 }

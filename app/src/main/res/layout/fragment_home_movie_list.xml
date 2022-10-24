@@ -38,9 +38,12 @@
     </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/rl_toolbar">
+        android:layout_below="@id/rl_toolbar"
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -65,8 +68,8 @@
                 android:background="@drawable/bg_seemore"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="4dp"
-                android:textAppearance="@style/Theme.MovieBD.Seemore"
-                android:text="See more" />
+                android:text="See more"
+                android:textAppearance="@style/Theme.MovieBD.Seemore" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_now_showing_movies"
@@ -97,15 +100,15 @@
                 android:id="@+id/tv_popular_seemore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/rv_now_showing_movies"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
-                android:layout_below="@id/rv_now_showing_movies"
                 android:background="@drawable/bg_seemore"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="4dp"
-                android:textAppearance="@style/Theme.MovieBD.Seemore"
-                android:text="See more" />
+                android:text="See more"
+                android:textAppearance="@style/Theme.MovieBD.Seemore" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_popular_movies"

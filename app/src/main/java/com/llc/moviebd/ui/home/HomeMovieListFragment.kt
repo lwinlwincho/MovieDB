@@ -9,8 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.llc.moviebd.R
 import com.llc.moviebd.data.model.MovieModel
-import com.llc.moviebd.databinding.FragmentMovieListBinding
-import com.llc.moviebd.network.*
+import com.llc.moviebd.databinding.FragmentHomeMovieListBinding
 import com.llc.moviebd.ui.home.now_showing.NowShowingItemAdapter
 import com.llc.moviebd.ui.home.popular.PopularItemAdapter
 
@@ -18,7 +17,7 @@ class HomeMovieListFragment : Fragment() {
 
     private val viewModel: HomeMovieListViewModel by viewModels()
 
-    private var _binding: FragmentMovieListBinding? = null
+    private var _binding: FragmentHomeMovieListBinding? = null
     private val binding get() = _binding!!
 
     private val nowShowingItemAdapter: NowShowingItemAdapter by lazy {
@@ -27,7 +26,7 @@ class HomeMovieListFragment : Fragment() {
         }
     }
 
-    private val popularItemAdapter:PopularItemAdapter by lazy {
+    private val popularItemAdapter: PopularItemAdapter by lazy {
         PopularItemAdapter { movieModel ->
             goToDetails(movieModel)
         }
@@ -39,9 +38,9 @@ class HomeMovieListFragment : Fragment() {
         findNavController().navigate(action)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater){
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.layout_menu, menu)
-        super.onCreateOptionsMenu(menu,inflater)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -61,7 +60,7 @@ class HomeMovieListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMovieListBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeMovieListBinding.inflate(inflater, container, false)
         return binding.root
 
         setHasOptionsMenu(true)
@@ -70,13 +69,15 @@ class HomeMovieListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tvNowShowingSeemore.setOnClickListener{
-            val action=HomeMovieListFragmentDirections.actionMovieListFragmentToMovieListShowFragment()
+        binding.tvNowShowingSeemore.setOnClickListener {
+            val action =
+                HomeMovieListFragmentDirections.actionMovieListFragmentToSeeMoreFragment(Category.NOW_SHOWING)
             findNavController().navigate(action)
         }
 
-        binding.tvPopularSeemore.setOnClickListener{
-            val action=HomeMovieListFragmentDirections.actionMovieListFragmentToPopularListShowFragment()
+        binding.tvPopularSeemore.setOnClickListener {
+            val action =
+                HomeMovieListFragmentDirections.actionMovieListFragmentToSeeMoreFragment(Category.POPULAR)
             findNavController().navigate(action)
         }
 

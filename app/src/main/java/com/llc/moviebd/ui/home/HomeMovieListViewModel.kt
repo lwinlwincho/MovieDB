@@ -1,10 +1,11 @@
-package com.llc.moviebd.network
+package com.llc.moviebd.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.llc.moviebd.data.model.MovieModel
+import com.llc.moviebd.network.MovieAPI
 import kotlinx.coroutines.launch
 import java.lang.Exception
 

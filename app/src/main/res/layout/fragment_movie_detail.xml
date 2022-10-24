@@ -42,7 +42,7 @@
                 android:layout_marginStart="14dp"
                 android:layout_marginTop="8dp"
                 android:padding="10dp"
-                android:src="@drawable/ic_keyboard_backspace_24"
+                android:src="@drawable/ic_arrow_back_white_24"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

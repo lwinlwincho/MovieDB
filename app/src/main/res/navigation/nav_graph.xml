@@ -3,28 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/movieListFragment">
+    app:startDestination="@id/homeMovieListFragment">
 
     <fragment
-        android:id="@+id/movieListFragment"
+        android:id="@+id/homeMovieListFragment"
         android:name="com.llc.moviebd.ui.home.HomeMovieListFragment"
         android:label="fragment_movie_list"
-        tools:layout="@layout/fragment_movie_list" >
+        tools:layout="@layout/fragment_home_movie_list" >
         <action
             android:id="@+id/action_movieListFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
         <action
-            android:id="@+id/action_movieListFragment_to_favouriteMovieFragment"
-            app:destination="@id/favouriteMovieFragment" />
-        <action
-            android:id="@+id/action_movieListFragment_to_movieListShowFragment"
-            app:destination="@id/movieListShowFragment" />
-        <action
-            android:id="@+id/action_movieListFragment_to_popularListShowFragment"
-            app:destination="@id/popularListsFragment" />
-        <action
-            android:id="@+id/action_movieListFragment_to_popularListsFragment"
-            app:destination="@id/popularListsFragment" />
+            android:id="@+id/action_movieListFragment_to_seeMoreFragment"
+            app:destination="@id/seeMoreFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
@@ -35,30 +26,19 @@
             android:name="movieId"
             app:argType="string" />
     </fragment>
+
     <fragment
-        android:id="@+id/favouriteMovieFragment"
-        android:name="com.llc.moviebd.ui.home.favourite_movie.FavouriteMovieFragment"
-        android:label="fragment_favourite_movie"
-        tools:layout="@layout/fragment_favourite_movie" >
-    </fragment>
-    <fragment
-        android:id="@+id/movieListShowFragment"
-        android:name="com.llc.moviebd.ui.home.movielist.NowShowingListFragment"
+        android:id="@+id/seeMoreFragment"
+        android:name="com.llc.moviebd.ui.home.seeMore.SeeMoreFragment"
         android:label="fragment_movie_list_show"
-        tools:layout="@layout/fragment_now_showing_list" >
+        tools:layout="@layout/fragment_home_movie_list" >
 
         <action
             android:id="@+id/action_movieListShowFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/popularListsFragment"
-        android:name="com.llc.moviebd.ui.home.movielist.PopularListsFragment"
-        android:label="PopularListsFragment"
-        tools:layout="@layout/fragment_now_showing_list">
-        <action
-            android:id="@+id/action_popularListsFragment_to_movieDetailFragment"
-            app:destination="@id/movieDetailFragment" />
+        <argument
+            android:name="category"
+            app:argType="com.llc.moviebd.ui.home.Category" />
     </fragment>
 
 </navigation>

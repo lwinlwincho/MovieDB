@@ -10,29 +10,29 @@ import java.lang.Exception
 
 class HomeMovieListViewModel : ViewModel() {
 
-    private val _movieUiEvent = MutableLiveData<MovieUpcomingEvent>()
-    val movieUiEvent: LiveData<MovieUpcomingEvent> = _movieUiEvent
+    private val _nowShowingUiEvent = MutableLiveData<MovieUpcomingEvent>()
+    val nowShowingUiEvent: LiveData<MovieUpcomingEvent> = _nowShowingUiEvent
 
     private val _popularUiEvent = MutableLiveData<MovieUpcomingEvent>()
     val popularUiEvent: LiveData<MovieUpcomingEvent> = _popularUiEvent
 
     // Call getMarsPhotos() on init so we can display status immediately.
     init {
-        getMovie()
+        getNowShowing()
         getPopular()
     }
 
-    private fun getMovie() {
+    private fun getNowShowing() {
 
-        _movieUiEvent.value = MovieUpcomingEvent.Loading
+        _nowShowingUiEvent.value = MovieUpcomingEvent.Loading
 
         viewModelScope.launch {
             try {
                 //get data from web server
                 val result = MovieAPI.retrofitService.getNowPlaying().results.sortedByDescending { it.releaseDate }
-                _movieUiEvent.value = MovieUpcomingEvent.Success(result)
+                _nowShowingUiEvent.value = MovieUpcomingEvent.Success(result)
             } catch (e: Exception) {
-                _movieUiEvent.value = MovieUpcomingEvent.Failure(e.message.toString())
+                _nowShowingUiEvent.value = MovieUpcomingEvent.Failure(e.message.toString())
             }
         }
     }

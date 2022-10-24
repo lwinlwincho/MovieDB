@@ -16,6 +16,8 @@
         <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_movie_detail.xml" value="0.25" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_movie_list.xml" value="0.11776945484810654" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_movie_list_show.xml" value="0.14739583333333334" />
+        <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_popular_list.xml" value="0.1" />
+        <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_popular_lists.xml" value="0.12" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/item_genres.xml" value="0.1" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/item_movie.xml" value="0.18" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/item_movie_popular.xml" value="0.25" />

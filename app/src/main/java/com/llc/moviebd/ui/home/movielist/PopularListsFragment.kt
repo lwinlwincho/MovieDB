@@ -8,19 +8,21 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
+import com.llc.moviebd.R
 import com.llc.moviebd.data.model.MovieModel
-import com.llc.moviebd.databinding.FragmentMovieListShowBinding
+import com.llc.moviebd.databinding.FragmentPopularListsBinding
 import com.llc.moviebd.network.HomeMovieListViewModel
 import com.llc.moviebd.network.MovieUpcomingEvent
 import com.llc.moviebd.ui.home.HomeMovieListFragmentDirections
+import com.llc.moviebd.ui.home.HomeMovieListFragmentDirections.Companion.actionMovieListFragmentToMovieDetailFragment
 import com.llc.moviebd.ui.home.popular.PopularItemAdapter
 
-class PopularListShowFragment : Fragment() {
+class PopularListsFragment : Fragment() {
 
     private val viewModel: HomeMovieListViewModel by viewModels()
 
-    private var _binding: FragmentMovieListShowBinding? = null
+    private var _binding: FragmentPopularListsBinding? = null
     private val binding get() = _binding!!
 
     private val popularItemAdapter: PopularItemAdapter by lazy {
@@ -30,25 +32,25 @@ class PopularListShowFragment : Fragment() {
     }
 
     private fun goToDetails(movieModel: MovieModel) {
-        val action = HomeMovieListFragmentDirections
-            .actionMovieListFragmentToMovieDetailFragment(movieModel.id.toString())
+        val action = PopularListsFragmentDirections
+            .actionPopularListsFragmentToMovieDetailFragment(movieModel.id.toString())
         findNavController().navigate(action)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentMovieListShowBinding.inflate(inflater, container, false)
+    ): View {
+        _binding = FragmentPopularListsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.rvNowShowingMoviesList.apply {
+        binding.rvPopularList.apply {
             layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                GridLayoutManager(requireContext(), 2)
             adapter = popularItemAdapter
         }
 

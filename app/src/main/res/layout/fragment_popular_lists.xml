@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.movielist.MovieListShowFragment">
+    tools:context=".ui.home.movielist.PopularListsFragment">
 
     <RelativeLayout
         android:id="@+id/rl_toolbar"
@@ -51,11 +51,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
-                android:text="@string/label_now_showing"
+                android:text="@string/label_popular"
                 android:textAppearance="@style/Theme.MovieBD.Headline" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_now_showing_movies_list"
+                android:id="@+id/rv_popular_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_title_now_showing"

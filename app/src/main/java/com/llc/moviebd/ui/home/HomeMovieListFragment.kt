@@ -92,7 +92,7 @@ class HomeMovieListFragment : Fragment() {
             adapter = popularItemAdapter
         }
 
-        viewModel.movieUiEvent.observe(viewLifecycleOwner) { event ->
+        viewModel.nowShowingUiEvent.observe(viewLifecycleOwner) { event ->
             when (event) {
                 is MovieUpcomingEvent.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE

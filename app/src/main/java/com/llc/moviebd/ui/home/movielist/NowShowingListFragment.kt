@@ -11,17 +11,17 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.llc.moviebd.data.model.MovieModel
-import com.llc.moviebd.databinding.FragmentMovieListShowBinding
+import com.llc.moviebd.databinding.FragmentNowShowingListBinding
 import com.llc.moviebd.network.HomeMovieListViewModel
 import com.llc.moviebd.network.MovieUpcomingEvent
 import com.llc.moviebd.ui.home.HomeMovieListFragmentDirections
 import com.llc.moviebd.ui.home.now_showing.NowShowingItemAdapter
 
-class MovieListShowFragment : Fragment() {
+class NowShowingListFragment : Fragment() {
 
     private val viewModel:HomeMovieListViewModel by viewModels()
 
-   private var _binding: FragmentMovieListShowBinding? = null
+   private var _binding: FragmentNowShowingListBinding? = null
     private val binding get() = _binding!!
 
     private val nowShowingItemAdapter:NowShowingItemAdapter by lazy {
@@ -31,8 +31,8 @@ class MovieListShowFragment : Fragment() {
     }
 
     private fun goToDetails(movieModel: MovieModel) {
-        val action = HomeMovieListFragmentDirections
-            .actionMovieListFragmentToMovieDetailFragment(movieModel.id.toString())
+        val action = NowShowingListFragmentDirections
+            .actionMovieListShowFragmentToMovieDetailFragment(movieModel.id.toString())
         findNavController().navigate(action)
     }
 
@@ -40,7 +40,7 @@ class MovieListShowFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentMovieListShowBinding.inflate(inflater, container, false)
+        _binding = FragmentNowShowingListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -53,17 +53,17 @@ class MovieListShowFragment : Fragment() {
             adapter = nowShowingItemAdapter
         }
 
-        viewModel.movieUiEvent.observe(viewLifecycleOwner) { event ->
-            when (event) {
+        viewModel.nowShowingUiEvent.observe(viewLifecycleOwner) { nowShowingEvent ->
+            when (nowShowingEvent) {
                 is MovieUpcomingEvent.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                 }
                 is MovieUpcomingEvent.Success -> {
-                    nowShowingItemAdapter.submitList(event.movieList)
+                    nowShowingItemAdapter.submitList(nowShowingEvent.movieList)
                     binding.progressBar.visibility = View.GONE
                 }
                 is MovieUpcomingEvent.Failure -> {
-                    Toast.makeText(requireContext(), event.message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), nowShowingEvent.message, Toast.LENGTH_LONG).show()
                     binding.progressBar.visibility = View.GONE
                 }
                 else -> {}

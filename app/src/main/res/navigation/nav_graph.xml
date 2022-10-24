@@ -21,7 +21,10 @@
             app:destination="@id/movieListShowFragment" />
         <action
             android:id="@+id/action_movieListFragment_to_popularListShowFragment"
-            app:destination="@id/popularListShowFragment" />
+            app:destination="@id/popularListsFragment" />
+        <action
+            android:id="@+id/action_movieListFragment_to_popularListsFragment"
+            app:destination="@id/popularListsFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
@@ -40,14 +43,23 @@
     </fragment>
     <fragment
         android:id="@+id/movieListShowFragment"
-        android:name="com.llc.moviebd.ui.home.movielist.MovieListShowFragment"
+        android:name="com.llc.moviebd.ui.home.movielist.NowShowingListFragment"
         android:label="fragment_movie_list_show"
-        tools:layout="@layout/fragment_movie_list_show" >
+        tools:layout="@layout/fragment_now_showing_list" >
 
+        <action
+            android:id="@+id/action_movieListShowFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
     </fragment>
     <fragment
-        android:id="@+id/popularListShowFragment"
-        android:name="com.llc.moviebd.ui.home.movielist.PopularListShowFragment"
-        android:label="PopularListShowFragment" />
+        android:id="@+id/popularListsFragment"
+        android:name="com.llc.moviebd.ui.home.movielist.PopularListsFragment"
+        android:label="PopularListsFragment"
+        tools:layout="@layout/fragment_now_showing_list">
+        <action
+            android:id="@+id/action_popularListsFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
+
 </navigation>
    <!-- com.llc.moviebd.data.model.MovieModel-->

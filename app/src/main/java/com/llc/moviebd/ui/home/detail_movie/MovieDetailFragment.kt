@@ -58,7 +58,7 @@ class MovieDetailFragment : Fragment() {
                     binding.detailProgressBar.visibility = View.VISIBLE
                 }
                 is MovieDetailEvent.Success -> {
-                    //bindDetailPoster(movieId)
+                    binding.detailScrollView.visibility=View.VISIBLE
                     bindDetailMovie(detailResult.movieDetailModel)
                     binding.detailProgressBar.visibility = View.GONE
                 }

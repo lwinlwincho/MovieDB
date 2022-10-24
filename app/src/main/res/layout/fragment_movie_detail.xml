@@ -14,8 +14,11 @@
         android:layout_centerInParent="true" />
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/detail_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="invisible"
+        tools:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

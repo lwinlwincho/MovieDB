@@ -7,8 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.databinding.FragmentMovieListBinding
 import com.llc.moviebd.ui.home.now_showing.NowShowingItemAdapter
-import com.llc.moviebd.extension.loadFromUrl
-import com.llc.moviebd.network.IMAGE_URL
 
 
 interface FavouriteClickListener {

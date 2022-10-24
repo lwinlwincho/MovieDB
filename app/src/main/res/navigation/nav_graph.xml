@@ -16,6 +16,12 @@
         <action
             android:id="@+id/action_movieListFragment_to_favouriteMovieFragment"
             app:destination="@id/favouriteMovieFragment" />
+        <action
+            android:id="@+id/action_movieListFragment_to_movieListShowFragment"
+            app:destination="@id/movieListShowFragment" />
+        <action
+            android:id="@+id/action_movieListFragment_to_popularListShowFragment"
+            app:destination="@id/popularListShowFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
@@ -32,5 +38,16 @@
         android:label="fragment_favourite_movie"
         tools:layout="@layout/fragment_favourite_movie" >
     </fragment>
+    <fragment
+        android:id="@+id/movieListShowFragment"
+        android:name="com.llc.moviebd.ui.home.movielist.MovieListShowFragment"
+        android:label="fragment_movie_list_show"
+        tools:layout="@layout/fragment_movie_list_show" >
+
+    </fragment>
+    <fragment
+        android:id="@+id/popularListShowFragment"
+        android:name="com.llc.moviebd.ui.home.movielist.PopularListShowFragment"
+        android:label="PopularListShowFragment" />
 </navigation>
    <!-- com.llc.moviebd.data.model.MovieModel-->

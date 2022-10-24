@@ -6,13 +6,16 @@
         <entry key="..\:/MovieBD/app/src/main/res/drawable/bg_favorite_round_shape.xml" value="0.1" />
         <entry key="..\:/MovieBD/app/src/main/res/drawable/bg_favorite_shape.xml" value="0.1" />
         <entry key="..\:/MovieBD/app/src/main/res/drawable/bg_genres.xml" value="0.1315" />
+        <entry key="..\:/MovieBD/app/src/main/res/drawable/bg_seemore.xml" value="0.1" />
         <entry key="..\:/MovieBD/app/src/main/res/drawable/ic_baseline_bookmark_border_24.xml" value="0.1185" />
         <entry key="..\:/MovieBD/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.1" />
+        <entry key="..\:/MovieBD/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.1" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_favourite_movie.xml" value="0.1" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_movie_deatill.xml" value="0.1" />
-        <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_movie_detail.xml" value="0.3385416666666667" />
-        <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_movie_list.xml" value="0.1" />
+        <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_movie_detail.xml" value="0.25" />
+        <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_movie_list.xml" value="0.11776945484810654" />
+        <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_movie_list_show.xml" value="0.14739583333333334" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/item_genres.xml" value="0.1" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/item_movie.xml" value="0.18" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/item_movie_popular.xml" value="0.25" />
@@ -20,6 +23,7 @@
         <entry key="..\:/MovieBD/app/src/main/res/layout/item_now_showing.xml" value="0.10729166666666666" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/item_popular.xml" value="0.18" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/movie_list.xml" value="0.16" />
+        <entry key="..\:/MovieBD/app/src/main/res/menu/layout_menu.xml" value="0.16927083333333334" />
       </map>
     </option>
   </component>

@@ -13,9 +13,6 @@ class MovieDetailViewModel : ViewModel() {
     private val _detailUIEvent = MutableLiveData<MovieDetailEvent>()
     val detailUIEvent: LiveData<MovieDetailEvent> = _detailUIEvent
 
-    /* private val _genres = MutableLiveData<Genre>()
-     val genres: LiveData<Genre> = _genres
- */
     fun getMovieDetail(movieId: String) {
 
         viewModelScope.launch {

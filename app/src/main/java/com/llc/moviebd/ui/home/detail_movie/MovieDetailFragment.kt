@@ -94,8 +94,6 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun bindDetailMovie(detailDataModel: MovieDetailModel) {
-        //binding.rating.rating = (detailDataModel.vote_average / 2).toFloat()
-        //binding.imvAdult.visibility = if (detailDataModel.adult) View.VISIBLE else View.GONE
 
         /* Glide.with(requireContext())
              .load(IMAGE_URL + detailDataModel.backdrop_path)
@@ -104,18 +102,25 @@ class MovieDetailFragment : Fragment() {
 
         binding.ivDetail.loadFromUrl(IMAGE_URL + detailDataModel.backdrop_path)
         binding.tvDetailName.text = detailDataModel.original_title
+        //binding.tvLength.text = hourMinute(detailDataModel.runtime) Using sample fun
+        //using extension function
+        binding.tvLength.text = detailDataModel.runtime.toHourMinute()
+        binding.tvRating.text = (detailDataModel.vote_average / 2).toString()
+        binding.tvDescription.text = detailDataModel.overview
+
         binding.tvDetailStarRate.text =
             binding.root.context.getString(
                 R.string.vote_average_format,
                 detailDataModel.vote_average.toString()
             )
-        // binding.tvGenres.text = detailDataModel.genres.first().name
+
         binding.tvLanguage.text =
             if (detailDataModel.original_language == "en") "English"
+            else if (detailDataModel.original_language == "ko") "Korea"
+            else if (detailDataModel.original_language == "ja") "Japan"
+            else if (detailDataModel.original_language == "fr") "France"
+            else if (detailDataModel.original_language == "ch") "China"
             else detailDataModel.original_language
-        binding.tvLength.text = detailDataModel.runtime.toHourMinute()
-        binding.tvRating.text = (detailDataModel.vote_average / 2).toString()
-        binding.tvDescription.text = detailDataModel.overview
 
         genreItemAdapter.submitList(detailDataModel.genres)
     }

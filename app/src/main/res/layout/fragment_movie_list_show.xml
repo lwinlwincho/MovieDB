@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
-    tools:context=".ui.home.HomeMovieListFragment">
+    tools:context=".ui.home.movielist.MovieListShowFragment">
 
     <RelativeLayout
         android:id="@+id/rl_toolbar"
@@ -44,7 +42,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
             <TextView
                 android:id="@+id/tv_title_now_showing"
@@ -55,21 +54,8 @@
                 android:text="@string/label_now_showing"
                 android:textAppearance="@style/Theme.MovieBD.Headline" />
 
-            <TextView
-                android:id="@+id/tv_now_showing_seemore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/bg_seemore"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="4dp"
-                android:textAppearance="@style/Theme.MovieBD.Seemore"
-                android:text="See more" />
-
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_now_showing_movies"
+                android:id="@+id/rv_now_showing_movies_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_title_now_showing"
@@ -80,54 +66,14 @@
                 android:paddingStart="24dp"
                 android:paddingEnd="8dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:itemCount="16"
+                tools:itemCount="2"
                 tools:listitem="@layout/item_now_showing" />
-
-            <TextView
-                android:id="@+id/tv_title_popular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/rv_now_showing_movies"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/label_popular"
-                android:textAppearance="@style/Theme.MovieBD.Headline" />
-
-            <TextView
-                android:id="@+id/tv_popular_seemore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                android:layout_below="@id/rv_now_showing_movies"
-                android:background="@drawable/bg_seemore"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="4dp"
-                android:textAppearance="@style/Theme.MovieBD.Seemore"
-                android:text="See more" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_popular_movies"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_title_popular"
-                android:layout_marginTop="16dp"
-                android:background="@color/white"
-                android:clipToPadding="false"
-                android:orientation="vertical"
-                android:paddingHorizontal="20dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:itemCount="16"
-                tools:listitem="@layout/item_popular" />
 
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
-
     <ProgressBar
         android:id="@+id/progress_bar"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_centerInParent="true" />
-
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerInParent="true"/>
 </RelativeLayout>

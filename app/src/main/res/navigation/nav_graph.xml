@@ -9,19 +9,27 @@
         android:id="@+id/homeMovieListFragment"
         android:name="com.llc.moviebd.ui.home.HomeMovieListFragment"
         android:label="fragment_movie_list"
-        tools:layout="@layout/fragment_home_movie_list" >
+        tools:layout="@layout/fragment_home_movie_list">
         <action
             android:id="@+id/action_movieListFragment_to_movieDetailFragment"
-            app:destination="@id/movieDetailFragment" />
+            app:destination="@id/movieDetailFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
         <action
             android:id="@+id/action_movieListFragment_to_seeMoreFragment"
-            app:destination="@id/seeMoreFragment" />
+            app:destination="@id/seeMoreFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
         android:name="com.llc.moviebd.ui.home.detail_movie.MovieDetailFragment"
         android:label="fragment_movie_detail"
-        tools:layout="@layout/fragment_movie_detail" >
+        tools:layout="@layout/fragment_movie_detail">
         <argument
             android:name="movieId"
             app:argType="string" />
@@ -31,15 +39,18 @@
         android:id="@+id/seeMoreFragment"
         android:name="com.llc.moviebd.ui.home.seeMore.SeeMoreFragment"
         android:label="fragment_movie_list_show"
-        tools:layout="@layout/fragment_home_movie_list" >
+        tools:layout="@layout/fragment_home_movie_list">
 
         <action
             android:id="@+id/action_movieListShowFragment_to_movieDetailFragment"
-            app:destination="@id/movieDetailFragment" />
+            app:destination="@id/movieDetailFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
         <argument
             android:name="category"
             app:argType="com.llc.moviebd.ui.home.Category" />
     </fragment>
 
-</navigation>
-   <!-- com.llc.moviebd.data.model.MovieModel-->
+</navigation><!-- com.llc.moviebd.data.model.MovieModel-->

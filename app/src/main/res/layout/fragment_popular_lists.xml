@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.seeMore.PopularListsFragment">
+    tools:context=".ui.home.seeMore.SeeMoreFragment">
 
     <RelativeLayout
         android:id="@+id/rl_toolbar"
@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="@dimen/margin_big"
             android:src="@drawable/ic_menu" />
 
         <TextView
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="@dimen/margin_big"
             android:src="@drawable/ic_noti_ball" />
     </RelativeLayout>
 
@@ -49,8 +49,8 @@
                 android:id="@+id/tv_title_now_showing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="@dimen/margin_big"
+                android:layout_marginTop="@dimen/margin_normal"
                 android:text="@string/label_popular"
                 android:textAppearance="@style/Theme.MovieBD.Headline" />
 
@@ -59,12 +59,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_title_now_showing"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/margin_normal"
                 android:background="@color/white"
                 android:clipToPadding="false"
                 android:orientation="horizontal"
-                android:paddingStart="24dp"
-                android:paddingEnd="8dp"
+                android:paddingStart="@dimen/margin_big"
+                android:paddingEnd="@dimen/margin_tiny"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="2"
                 tools:listitem="@layout/item_now_showing" />

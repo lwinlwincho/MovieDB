@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="@dimen/margin_big"
             android:src="@drawable/ic_menu" />
 
         <TextView
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="@dimen/margin_big"
             android:src="@drawable/ic_noti_ball" />
     </RelativeLayout>
 
@@ -53,8 +53,8 @@
                 android:id="@+id/tv_title_now_showing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="@dimen/margin_big"
+                android:layout_marginTop="@dimen/margin_normal"
                 android:text="@string/label_now_showing"
                 android:textAppearance="@style/Theme.MovieBD.Headline" />
 
@@ -63,12 +63,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginEnd="@dimen/margin_big"
                 android:background="@drawable/bg_seemore"
                 android:foreground="@drawable/btn_see_more_ripple"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="4dp"
+                android:paddingHorizontal="@dimen/margin_tiny"
+                android:paddingVertical="@dimen/margin_x_tiny"
                 android:text="See more"
                 android:textAppearance="@style/Theme.MovieBD.Seemore" />
 
@@ -77,12 +77,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_title_now_showing"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/margin_normal"
                 android:background="@color/white"
                 android:clipToPadding="false"
                 android:orientation="horizontal"
-                android:paddingStart="24dp"
-                android:paddingEnd="8dp"
+                android:paddingStart="@dimen/margin_big"
+                android:paddingEnd="@dimen/margin_tiny"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="16"
                 tools:listitem="@layout/item_now_showing" />
@@ -92,8 +92,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rv_now_showing_movies"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="@dimen/margin_big"
+                android:layout_marginTop="@dimen/margin_normal"
                 android:text="@string/label_popular"
                 android:textAppearance="@style/Theme.MovieBD.Headline" />
 
@@ -103,12 +103,12 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rv_now_showing_movies"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginEnd="@dimen/margin_big"
                 android:background="@drawable/bg_seemore"
                 android:foreground="@drawable/btn_see_more_ripple"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="4dp"
+                android:paddingHorizontal="@dimen/margin_tiny"
+                android:paddingVertical="@dimen/margin_x_tiny"
                 android:text="See more"
                 android:textAppearance="@style/Theme.MovieBD.Seemore" />
 
@@ -117,11 +117,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_title_popular"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/margin_normal"
                 android:background="@color/white"
                 android:clipToPadding="false"
                 android:orientation="vertical"
-                android:paddingHorizontal="20dp"
+                android:paddingHorizontal="@dimen/margin_medium"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="16"
                 tools:listitem="@layout/item_popular" />

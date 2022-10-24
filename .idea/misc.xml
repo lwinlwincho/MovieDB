@@ -8,24 +8,34 @@
         <entry key="..\:/MovieBD/app/src/main/res/drawable/bg_genres.xml" value="0.1315" />
         <entry key="..\:/MovieBD/app/src/main/res/drawable/bg_seemore.xml" value="0.1" />
         <entry key="..\:/MovieBD/app/src/main/res/drawable/btn_see_more_ripple.xml" value="0.113" />
+        <entry key="..\:/MovieBD/app/src/main/res/drawable/ic_arrow_back_24.xml" value="0.113" />
+        <entry key="..\:/MovieBD/app/src/main/res/drawable/ic_arrow_back_white_24.xml" value="0.113" />
         <entry key="..\:/MovieBD/app/src/main/res/drawable/ic_baseline_bookmark_border_24.xml" value="0.1185" />
+        <entry key="..\:/MovieBD/app/src/main/res/drawable/ic_baseline_broken_image_24.xml" value="0.113" />
+        <entry key="..\:/MovieBD/app/src/main/res/drawable/ic_baseline_double_arrow_24.xml" value="0.113" />
         <entry key="..\:/MovieBD/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.1" />
         <entry key="..\:/MovieBD/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.1" />
+        <entry key="..\:/MovieBD/app/src/main/res/drawable/ic_menu.xml" value="0.113" />
+        <entry key="..\:/MovieBD/app/src/main/res/drawable/ic_more_horiz_24.xml" value="0.113" />
+        <entry key="..\:/MovieBD/app/src/main/res/drawable/ic_noti_ball.xml" value="0.113" />
+        <entry key="..\:/MovieBD/app/src/main/res/drawable/ic_star_rate_24.xml" value="0.113" />
+        <entry key="..\:/MovieBD/app/src/main/res/drawable/ripple.xml" value="0.113" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_favourite_movie.xml" value="0.1" />
-        <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_home_movie_list.xml" value="0.1" />
+        <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_home_movie_list.xml" value="0.2" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_movie_deatill.xml" value="0.1" />
-        <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_movie_detail.xml" value="0.22" />
+        <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_movie_detail.xml" value="0.25" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_movie_list.xml" value="0.11776945484810654" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_movie_list_show.xml" value="0.14739583333333334" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_popular_list.xml" value="0.1" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_popular_lists.xml" value="0.12" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/fragment_see_more.xml" value="0.14628623188405798" />
+        <entry key="..\:/MovieBD/app/src/main/res/layout/item_cast.xml" value="0.14628623188405798" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/item_genres.xml" value="0.1" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/item_movie.xml" value="0.18" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/item_movie_popular.xml" value="0.25" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/item_movie_showing.xml" value="0.5" />
-        <entry key="..\:/MovieBD/app/src/main/res/layout/item_now_showing.xml" value="0.10729166666666666" />
+        <entry key="..\:/MovieBD/app/src/main/res/layout/item_now_showing.xml" value="0.17" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/item_popular.xml" value="0.18" />
         <entry key="..\:/MovieBD/app/src/main/res/layout/movie_list.xml" value="0.16" />
         <entry key="..\:/MovieBD/app/src/main/res/menu/layout_menu.xml" value="0.16927083333333334" />

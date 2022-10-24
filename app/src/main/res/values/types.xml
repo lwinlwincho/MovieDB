@@ -45,10 +45,10 @@
 
     <style name="Theme.MovieBD.PhotoGrid">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopLeft">6dp</item>
-        <item name="cornerSizeTopRight">6dp</item>
-        <item name="cornerSizeBottomLeft">6dp</item>
-        <item name="cornerSizeBottomRight">6dp</item>
+        <item name="cornerSizeTopLeft">@dimen/margin_tiny_2</item>
+        <item name="cornerSizeTopRight">@dimen/margin_tiny_2</item>
+        <item name="cornerSizeBottomLeft">@dimen/margin_tiny_2</item>
+        <item name="cornerSizeBottomRight">@dimen/margin_tiny_2</item>
     </style>
 
     <style name="Theme.MovieBD.DetailTitle">

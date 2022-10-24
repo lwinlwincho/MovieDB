@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/rl_toolbar"
-        android:visibility="gone"
+        android:visibility="invisible"
         tools:visibility="visible">
 
         <RelativeLayout
@@ -66,6 +66,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/bg_seemore"
+                android:foreground="@drawable/btn_see_more_ripple"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="4dp"
                 android:text="See more"
@@ -105,6 +106,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/bg_seemore"
+                android:foreground="@drawable/btn_see_more_ripple"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="4dp"
                 android:text="See more"

@@ -25,7 +25,7 @@
         android:id="@+id/tv_movie_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="@dimen/margin_small"
         android:textAppearance="@style/Theme.MovieBD.SubTitle"
         app:layout_constraintEnd_toEndOf="@+id/iv_poster"
         app:layout_constraintStart_toStartOf="@+id/iv_poster"

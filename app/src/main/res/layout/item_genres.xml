@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:background="@drawable/bg_genres"
-        android:paddingHorizontal="12dp"
+        android:paddingHorizontal="@dimen/margin_small"
         android:paddingVertical="4dp"
         android:textAppearance="@style/Theme.MovieBD.Genres"
         tools:text="HORROR" />

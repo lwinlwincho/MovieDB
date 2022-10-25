@@ -2,8 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_setting"
-        android:icon="@drawable/ic_baseline_settings_24"
-        android:title="@string/label_setting"
-        app:showAsAction="withText" />
+        android:id="@+id/action_now_showing"
+        android:icon="@drawable/ic_baseline_tv_24"
+        android:title="@string/label_now_showing" />
+    <item
+        android:id="@+id/action_popular"
+        android:icon="@drawable/ic_baseline_tv_24"
+        android:title="@string/label_popular" />
+    <item
+        android:id="@+id/action_save"
+        android:icon="@drawable/ic_bookmark_border_gray"
+        android:title="@string/label_save" />
 </menu>

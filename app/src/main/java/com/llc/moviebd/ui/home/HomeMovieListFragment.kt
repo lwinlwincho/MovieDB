@@ -45,8 +45,16 @@ class HomeMovieListFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_setting -> {
-                Toast.makeText(requireContext(), "Setting", Toast.LENGTH_LONG).show()
+            R.id.action_now_showing -> {
+                Toast.makeText(requireContext(), "Now Showing", Toast.LENGTH_LONG).show()
+                true
+            }
+            R.id.action_popular -> {
+                Toast.makeText(requireContext(), "Popular", Toast.LENGTH_LONG).show()
+                true
+            }
+            R.id.action_save -> {
+                Toast.makeText(requireContext(), "Save", Toast.LENGTH_LONG).show()
                 true
             }
             else -> {

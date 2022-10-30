@@ -68,17 +68,17 @@ class SeeMoreFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        viewModel.seeMoreUiEvent.observe(viewLifecycleOwner) { nowShowingEvent ->
-            when (nowShowingEvent) {
+        viewModel.seeMoreUiEvent.observe(viewLifecycleOwner) { seeMoreEvent->
+            when (seeMoreEvent) {
                 is SeeMoreEvent.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                 }
                 is SeeMoreEvent.Success -> {
-                    nowShowingItemAdapter.submitList(nowShowingEvent.movieList)
+                    nowShowingItemAdapter.submitList(seeMoreEvent.movieList)
                     binding.progressBar.visibility = View.GONE
                 }
                 is SeeMoreEvent.Failure -> {
-                    Toast.makeText(requireContext(), nowShowingEvent.message, Toast.LENGTH_LONG)
+                    Toast.makeText(requireContext(), seeMoreEvent.message, Toast.LENGTH_LONG)
                         .show()
                     binding.progressBar.visibility = View.GONE
                 }

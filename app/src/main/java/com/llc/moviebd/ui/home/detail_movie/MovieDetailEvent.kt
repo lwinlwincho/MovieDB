@@ -1,4 +1,4 @@
-package com.llc.moviebd.data.data_result
+package com.llc.moviebd.ui.home.detail_movie
 
 import com.llc.moviebd.data.model.CreditModel
 import com.llc.moviebd.data.model.MovieDetailModel

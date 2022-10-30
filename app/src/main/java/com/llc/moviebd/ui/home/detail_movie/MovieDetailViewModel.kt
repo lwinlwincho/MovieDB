@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.llc.moviebd.data.data_result.MovieDetailEvent
 import com.llc.moviebd.network.MovieAPI
 import kotlinx.coroutines.launch
 

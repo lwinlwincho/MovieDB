@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.llc.moviebd.R
-import com.llc.moviebd.data.data_result.MovieDetailEvent
 import com.llc.moviebd.data.model.MovieDetailModel
 import com.llc.moviebd.databinding.FragmentMovieDetailBinding
 import com.llc.moviebd.extension.loadFromUrl
@@ -58,7 +57,7 @@ class MovieDetailFragment : Fragment() {
                     binding.detailProgressBar.visibility = View.VISIBLE
                 }
                 is MovieDetailEvent.Success -> {
-                    binding.detailScrollView.visibility=View.VISIBLE
+                    binding.detailScrollView.visibility = View.VISIBLE
                     bindDetailMovie(detailResult.movieDetailModel)
                     binding.detailProgressBar.visibility = View.GONE
                 }
@@ -95,33 +94,37 @@ class MovieDetailFragment : Fragment() {
 
     private fun bindDetailMovie(detailDataModel: MovieDetailModel) {
 
+        //use this code in extension function
         /* Glide.with(requireContext())
              .load(IMAGE_URL + detailDataModel.backdrop_path)
              .transition(DrawableTransitionOptions.withCrossFade())
              .into(binding.ivDetail)*/
 
-        binding.ivDetail.loadFromUrl(IMAGE_URL + detailDataModel.backdrop_path)
-        binding.tvDetailName.text = detailDataModel.original_title
-        //binding.tvLength.text = hourMinute(detailDataModel.runtime) Using sample fun
-        //using extension function
-        binding.tvLength.text = detailDataModel.runtime.toHourMinute()
-        binding.tvRating.text = (detailDataModel.vote_average / 2).toString()
-        binding.tvDescription.text = detailDataModel.overview
+        binding.apply {
+            ivDetail.loadFromUrl(IMAGE_URL + detailDataModel.backdrop_path)
+            tvDetailName.text = detailDataModel.original_title
+            //using sample function
+            //tvLength.text = hourMinute(detailDataModel.runtime) Using sample fun
+            //using extension function
+            tvLength.text = detailDataModel.runtime.toHourMinute()
+            tvRating.text = (detailDataModel.vote_average / 2).toString()
+            tvDescription.text = detailDataModel.overview
 
-        binding.tvDetailStarRate.text =
-            binding.root.context.getString(
-                R.string.vote_average_format,
-                detailDataModel.vote_average.toString()
-            )
+            tvDetailStarRate.text =
+                root.context.getString(
+                    R.string.vote_average_format,
+                    detailDataModel.vote_average.toString()
+                )
 
-        binding.tvLanguage.text =
-            if (detailDataModel.original_language == "en") "English"
-            else if (detailDataModel.original_language == "ko") "Korea"
-            else if (detailDataModel.original_language == "ja") "Japan"
-            else if (detailDataModel.original_language == "fr") "France"
-            else if (detailDataModel.original_language == "ch") "China"
-            else detailDataModel.original_language
+            tvLanguage.text =
+                if (detailDataModel.original_language == "en") "English"
+                else if (detailDataModel.original_language == "ko") "Korea"
+                else if (detailDataModel.original_language == "ja") "Japan"
+                else if (detailDataModel.original_language == "fr") "France"
+                else if (detailDataModel.original_language == "ch") "China"
+                else detailDataModel.original_language
 
+        }
         genreItemAdapter.submitList(detailDataModel.genres)
     }
 }

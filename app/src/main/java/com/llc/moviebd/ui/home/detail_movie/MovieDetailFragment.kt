@@ -24,7 +24,7 @@ class MovieDetailFragment : Fragment() {
     private val viewModel: MovieDetailViewModel by viewModels()
 
     private var _binding: FragmentMovieDetailBinding? = null
-    val binding get() = _binding!!
+    private val binding get() = _binding!!
 
     private val args: MovieDetailFragmentArgs by navArgs()
 
@@ -100,7 +100,7 @@ class MovieDetailFragment : Fragment() {
              .transition(DrawableTransitionOptions.withCrossFade())
              .into(binding.ivDetail)*/
 
-        binding.apply {
+        with(binding) {
             ivDetail.loadFromUrl(IMAGE_URL + detailDataModel.backdrop_path)
             tvDetailName.text = detailDataModel.original_title
             //using sample function

@@ -12,9 +12,43 @@ import com.llc.moviebd.extension.loadFromUrl
 import com.llc.moviebd.network.IMAGE_URL
 
 class PopularItemAdapter(private val onItemClickListener: (MovieModel) -> Unit) :
-    ListAdapter<MovieModel, PopularItemAdapter.PopularMovieViewHolder>(DiffCallBack) {
+    ListAdapter<MovieModel, PopularItemAdapter.PopularMovieViewHolder>(diffCallback) {
 
-    companion object DiffCallBack : DiffUtil.ItemCallback<MovieModel>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularMovieViewHolder {
+        return PopularMovieViewHolder(
+            ItemPopularBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            onItemClickListener
+        )
+    }
+
+    override fun onBindViewHolder(holder: PopularMovieViewHolder, position: Int) {
+        val movieItem: MovieModel = getItem(position)
+        holder.bind(movieItem)
+    }
+
+    class PopularMovieViewHolder(
+        private var binding: ItemPopularBinding,
+        private val onItemClickListener: (MovieModel) -> Unit
+    ) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(movieModel: MovieModel) {
+
+            with(binding) {
+                ivPoster.loadFromUrl(IMAGE_URL + movieModel.posterPath)
+                tvMovieName.text = movieModel.title
+                tvStarRate.text = binding.root.context.getString(
+                    R.string.vote_average_format,
+                    movieModel.vote_average.toString()
+                )
+
+                root.setOnClickListener {
+                    onItemClickListener.invoke(movieModel)
+                }
+            }
+        }
+    }
+
+    companion object diffCallback : DiffUtil.ItemCallback<MovieModel>() {
 
         override fun areItemsTheSame(oldItem: MovieModel, newItem: MovieModel): Boolean {
             return oldItem.id == newItem.id
@@ -22,32 +56,6 @@ class PopularItemAdapter(private val onItemClickListener: (MovieModel) -> Unit) 
 
         override fun areContentsTheSame(oldItem: MovieModel, newItem: MovieModel): Boolean {
             return oldItem == newItem
-        }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularMovieViewHolder {
-        return PopularMovieViewHolder(ItemPopularBinding.inflate(LayoutInflater.from(parent.context)))
-    }
-
-    override fun onBindViewHolder(holder: PopularMovieViewHolder, position: Int) {
-        val movieItemPosition: MovieModel = getItem(position)
-        holder.bind(movieItemPosition, onItemClickListener)
-    }
-
-    class PopularMovieViewHolder(private var binding: ItemPopularBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(movieModel: MovieModel, onItemClickListener: (MovieModel) -> Unit) {
-
-            binding.ivPoster.loadFromUrl(IMAGE_URL + movieModel.posterPath)
-            binding.tvMovieName.text = movieModel.title
-            binding.tvStarRate.text = binding.root.context.getString(
-                R.string.vote_average_format,
-                movieModel.vote_average.toString()
-            )
-
-            binding.root.setOnClickListener {
-                onItemClickListener.invoke(movieModel)
-            }
         }
     }
 }

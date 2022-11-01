@@ -1,4 +1,4 @@
-package com.llc.moviebd.ui.home.seeMore
+package com.llc.moviebd.favourite_movie
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,24 +12,29 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.llc.moviebd.R
 import com.llc.moviebd.data.model.MovieModel
+import com.llc.moviebd.databinding.FragmentFavouriteMovieBinding
 import com.llc.moviebd.databinding.FragmentSeeMoreBinding
 import com.llc.moviebd.ui.home.Category
 import com.llc.moviebd.ui.home.now_showing.NowShowingItemAdapter
+import com.llc.moviebd.ui.home.seeMore.SeeMoreEvent
+import com.llc.moviebd.ui.home.seeMore.SeeMoreFragmentArgs
+import com.llc.moviebd.ui.home.seeMore.SeeMoreFragmentDirections
+import com.llc.moviebd.ui.home.seeMore.SeeMoreViewModel
 
-class SeeMoreFragment : Fragment() {
+class FavouriteMovieFragment : Fragment() {
 
-    private val viewModel: SeeMoreViewModel by viewModels()
+    private val viewModel: FavouriteViewModel by viewModels()
 
-    private var _binding: FragmentSeeMoreBinding? = null
+    private var _binding: FragmentFavouriteMovieBinding? = null
     private val binding get() = _binding!!
 
     private val args: SeeMoreFragmentArgs by navArgs()
 
-    private val seeMoreItemAdapter: SeeMoreItemAdapter by lazy {
-       SeeMoreItemAdapter { movieModel ->
+   /* private val nowShowingItemAdapter: NowShowingItemAdapter by lazy {
+        NowShowingItemAdapter { movieModel ->
             goToDetails(movieModel)
         }
-    }
+    }*/
 
     private fun goToDetails(movieModel: MovieModel) {
         val action = SeeMoreFragmentDirections
@@ -41,44 +46,33 @@ class SeeMoreFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSeeMoreBinding.inflate(inflater, container, false)
+        _binding = FragmentFavouriteMovieBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        when (args.category) {
-            Category.NOW_SHOWING -> {
-                binding.tvTitle.text = getString(R.string.label_now_showing)
-                viewModel.getNowShowing()
-            }
-            Category.POPULAR -> {
-                binding.tvTitle.text = getString(R.string.label_popular)
-                viewModel.getPopular()
-            }
-        }
-
         binding.rvMoviesList.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
-            adapter = seeMoreItemAdapter
+           // adapter = nowShowingItemAdapter
         }
 
         binding.ivBack.setOnClickListener {
             findNavController().navigateUp()
         }
 
-        viewModel.seeMoreUiEvent.observe(viewLifecycleOwner) { seeMoreEvent->
-            when (seeMoreEvent) {
-                is SeeMoreEvent.Loading -> {
+        viewModel.favouriteUEvent.observe(viewLifecycleOwner) { favouriteEvent->
+            when (favouriteEvent) {
+                is FavouriteEvent.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                 }
-                is SeeMoreEvent.Success -> {
-                    seeMoreItemAdapter.submitList(seeMoreEvent.movieList)
+                is FavouriteEvent.Success -> {
+                  //  nowShowingItemAdapter.submitList(favouriteEvent.movieList)
                     binding.progressBar.visibility = View.GONE
                 }
-                is SeeMoreEvent.Failure -> {
-                    Toast.makeText(requireContext(), seeMoreEvent.message, Toast.LENGTH_LONG)
+                is FavouriteEvent.Failure -> {
+                    Toast.makeText(requireContext(), favouriteEvent.message, Toast.LENGTH_LONG)
                         .show()
                     binding.progressBar.visibility = View.GONE
                 }

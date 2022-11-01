@@ -24,6 +24,9 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_out" />
+        <action
+            android:id="@+id/action_homeMovieListFragment_to_favouriteMovieFragment"
+            app:destination="@id/favouriteMovieFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
@@ -52,5 +55,9 @@
             android:name="category"
             app:argType="com.llc.moviebd.ui.home.Category" />
     </fragment>
+    <fragment
+        android:id="@+id/favouriteMovieFragment"
+        android:name="com.llc.moviebd.favourite_movie.FavouriteMovieFragment"
+        android:label="FavouriteMovieFragment" />
 
 </navigation><!-- com.llc.moviebd.data.model.MovieModel-->

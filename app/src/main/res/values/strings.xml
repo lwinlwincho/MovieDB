@@ -13,6 +13,9 @@
     <string name="label_filmku">FilmKu</string>
     <string name="label_now_showing">Now Showing</string>
     <string name="label_popular">Popular</string>
+    <string name="label_favourite">Favourite</string>
     <string name="label_cast">Cast</string>
     <string name="label_save">Save</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

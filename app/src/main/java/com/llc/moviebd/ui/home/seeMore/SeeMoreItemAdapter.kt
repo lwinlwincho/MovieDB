@@ -1,4 +1,4 @@
-package com.llc.moviebd.ui.home.now_showing
+package com.llc.moviebd.ui.home.seeMore
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,28 +10,28 @@ import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.databinding.ItemNowShowingBinding
 import com.llc.moviebd.extension.loadFromUrl
 import com.llc.moviebd.network.IMAGE_URL
-import com.llc.moviebd.ui.home.popular.PopularItemAdapter
 import com.llc.moviebd.ui.home.popular.onItemClickListener
 
-class NowShowingItemAdapter(private val listener: onItemClickListener):
-    ListAdapter<MovieModel, NowShowingItemAdapter.NowShowingViewHolder>(diffCallBack) {
+class SeeMoreItemAdapter(private val onItemClickListener:(MovieModel)->Unit
+) :
+    ListAdapter<MovieModel, SeeMoreItemAdapter.SeeMoreViewHolder>(diffCallBack) {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NowShowingViewHolder {
-        return NowShowingViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeeMoreViewHolder {
+        return SeeMoreViewHolder(
             ItemNowShowingBinding.inflate(LayoutInflater.from(parent.context)),
-            listener
+            onItemClickListener
         )
     }
 
-    override fun onBindViewHolder(holder: NowShowingViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SeeMoreViewHolder, position: Int) {
         val movieItem: MovieModel = getItem(position)
         holder.bind(movieItem)
     }
 
-    class NowShowingViewHolder(
+    class SeeMoreViewHolder(
         private var binding: ItemNowShowingBinding,
-        private val listener:onItemClickListener
+        private val onItemClickListener:(MovieModel)->Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(movieModel: MovieModel) {
 
@@ -43,12 +43,8 @@ class NowShowingItemAdapter(private val listener: onItemClickListener):
                     movieModel.vote_average.toString()
                 )
 
-                ivPoster.setOnClickListener {
-                    listener.onPosterClicked(movieModel)
-                }
-
-                imvFav.setOnClickListener {
-                    listener.onFavoriteClicked(movieModel)
+                root.setOnClickListener {
+                    onItemClickListener.invoke(movieModel)
                 }
             }
         }

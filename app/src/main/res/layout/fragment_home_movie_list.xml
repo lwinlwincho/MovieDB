@@ -29,6 +29,7 @@
             android:textAppearance="@style/Theme.MovieBD.Headline" />
 
         <ImageView
+            android:id="@+id/imv_noti"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"

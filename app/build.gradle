@@ -35,21 +35,19 @@ android {
         viewBinding true
         dataBinding true
     }
-
 }
 
 dependencies {
 
-    def nav_version = "2.5.2"
+    //def nav_version = "2.5.2"
+
+    // Room
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
 
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-
-  /*  // Retrofit
-    implementation "com.squareup.retrofit2:retrofit:2.9.0"
-    // Retrofit with Scalar Converter
-    implementation "com.squareup.retrofit2:converter-scalars:2.9.0"
-*/
 
     // Moshi
     implementation 'com.squareup.moshi:moshi-kotlin:1.13.0'

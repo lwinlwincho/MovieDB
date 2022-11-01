@@ -11,7 +11,6 @@
         android:layout_width="85dp"
         android:layout_height="128dp"
         android:layout_marginHorizontal="@dimen/margin_x_tiny"
-
         android:layout_marginTop="@dimen/margin_x_tiny"
         android:foreground="?attr/selectableItemBackgroundBorderless"
         android:scaleType="centerCrop"
@@ -19,6 +18,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearance="@style/Theme.MovieBD.PhotoGrid"
         tools:src="@drawable/ic_placeholder" />
+
+    <ImageView
+        android:id="@+id/imv_fav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_x_tiny"
+        android:layout_marginBottom="@dimen/margin_x_tiny"
+        android:background="@drawable/bg_favorite_round_shape"
+        android:padding="@dimen/margin_x_tiny"
+        android:foreground="@drawable/ripple"
+        android:src="@drawable/ic_baseline_favorite_border_24"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_poster"
+        app:layout_constraintEnd_toEndOf="@+id/iv_poster" />
 
     <TextView
         android:id="@+id/tv_movie_name"

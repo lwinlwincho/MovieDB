@@ -21,6 +21,19 @@
         app:shapeAppearance="@style/Theme.MovieBD.PhotoGrid"
         tools:src="@drawable/ic_placeholder" />
 
+    <ImageView
+        android:id="@+id/imv_fav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_favorite_border_24"
+        android:background="@drawable/bg_favorite_round_shape"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_poster"
+        app:layout_constraintEnd_toEndOf="@+id/iv_poster"
+        android:layout_marginEnd="@dimen/margin_x_small"
+        android:padding="@dimen/margin_tiny"
+        android:foreground="@drawable/ripple"
+        android:layout_marginBottom="@dimen/margin_x_small"/>
+
     <TextView
         android:id="@+id/tv_movie_name"
         android:layout_width="0dp"

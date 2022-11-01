@@ -27,10 +27,9 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:textAppearance="@style/Theme.MovieBD.Headline"
-            tools:text="@string/label_filmku" />
+            tools:text="@string/label_popular" />
 
     </RelativeLayout>
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_movies_list"

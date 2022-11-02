@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpBottomNavigation() {
-        binding.bottomNavView.itemIconTintList = null
         binding.bottomNavView.setupWithNavController(navController)
         binding.bottomNavView.setOnItemReselectedListener { item ->
             if (binding.bottomNavView.selectedItemId == item.itemId) {

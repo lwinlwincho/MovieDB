@@ -10,7 +10,7 @@
         android:icon="@drawable/ic_baseline_tv_24"
         android:title="@string/label_popular" />
     <item
-        android:id="@+id/action_save"
-        android:icon="@drawable/ic_bookmark_border_gray"
-        android:title="@string/label_save" />
+        android:id="@+id/action_favourite"
+        android:icon="@drawable/ic_baseline_favorite_border_24"
+        android:title="@string/label_favourite" />
 </menu>

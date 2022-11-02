@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:textAppearance="@style/Theme.MovieBD.Headline"
-            tools:text="@string/label_favourite" />
+            android:text="@string/label_favourite" />
 
     </RelativeLayout>
 
@@ -47,9 +47,4 @@
         tools:itemCount="4"
         tools:listitem="@layout/item_now_showing" />
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_centerInParent="true" />
 </RelativeLayout>

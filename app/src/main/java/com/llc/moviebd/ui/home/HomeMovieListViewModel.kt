@@ -1,13 +1,11 @@
 package com.llc.moviebd.ui.home
 
-import android.icu.text.CaseMap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.database.MovieEntity
-import com.llc.moviebd.favourite_movie.FavouriteEvent
 import com.llc.moviebd.network.MovieAPI
 import com.llc.myinventory.database.MovieRoomDatabase
 import kotlinx.coroutines.launch
@@ -21,8 +19,8 @@ class HomeMovieListViewModel : ViewModel() {
     private val _popularUiEvent = MutableLiveData<MovieUpcomingEvent>()
     val popularUiEvent: LiveData<MovieUpcomingEvent> = _popularUiEvent
 
-    private val _favouriteUiEvent = MutableLiveData<FavouriteEvent>()
-    val favouriteUiEvent: LiveData<FavouriteEvent> = _favouriteUiEvent
+    private val _favouriteUiEvent = MutableLiveData<MovieUpcomingEvent>()
+    val favouriteUiEvent: LiveData<MovieUpcomingEvent> = _favouriteUiEvent
 
     // Call getMarsPhotos() on init so we can display status immediately.
     init {
@@ -52,7 +50,6 @@ class HomeMovieListViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 //get data from web server
-
                 val popularResult =
                     MovieAPI.retrofitService.getPopular().results.sortedByDescending { it.vote_average }
                 _popularUiEvent.value = MovieUpcomingEvent.Success(popularResult)
@@ -79,9 +76,9 @@ class HomeMovieListViewModel : ViewModel() {
                     voteAverage =voteAverage
                 )
                 appDatabase.movieDao().insert(entity)
-                _favouriteUiEvent.postValue(FavouriteEvent.SuccessfulAdded("Successfully Added!"))
+                _favouriteUiEvent.postValue(MovieUpcomingEvent.SuccessAddedSms("Successfully Added!"))
             } catch (e: Exception) {
-                _favouriteUiEvent.postValue(FavouriteEvent.Failure(e.message.toString()))
+                _favouriteUiEvent.postValue(MovieUpcomingEvent.Failure(e.message.toString()))
             }
         }
     }
@@ -90,7 +87,8 @@ class HomeMovieListViewModel : ViewModel() {
 //You can store many data class and singleton obj in sealed class
 sealed class MovieUpcomingEvent {
     data class Success(val movieList: List<MovieModel>) : MovieUpcomingEvent()
-    data class SuccessFavSms(val message: String) : MovieUpcomingEvent()
+    data class SuccessRemovedSms(val message: String) : MovieUpcomingEvent()
+    data class SuccessAddedSms(val message: String) : MovieUpcomingEvent()
     data class Failure(val message: String) : MovieUpcomingEvent()
     object Loading : MovieUpcomingEvent()
 }

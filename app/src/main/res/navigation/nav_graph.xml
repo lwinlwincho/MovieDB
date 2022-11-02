@@ -58,6 +58,10 @@
     <fragment
         android:id="@+id/favouriteMovieFragment"
         android:name="com.llc.moviebd.favourite_movie.FavouriteMovieFragment"
-        android:label="FavouriteMovieFragment" />
+        android:label="FavouriteMovieFragment" >
+        <action
+            android:id="@+id/action_favouriteMovieFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
 
 </navigation><!-- com.llc.moviebd.data.model.MovieModel-->

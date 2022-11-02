@@ -2,7 +2,6 @@ package com.llc.moviebd.ui.home
 
 import android.os.Bundle
 import android.view.*
-import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -11,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.llc.moviebd.R
 import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.databinding.FragmentHomeMovieListBinding
-import com.llc.moviebd.favourite_movie.FavouriteEvent
 import com.llc.moviebd.ui.home.now_showing.NowShowingItemAdapter
 import com.llc.moviebd.ui.home.popular.PopularItemAdapter
 import com.llc.moviebd.ui.home.popular.onItemClickListener
@@ -36,12 +34,6 @@ class HomeMovieListFragment : Fragment(), onItemClickListener {
         PopularItemAdapter(this)
     }
 
-    private fun goToDetails(movieModel: MovieModel) {
-        val action = HomeMovieListFragmentDirections
-            .actionMovieListFragmentToMovieDetailFragment(movieModel.id.toString())
-        findNavController().navigate(action)
-    }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.layout_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
@@ -57,8 +49,8 @@ class HomeMovieListFragment : Fragment(), onItemClickListener {
                 Toast.makeText(requireContext(), "Popular", Toast.LENGTH_LONG).show()
                 true
             }
-            R.id.action_save -> {
-                Toast.makeText(requireContext(), "Save", Toast.LENGTH_LONG).show()
+            R.id.action_favourite -> {
+                Toast.makeText(requireContext(), "Favourite", Toast.LENGTH_LONG).show()
                 true
             }
             else -> {
@@ -149,22 +141,21 @@ class HomeMovieListFragment : Fragment(), onItemClickListener {
 
         viewModel.favouriteUiEvent.observe(viewLifecycleOwner) { favouriteEvent ->
             when (favouriteEvent) {
-                is FavouriteEvent.Loading -> {
+                is MovieUpcomingEvent.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                 }
-                is FavouriteEvent.SuccessfulAdded -> {
+                is MovieUpcomingEvent.SuccessAddedSms -> {
+                    Toast.makeText(requireContext(), favouriteEvent.message, Toast.LENGTH_LONG)
+                        .show()
+                    binding.progressBar.visibility = View.GONE
+                }
+                is MovieUpcomingEvent.SuccessRemovedSms -> {
                     // popularItemAdapter.submitList(popularEvent.movieList)
                     Toast.makeText(requireContext(), favouriteEvent.message, Toast.LENGTH_LONG)
                         .show()
                     binding.progressBar.visibility = View.GONE
                 }
-                is FavouriteEvent.SuccessfulRemoved -> {
-                    // popularItemAdapter.submitList(popularEvent.movieList)
-                    Toast.makeText(requireContext(), favouriteEvent.message, Toast.LENGTH_LONG)
-                        .show()
-                    binding.progressBar.visibility = View.GONE
-                }
-                is FavouriteEvent.Failure -> {
+                is MovieUpcomingEvent.Failure -> {
                     Toast.makeText(requireContext(), favouriteEvent.message, Toast.LENGTH_LONG)
                         .show()
                     binding.progressBar.visibility = View.GONE
@@ -172,11 +163,6 @@ class HomeMovieListFragment : Fragment(), onItemClickListener {
                 else -> {}
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     override fun onPosterClicked(model: MovieModel) {
@@ -187,6 +173,12 @@ class HomeMovieListFragment : Fragment(), onItemClickListener {
         addFav(model)
     }
 
+    private fun goToDetails(movieModel: MovieModel) {
+        val action = HomeMovieListFragmentDirections
+            .actionMovieListFragmentToMovieDetailFragment(movieModel.id.toString())
+        findNavController().navigate(action)
+    }
+
     private fun addFav(model: MovieModel) {
         viewModel.addFavourite(
             appDatabase = appDatabase,
@@ -194,7 +186,11 @@ class HomeMovieListFragment : Fragment(), onItemClickListener {
             title = model.title,
             releaseDate = model.releaseDate,
             voteAverage = model.vote_average.toString()
-
         )
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

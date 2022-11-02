@@ -22,5 +22,5 @@ interface MovieDao {
     fun getById(id: Int): MovieEntity
 
     @Query("SELECT * from movieentity ORDER BY id ASC")
-    fun getAllMovie(): List<MovieEntity>
+    fun getAllFavMovie(): List<MovieEntity>
 }

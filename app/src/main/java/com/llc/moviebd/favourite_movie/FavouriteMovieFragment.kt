@@ -12,14 +12,13 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.llc.moviebd.R
 import com.llc.moviebd.data.model.MovieModel
+import com.llc.moviebd.database.MovieEntity
 import com.llc.moviebd.databinding.FragmentFavouriteMovieBinding
 import com.llc.moviebd.databinding.FragmentSeeMoreBinding
 import com.llc.moviebd.ui.home.Category
 import com.llc.moviebd.ui.home.now_showing.NowShowingItemAdapter
-import com.llc.moviebd.ui.home.seeMore.SeeMoreEvent
-import com.llc.moviebd.ui.home.seeMore.SeeMoreFragmentArgs
-import com.llc.moviebd.ui.home.seeMore.SeeMoreFragmentDirections
-import com.llc.moviebd.ui.home.seeMore.SeeMoreViewModel
+import com.llc.moviebd.ui.home.seeMore.*
+import com.llc.myinventory.database.MovieRoomDatabase
 
 class FavouriteMovieFragment : Fragment() {
 
@@ -28,17 +27,19 @@ class FavouriteMovieFragment : Fragment() {
     private var _binding: FragmentFavouriteMovieBinding? = null
     private val binding get() = _binding!!
 
-    private val args: SeeMoreFragmentArgs by navArgs()
+    private val appDatabase by lazy {
+        MovieRoomDatabase.getDatabase(requireContext())
+    }
 
-   /* private val nowShowingItemAdapter: NowShowingItemAdapter by lazy {
-        NowShowingItemAdapter { movieModel ->
-            goToDetails(movieModel)
+    private val favouriteItemAdapter: FavouriteItemAdapter by lazy {
+        FavouriteItemAdapter { movieEntity ->
+            goToDetails(movieEntity)
         }
-    }*/
+    }
 
-    private fun goToDetails(movieModel: MovieModel) {
-        val action = SeeMoreFragmentDirections
-            .actionMovieListShowFragmentToMovieDetailFragment(movieModel.id.toString())
+    private fun goToDetails(movieEntity: MovieEntity) {
+        val action = FavouriteMovieFragmentDirections
+            .actionFavouriteMovieFragmentToMovieDetailFragment(movieEntity.id.toString())
         findNavController().navigate(action)
     }
 
@@ -55,29 +56,26 @@ class FavouriteMovieFragment : Fragment() {
 
         binding.rvMoviesList.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
-           // adapter = nowShowingItemAdapter
+            adapter = favouriteItemAdapter
         }
 
-        binding.ivBack.setOnClickListener {
-            findNavController().navigateUp()
-        }
-
+        viewModel.getAllFavourite(appDatabase)
         viewModel.favouriteUEvent.observe(viewLifecycleOwner) { favouriteEvent->
             when (favouriteEvent) {
-                is FavouriteEvent.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
-                }
+
                 is FavouriteEvent.Success -> {
-                  //  nowShowingItemAdapter.submitList(favouriteEvent.movieList)
-                    binding.progressBar.visibility = View.GONE
+                    favouriteItemAdapter.submitList(favouriteEvent.movieList)
                 }
                 is FavouriteEvent.Failure -> {
                     Toast.makeText(requireContext(), favouriteEvent.message, Toast.LENGTH_LONG)
                         .show()
-                    binding.progressBar.visibility = View.GONE
                 }
                 else -> {}
             }
+        }
+
+        binding.ivBack.setOnClickListener {
+            findNavController().navigateUp()
         }
     }
 }

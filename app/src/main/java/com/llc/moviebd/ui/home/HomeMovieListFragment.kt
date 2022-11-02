@@ -160,10 +160,7 @@ class HomeMovieListFragment : Fragment(), onItemClickListener {
     private fun addFav(model: MovieModel) {
         viewModel.addFavourite(
             appDatabase = appDatabase,
-            posterPath = model.posterPath.toString(),
-            title = model.title,
-            releaseDate = model.releaseDate,
-            voteAverage = model.vote_average.toString()
+            model = model
         )
     }
 

@@ -63,18 +63,16 @@ class HomeMovieListViewModel : ViewModel() {
 
     fun addFavourite(
         appDatabase: MovieRoomDatabase,
-        posterPath: String,
-        title: String,
-        releaseDate: String,
-        voteAverage: String,
+        model: MovieModel
     ) {
         viewModelScope.launch {
             try {
                 val entity = MovieEntity(
-                    posterPath = posterPath,
-                    title = title,
-                    releaseDate = releaseDate,
-                    voteAverage = voteAverage
+                    id= model.id,
+                    posterPath = model.posterPath.orEmpty(),
+                    title = model.title,
+                    releaseDate = model.releaseDate,
+                    voteAverage = model.vote_average.toString()
                 )
                 appDatabase.movieDao().insert(entity)
                 _favouriteUiEvent.postValue(Event(MovieUpcomingEvent.SuccessAddedSms("Successfully Added!")))

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.llc.moviebd.R
 import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.databinding.FragmentHomeMovieListBinding
+import com.llc.moviebd.singleEvent.observeEvent
 import com.llc.moviebd.ui.home.now_showing.NowShowingItemAdapter
 import com.llc.moviebd.ui.home.popular.PopularItemAdapter
 import com.llc.moviebd.ui.home.popular.onItemClickListener
@@ -27,36 +28,11 @@ class HomeMovieListFragment : Fragment(), onItemClickListener {
     }
 
     private val nowShowingItemAdapter: NowShowingItemAdapter by lazy {
-        NowShowingItemAdapter (this)
+        NowShowingItemAdapter(this)
     }
 
     private val popularItemAdapter: PopularItemAdapter by lazy {
         PopularItemAdapter(this)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.layout_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_now_showing -> {
-                Toast.makeText(requireContext(), "Now Showing", Toast.LENGTH_LONG).show()
-                true
-            }
-            R.id.action_popular -> {
-                Toast.makeText(requireContext(), "Popular", Toast.LENGTH_LONG).show()
-                true
-            }
-            R.id.action_favourite -> {
-                Toast.makeText(requireContext(), "Favourite", Toast.LENGTH_LONG).show()
-                true
-            }
-            else -> {
-                super.onOptionsItemSelected(item)
-            }
-        }
     }
 
     override fun onCreateView(
@@ -139,14 +115,16 @@ class HomeMovieListFragment : Fragment(), onItemClickListener {
             }
         }
 
-        viewModel.favouriteUiEvent.observe(viewLifecycleOwner) { favouriteEvent ->
+        viewModel.favouriteUiEvent.observeEvent(viewLifecycleOwner) { favouriteEvent ->
             when (favouriteEvent) {
                 is MovieUpcomingEvent.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                 }
                 is MovieUpcomingEvent.SuccessAddedSms -> {
-                    Toast.makeText(requireContext(), favouriteEvent.message, Toast.LENGTH_LONG)
-                        .show()
+                    if (favouriteEvent.message.isNotBlank()) {
+                        Toast.makeText(requireContext(), favouriteEvent.message, Toast.LENGTH_LONG)
+                            .show()
+                    }
                     binding.progressBar.visibility = View.GONE
                 }
                 is MovieUpcomingEvent.SuccessRemovedSms -> {

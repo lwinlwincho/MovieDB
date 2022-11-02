@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/action_now_showing"
-        android:icon="@drawable/ic_baseline_tv_24"
-        android:title="@string/label_now_showing" />
+        android:id="@+id/homeMovieListFragment"
+        android:icon="@drawable/ic_all_movie"
+        android:title="@string/label_home" />
     <item
-        android:id="@+id/action_popular"
-        android:icon="@drawable/ic_baseline_tv_24"
-        android:title="@string/label_popular" />
-    <item
-        android:id="@+id/action_favourite"
-        android:icon="@drawable/ic_baseline_favorite_border_24"
+        android:id="@+id/favouriteMovieFragment"
+        android:icon="@drawable/ic_bookmarks"
         android:title="@string/label_favourite" />
 </menu>

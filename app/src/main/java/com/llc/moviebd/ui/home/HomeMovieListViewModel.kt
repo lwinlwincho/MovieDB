@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.database.MovieEntity
 import com.llc.moviebd.network.MovieAPI
+import com.llc.moviebd.singleEvent.Event
 import com.llc.myinventory.database.MovieRoomDatabase
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -19,8 +20,8 @@ class HomeMovieListViewModel : ViewModel() {
     private val _popularUiEvent = MutableLiveData<MovieUpcomingEvent>()
     val popularUiEvent: LiveData<MovieUpcomingEvent> = _popularUiEvent
 
-    private val _favouriteUiEvent = MutableLiveData<MovieUpcomingEvent>()
-    val favouriteUiEvent: LiveData<MovieUpcomingEvent> = _favouriteUiEvent
+    private val _favouriteUiEvent = MutableLiveData<Event<MovieUpcomingEvent>>()
+    val favouriteUiEvent: LiveData<Event<MovieUpcomingEvent>> = _favouriteUiEvent
 
     // Call getMarsPhotos() on init so we can display status immediately.
     init {
@@ -73,12 +74,13 @@ class HomeMovieListViewModel : ViewModel() {
                     posterPath = posterPath,
                     title = title,
                     releaseDate = releaseDate,
-                    voteAverage =voteAverage
+                    voteAverage = voteAverage
                 )
                 appDatabase.movieDao().insert(entity)
-                _favouriteUiEvent.postValue(MovieUpcomingEvent.SuccessAddedSms("Successfully Added!"))
+                _favouriteUiEvent.postValue(Event(MovieUpcomingEvent.SuccessAddedSms("Successfully Added!")))
+
             } catch (e: Exception) {
-                _favouriteUiEvent.postValue(MovieUpcomingEvent.Failure(e.message.toString()))
+                _favouriteUiEvent.postValue(Event(MovieUpcomingEvent.Failure(e.message.toString())))
             }
         }
     }

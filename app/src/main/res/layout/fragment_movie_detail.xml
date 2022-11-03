@@ -68,13 +68,13 @@
                 android:layout_marginStart="@dimen/margin_big"
                 android:layout_marginTop="@dimen/margin_big"
                 android:textAppearance="@style/Theme.MovieBD.DetailTitle"
-                app:layout_constraintEnd_toStartOf="@+id/rectangle"
+                app:layout_constraintEnd_toStartOf="@+id/book_mark"
                 app:layout_constraintStart_toStartOf="@+id/iv_detail"
                 app:layout_constraintTop_toBottomOf="@+id/iv_detail"
                 tools:text="Spide : NO Way Home" />
 
             <ImageView
-                android:id="@+id/rectangle"
+                android:id="@+id/book_mark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="27dp"

@@ -20,9 +20,6 @@ class HomeMovieListViewModel : ViewModel() {
     private val _popularUiEvent = MutableLiveData<MovieUpcomingEvent>()
     val popularUiEvent: LiveData<MovieUpcomingEvent> = _popularUiEvent
 
-    private val _favouriteUiEvent = MutableLiveData<Event<MovieUpcomingEvent>>()
-    val favouriteUiEvent: LiveData<Event<MovieUpcomingEvent>> = _favouriteUiEvent
-
     init {
         getNowShowing()
         getPopular()
@@ -59,35 +56,13 @@ class HomeMovieListViewModel : ViewModel() {
             }
         }
     }
-
-    fun addFavourite(
-        appDatabase: MovieRoomDatabase,
-        model: MovieModel
-    ) {
-        viewModelScope.launch {
-            try {
-                val entity = MovieEntity(
-                    id= model.id,
-                    posterPath = model.posterPath.orEmpty(),
-                    title = model.title,
-                    releaseDate = model.releaseDate,
-                    voteAverage = model.vote_average.toString()
-                )
-                appDatabase.movieDao().insert(entity)
-                _favouriteUiEvent.postValue(Event(MovieUpcomingEvent.SuccessAddedSms("Successfully Added!")))
-
-            } catch (e: Exception) {
-                _favouriteUiEvent.postValue(Event(MovieUpcomingEvent.Failure(e.message.toString())))
-            }
-        }
-    }
 }
 
 //You can store many data class and singleton obj in sealed class
 sealed class MovieUpcomingEvent {
     data class Success(val movieList: List<MovieModel>) : MovieUpcomingEvent()
-    data class SuccessRemovedSms(val message: String) : MovieUpcomingEvent()
-    data class SuccessAddedSms(val message: String) : MovieUpcomingEvent()
+    data class SuccessRemoved(val message: String) : MovieUpcomingEvent()
+    data class SuccessAdded(val message: String) : MovieUpcomingEvent()
     data class Failure(val message: String) : MovieUpcomingEvent()
     object Loading : MovieUpcomingEvent()
 }

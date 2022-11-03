@@ -12,12 +12,15 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.llc.moviebd.R
 import com.llc.moviebd.data.model.MovieDetailModel
+import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.databinding.FragmentMovieDetailBinding
 import com.llc.moviebd.extension.loadFromUrl
 import com.llc.moviebd.extension.toHourMinute
 import com.llc.moviebd.network.IMAGE_URL
+import com.llc.moviebd.singleEvent.observeEvent
 import com.llc.moviebd.ui.home.cast.CastItemAdapter
 import com.llc.moviebd.ui.home.genre.GenreItemAdapter
+import com.llc.myinventory.database.MovieRoomDatabase
 
 class MovieDetailFragment : Fragment() {
 
@@ -27,6 +30,10 @@ class MovieDetailFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val args: MovieDetailFragmentArgs by navArgs()
+
+    private val appDatabase by lazy {
+        MovieRoomDatabase.getDatabase(requireContext())
+    }
 
     private val genreItemAdapter: GenreItemAdapter by lazy {
         GenreItemAdapter()
@@ -41,7 +48,6 @@ class MovieDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMovieDetailBinding.inflate(inflater, container, false)
-        // Inflate the layout for this fragment
         return binding.root
     }
 
@@ -72,6 +78,32 @@ class MovieDetailFragment : Fragment() {
                 is MovieDetailEvent.Credits -> {
                     castItemAdapter.submitList(detailResult.creditModel.cast)
                 }
+            }
+        }
+
+        viewModel.favouriteAddEvent.observeEvent(viewLifecycleOwner) { favouriteEvent ->
+            when (favouriteEvent) {
+                is MovieDetailEvent.Loading -> {
+                    binding.detailProgressBar.visibility = View.VISIBLE
+                }
+                is MovieDetailEvent.SuccessAdded -> {
+                    if (favouriteEvent.message.isNotBlank()) {
+                        Toast.makeText(requireContext(), favouriteEvent.message, Toast.LENGTH_LONG)
+                            .show()
+                    }
+                    binding.detailProgressBar.visibility = View.GONE
+                }
+                is MovieDetailEvent.SuccessRemoved -> {
+                    Toast.makeText(requireContext(), favouriteEvent.message, Toast.LENGTH_LONG)
+                        .show()
+                    binding.detailProgressBar.visibility = View.GONE
+                }
+                is MovieDetailEvent.Error -> {
+                    Toast.makeText(requireContext(), favouriteEvent.error, Toast.LENGTH_LONG)
+                        .show()
+                    binding.detailProgressBar.visibility = View.GONE
+                }
+                else -> {}
             }
         }
 
@@ -123,7 +155,19 @@ class MovieDetailFragment : Fragment() {
                 else if (detailDataModel.original_language == "fr") "France"
                 else if (detailDataModel.original_language == "ch") "China"
                 else detailDataModel.original_language
+
+            genreItemAdapter.submitList(detailDataModel.genres)
+
+            bookMark.setOnClickListener {
+                addFav(detailDataModel)
+            }
         }
-        genreItemAdapter.submitList(detailDataModel.genres)
+    }
+
+    private fun addFav(detailDataModel: MovieDetailModel) {
+        viewModel.addFavourite(
+            appDatabase = appDatabase,
+            model = detailDataModel
+        )
     }
 }

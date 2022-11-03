@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.llc.moviebd.R
 import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.databinding.FragmentHomeMovieListBinding
 import com.llc.moviebd.singleEvent.observeEvent
@@ -22,10 +21,6 @@ class HomeMovieListFragment : Fragment(), onItemClickListener {
 
     private var _binding: FragmentHomeMovieListBinding? = null
     private val binding get() = _binding!!
-
-    private val appDatabase by lazy {
-        MovieRoomDatabase.getDatabase(requireContext())
-    }
 
     private val nowShowingItemAdapter: NowShowingItemAdapter by lazy {
         NowShowingItemAdapter(this)
@@ -105,33 +100,6 @@ class HomeMovieListFragment : Fragment(), onItemClickListener {
                 else -> {}
             }
         }
-
-        viewModel.favouriteUiEvent.observeEvent(viewLifecycleOwner) { favouriteEvent ->
-            when (favouriteEvent) {
-                is MovieUpcomingEvent.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
-                }
-                is MovieUpcomingEvent.SuccessAddedSms -> {
-                    if (favouriteEvent.message.isNotBlank()) {
-                        Toast.makeText(requireContext(), favouriteEvent.message, Toast.LENGTH_LONG)
-                            .show()
-                    }
-                    binding.progressBar.visibility = View.GONE
-                }
-                is MovieUpcomingEvent.SuccessRemovedSms -> {
-                    // popularItemAdapter.submitList(popularEvent.movieList)
-                    Toast.makeText(requireContext(), favouriteEvent.message, Toast.LENGTH_LONG)
-                        .show()
-                    binding.progressBar.visibility = View.GONE
-                }
-                is MovieUpcomingEvent.Failure -> {
-                    Toast.makeText(requireContext(), favouriteEvent.message, Toast.LENGTH_LONG)
-                        .show()
-                    binding.progressBar.visibility = View.GONE
-                }
-                else -> {}
-            }
-        }
     }
 
     override fun onPosterClicked(model: MovieModel) {
@@ -139,14 +107,7 @@ class HomeMovieListFragment : Fragment(), onItemClickListener {
     }
 
     override fun onFavoriteClicked(model: MovieModel) {
-        addFav(model)
-    }
-
-    private fun addFav(model: MovieModel) {
-        viewModel.addFavourite(
-            appDatabase = appDatabase,
-            model = model
-        )
+        //addFav(model)
     }
 
     private fun goToDetails(movieModel: MovieModel) {

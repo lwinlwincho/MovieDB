@@ -10,7 +10,6 @@ import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.databinding.ItemNowShowingBinding
 import com.llc.moviebd.extension.loadFromUrl
 import com.llc.moviebd.network.IMAGE_URL
-import com.llc.moviebd.ui.home.popular.onItemClickListener
 
 class SeeMoreItemAdapter(private val onItemClickListener:(MovieModel)->Unit) :
     ListAdapter<MovieModel, SeeMoreItemAdapter.SeeMoreViewHolder>(diffCallBack) {

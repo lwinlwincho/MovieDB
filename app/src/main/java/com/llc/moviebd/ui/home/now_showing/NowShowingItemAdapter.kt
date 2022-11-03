@@ -10,17 +10,14 @@ import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.databinding.ItemNowShowingBinding
 import com.llc.moviebd.extension.loadFromUrl
 import com.llc.moviebd.network.IMAGE_URL
-import com.llc.moviebd.ui.home.popular.PopularItemAdapter
-import com.llc.moviebd.ui.home.popular.onItemClickListener
 
-class NowShowingItemAdapter(private val listener: onItemClickListener):
+class NowShowingItemAdapter(private val onItemClickListener: (MovieModel) -> Unit) :
     ListAdapter<MovieModel, NowShowingItemAdapter.NowShowingViewHolder>(diffCallBack) {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NowShowingViewHolder {
         return NowShowingViewHolder(
             ItemNowShowingBinding.inflate(LayoutInflater.from(parent.context)),
-            listener
+            onItemClickListener
         )
     }
 
@@ -31,7 +28,7 @@ class NowShowingItemAdapter(private val listener: onItemClickListener):
 
     class NowShowingViewHolder(
         private var binding: ItemNowShowingBinding,
-        private val listener:onItemClickListener
+        private val onItemClickListener: (MovieModel) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(movieModel: MovieModel) {
 
@@ -43,12 +40,8 @@ class NowShowingItemAdapter(private val listener: onItemClickListener):
                     movieModel.vote_average.toString()
                 )
 
-                ivPoster.setOnClickListener {
-                    listener.onPosterClicked(movieModel)
-                }
-
-                imvFav.setOnClickListener {
-                    listener.onFavoriteClicked(movieModel)
+                root.setOnClickListener {
+                    onItemClickListener.invoke(movieModel)
                 }
             }
         }

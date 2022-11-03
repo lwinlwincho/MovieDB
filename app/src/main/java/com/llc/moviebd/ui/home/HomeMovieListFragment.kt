@@ -9,13 +9,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.databinding.FragmentHomeMovieListBinding
-import com.llc.moviebd.singleEvent.observeEvent
 import com.llc.moviebd.ui.home.now_showing.NowShowingItemAdapter
 import com.llc.moviebd.ui.home.popular.PopularItemAdapter
-import com.llc.moviebd.ui.home.popular.onItemClickListener
-import com.llc.myinventory.database.MovieRoomDatabase
 
-class HomeMovieListFragment : Fragment(), onItemClickListener {
+class HomeMovieListFragment : Fragment(){
 
     private val viewModel: HomeMovieListViewModel by viewModels()
 
@@ -23,11 +20,21 @@ class HomeMovieListFragment : Fragment(), onItemClickListener {
     private val binding get() = _binding!!
 
     private val nowShowingItemAdapter: NowShowingItemAdapter by lazy {
-        NowShowingItemAdapter(this)
+        NowShowingItemAdapter { movieModel ->
+            goToDetails(movieModel)
+        }
     }
 
     private val popularItemAdapter: PopularItemAdapter by lazy {
-        PopularItemAdapter(this)
+        PopularItemAdapter{ movieModel ->
+            goToDetails(movieModel)
+        }
+    }
+
+    private fun goToDetails(movieModel: MovieModel) {
+        val action = HomeMovieListFragmentDirections
+            .actionMovieListFragmentToMovieDetailFragment(movieModel.id.toString())
+        findNavController().navigate(action)
     }
 
     override fun onCreateView(
@@ -100,20 +107,6 @@ class HomeMovieListFragment : Fragment(), onItemClickListener {
                 else -> {}
             }
         }
-    }
-
-    override fun onPosterClicked(model: MovieModel) {
-        goToDetails(model)
-    }
-
-    override fun onFavoriteClicked(model: MovieModel) {
-        //addFav(model)
-    }
-
-    private fun goToDetails(movieModel: MovieModel) {
-        val action = HomeMovieListFragmentDirections
-            .actionMovieListFragmentToMovieDetailFragment(movieModel.id.toString())
-        findNavController().navigate(action)
     }
 
     override fun onDestroyView() {

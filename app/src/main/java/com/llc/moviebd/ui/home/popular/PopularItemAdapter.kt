@@ -11,18 +11,13 @@ import com.llc.moviebd.databinding.ItemPopularBinding
 import com.llc.moviebd.extension.loadFromUrl
 import com.llc.moviebd.network.IMAGE_URL
 
-interface onItemClickListener {
-    fun onPosterClicked(model: MovieModel)
-    fun onFavoriteClicked(model: MovieModel)
-}
-
-class PopularItemAdapter(private val listener: onItemClickListener) :
+class PopularItemAdapter(private val onItemClickListener: (MovieModel) -> Unit) :
     ListAdapter<MovieModel, PopularItemAdapter.PopularMovieViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularMovieViewHolder {
         return PopularMovieViewHolder(
             ItemPopularBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-            listener
+            onItemClickListener
         )
     }
 
@@ -33,9 +28,8 @@ class PopularItemAdapter(private val listener: onItemClickListener) :
 
     class PopularMovieViewHolder(
         private var binding: ItemPopularBinding,
-        private val listener: onItemClickListener
-    ) :
-        RecyclerView.ViewHolder(binding.root) {
+        private val onItemClickListener: (MovieModel) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(movieModel: MovieModel) {
 
             with(binding) {
@@ -46,12 +40,8 @@ class PopularItemAdapter(private val listener: onItemClickListener) :
                     movieModel.vote_average.toString()
                 )
 
-                ivPoster.setOnClickListener {
-                    listener.onPosterClicked(movieModel)
-                }
-
-                imvFav.setOnClickListener {
-                    listener.onFavoriteClicked(movieModel)
+                root.setOnClickListener {
+                    onItemClickListener.invoke(movieModel)
                 }
             }
         }

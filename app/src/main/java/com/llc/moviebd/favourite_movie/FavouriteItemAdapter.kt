@@ -15,7 +15,6 @@ import com.llc.moviebd.network.IMAGE_URL
 class FavouriteItemAdapter(private val onItemClickListener: (MovieEntity) -> Unit) :
     ListAdapter<MovieEntity, FavouriteItemAdapter.FavouriteViewHolder>(diffCallBack) {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouriteViewHolder {
         return FavouriteViewHolder(
             ItemNowShowingBinding.inflate(LayoutInflater.from(parent.context)),

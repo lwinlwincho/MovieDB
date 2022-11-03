@@ -23,7 +23,6 @@ class HomeMovieListViewModel : ViewModel() {
     private val _favouriteUiEvent = MutableLiveData<Event<MovieUpcomingEvent>>()
     val favouriteUiEvent: LiveData<Event<MovieUpcomingEvent>> = _favouriteUiEvent
 
-    // Call getMarsPhotos() on init so we can display status immediately.
     init {
         getNowShowing()
         getPopular()

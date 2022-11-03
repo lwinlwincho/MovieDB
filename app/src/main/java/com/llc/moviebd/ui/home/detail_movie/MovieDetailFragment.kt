@@ -123,7 +123,6 @@ class MovieDetailFragment : Fragment() {
                 else if (detailDataModel.original_language == "fr") "France"
                 else if (detailDataModel.original_language == "ch") "China"
                 else detailDataModel.original_language
-
         }
         genreItemAdapter.submitList(detailDataModel.genres)
     }

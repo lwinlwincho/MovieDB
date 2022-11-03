@@ -42,8 +42,6 @@ class HomeMovieListFragment : Fragment(), onItemClickListener {
     ): View {
         _binding = FragmentHomeMovieListBinding.inflate(inflater, container, false)
         return binding.root
-
-        setHasOptionsMenu(true)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,13 +58,6 @@ class HomeMovieListFragment : Fragment(), onItemClickListener {
                 HomeMovieListFragmentDirections.actionMovieListFragmentToSeeMoreFragment(Category.POPULAR)
             findNavController().navigate(action)
         }
-
-        binding.imvNoti.setOnClickListener {
-            val action =
-                HomeMovieListFragmentDirections.actionHomeMovieListFragmentToFavouriteMovieFragment()
-            findNavController().navigate(action)
-        }
-
 
         binding.rvNowShowingMovies.apply {
             layoutManager =
@@ -151,17 +142,17 @@ class HomeMovieListFragment : Fragment(), onItemClickListener {
         addFav(model)
     }
 
-    private fun goToDetails(movieModel: MovieModel) {
-        val action = HomeMovieListFragmentDirections
-            .actionMovieListFragmentToMovieDetailFragment(movieModel.id.toString())
-        findNavController().navigate(action)
-    }
-
     private fun addFav(model: MovieModel) {
         viewModel.addFavourite(
             appDatabase = appDatabase,
             model = model
         )
+    }
+
+    private fun goToDetails(movieModel: MovieModel) {
+        val action = HomeMovieListFragmentDirections
+            .actionMovieListFragmentToMovieDetailFragment(movieModel.id.toString())
+        findNavController().navigate(action)
     }
 
     override fun onDestroyView() {

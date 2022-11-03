@@ -16,9 +16,8 @@ interface onItemClickListener {
     fun onFavoriteClicked(model: MovieModel)
 }
 
-class PopularItemAdapter(private val listener:onItemClickListener):
+class PopularItemAdapter(private val listener: onItemClickListener) :
     ListAdapter<MovieModel, PopularItemAdapter.PopularMovieViewHolder>(diffCallback) {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularMovieViewHolder {
         return PopularMovieViewHolder(
@@ -34,7 +33,7 @@ class PopularItemAdapter(private val listener:onItemClickListener):
 
     class PopularMovieViewHolder(
         private var binding: ItemPopularBinding,
-        private val listener:onItemClickListener
+        private val listener: onItemClickListener
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movieModel: MovieModel) {

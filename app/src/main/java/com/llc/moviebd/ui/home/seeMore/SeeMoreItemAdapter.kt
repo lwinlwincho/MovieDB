@@ -12,10 +12,8 @@ import com.llc.moviebd.extension.loadFromUrl
 import com.llc.moviebd.network.IMAGE_URL
 import com.llc.moviebd.ui.home.popular.onItemClickListener
 
-class SeeMoreItemAdapter(private val onItemClickListener:(MovieModel)->Unit
-) :
+class SeeMoreItemAdapter(private val onItemClickListener:(MovieModel)->Unit) :
     ListAdapter<MovieModel, SeeMoreItemAdapter.SeeMoreViewHolder>(diffCallBack) {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeeMoreViewHolder {
         return SeeMoreViewHolder(

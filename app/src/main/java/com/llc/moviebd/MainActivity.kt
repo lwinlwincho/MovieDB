@@ -2,6 +2,9 @@ package com.llc.moviebd
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.view.isVisible
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -31,6 +34,11 @@ class MainActivity : AppCompatActivity() {
             if (binding.bottomNavView.selectedItemId == item.itemId) {
                 return@setOnItemReselectedListener
             }
+        }
+
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            val hideBottonNav = destination.id != R.id.movieDetailFragment
+            binding.bottomNavView.isVisible = hideBottonNav
         }
     }
 

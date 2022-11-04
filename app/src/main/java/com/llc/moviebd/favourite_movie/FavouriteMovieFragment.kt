@@ -8,16 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
-import com.llc.moviebd.R
-import com.llc.moviebd.data.model.MovieModel
-import com.llc.moviebd.database.MovieEntity
+import com.llc.moviebd.database.FavouriteMovieEntity
 import com.llc.moviebd.databinding.FragmentFavouriteMovieBinding
-import com.llc.moviebd.databinding.FragmentSeeMoreBinding
-import com.llc.moviebd.ui.home.Category
-import com.llc.moviebd.ui.home.now_showing.NowShowingItemAdapter
-import com.llc.moviebd.ui.home.seeMore.*
 import com.llc.myinventory.database.MovieRoomDatabase
 
 class FavouriteMovieFragment : Fragment() {
@@ -37,9 +30,9 @@ class FavouriteMovieFragment : Fragment() {
         }
     }
 
-    private fun goToDetails(movieEntity: MovieEntity) {
+    private fun goToDetails(favouriteMovieEntity: FavouriteMovieEntity) {
         val action = FavouriteMovieFragmentDirections
-            .actionFavouriteMovieFragmentToMovieDetailFragment(movieEntity.id.toString())
+            .actionFavouriteMovieFragmentToMovieDetailFragment(favouriteMovieEntity.id.toString())
         findNavController().navigate(action)
     }
 

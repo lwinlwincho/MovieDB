@@ -1,20 +1,19 @@
-package com.llc.myinventory.database
+package com.llc.moviebd.database
 
 import androidx.room.*
-import com.llc.moviebd.database.MovieEntity
 
 @Dao
 interface MovieDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(item: MovieEntity)
+    fun insertFavouriteMovie(item: FavouriteMovieEntity)
 
     @Delete
-    suspend fun delete(item: MovieEntity)
+    suspend fun delete(item: FavouriteMovieEntity)
 
-    @Query("SELECT * from movieentity WHERE title = :title")
-    fun getByTitle(title: String): MovieEntity
+    @Query("SELECT * from favouriteMovieEntity WHERE id = :id")
+    fun getFavouriteMovieById(id: Long): FavouriteMovieEntity?
 
-    @Query("SELECT * from movieentity ORDER BY id ASC")
-    fun getAllFavMovie(): List<MovieEntity>
+    @Query("SELECT * from favouriteMovieEntity ORDER BY id ASC")
+    fun getAllFavouriteMovie(): List<FavouriteMovieEntity>
 }

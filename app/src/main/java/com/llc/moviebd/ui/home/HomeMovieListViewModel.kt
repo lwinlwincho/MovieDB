@@ -5,10 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.llc.moviebd.data.model.MovieModel
-import com.llc.moviebd.database.MovieEntity
 import com.llc.moviebd.network.MovieAPI
-import com.llc.moviebd.singleEvent.Event
-import com.llc.myinventory.database.MovieRoomDatabase
 import kotlinx.coroutines.launch
 import java.lang.Exception
 

@@ -1,6 +1,5 @@
 package com.llc.moviebd.ui.home.detail_movie
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,9 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.llc.moviebd.R
 import com.llc.moviebd.data.model.MovieDetailModel
-import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.databinding.FragmentMovieDetailBinding
 import com.llc.moviebd.extension.loadFromUrl
 import com.llc.moviebd.extension.toHourMinute
@@ -55,9 +54,9 @@ class MovieDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val movieId = args.movieId
-
+        viewModel.setAppDatabase(appDatabase)
         viewModel.getMovieDetail(movieId)
-        viewModel.getCredits(movieId)
+
         viewModel.detailUIEvent.observe(viewLifecycleOwner) { detailResult ->
             when (detailResult) {
                 is MovieDetailEvent.Loading -> {
@@ -79,33 +78,30 @@ class MovieDetailFragment : Fragment() {
                 is MovieDetailEvent.Credits -> {
                     castItemAdapter.submitList(detailResult.creditModel.cast)
                 }
+                else -> {}
             }
         }
 
         viewModel.favouriteAddEvent.observeEvent(viewLifecycleOwner) { favouriteEvent ->
             when (favouriteEvent) {
-                is MovieDetailEvent.Loading -> {
-                    binding.detailProgressBar.visibility = View.VISIBLE
-                }
                 is MovieDetailEvent.SuccessAdded -> {
-                    if (favouriteEvent.message.isNotBlank()) {
-                        Toast.makeText(requireContext(), favouriteEvent.message, Toast.LENGTH_LONG)
-                            .show()
-                    }
-                    binding.detailProgressBar.visibility = View.GONE
+                    binding.ivBookMark.setImageResource(R.drawable.ic_bookmark_filled_24)
+                    if (favouriteEvent.message.isNotBlank()) showMessage(favouriteEvent.message)
                 }
                 is MovieDetailEvent.SuccessRemoved -> {
-                    Toast.makeText(requireContext(), favouriteEvent.message, Toast.LENGTH_LONG)
-                        .show()
-                    binding.detailProgressBar.visibility = View.GONE
+                    binding.ivBookMark.setImageResource(R.drawable.ic_bookmark_border_gray)
+                    showMessage(favouriteEvent.message)
                 }
                 is MovieDetailEvent.Error -> {
-                    Toast.makeText(requireContext(), favouriteEvent.error, Toast.LENGTH_LONG)
-                        .show()
-                    binding.detailProgressBar.visibility = View.GONE
+                    showMessage(favouriteEvent.error)
                 }
                 else -> {}
             }
+        }
+
+        viewModel.favouriteStatusEvent.observeEvent(viewLifecycleOwner) { isFavourite ->
+            val iconBookMarkId = getImageResourceId(isFavourite)
+            binding.ivBookMark.setImageResource(iconBookMarkId)
         }
 
         binding.rvGenres.apply {
@@ -125,6 +121,13 @@ class MovieDetailFragment : Fragment() {
         }
     }
 
+    private fun showMessage(message: String) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setMessage(message)
+            .setPositiveButton("Ok") { _, _ -> }
+            .show()
+    }
+
     private fun bindDetailMovie(detailDataModel: MovieDetailModel) {
 
         //use this code in extension function
@@ -133,12 +136,12 @@ class MovieDetailFragment : Fragment() {
              .transition(DrawableTransitionOptions.withCrossFade())
              .into(binding.ivDetail)*/
 
+
+        viewModel.checkFavouriteMovie(detailDataModel.id)
+
         with(binding) {
             ivDetail.loadFromUrl(IMAGE_URL + detailDataModel.backdrop_path)
             tvDetailName.text = detailDataModel.original_title
-            //using sample function
-            //tvLength.text = hourMinute(detailDataModel.runtime) Using sample fun
-            //using extension function
             tvLength.text = detailDataModel.runtime.toHourMinute()
             tvRating.text = (detailDataModel.vote_average / 2).toString()
             tvDescription.text = detailDataModel.overview
@@ -150,73 +153,24 @@ class MovieDetailFragment : Fragment() {
                 )
 
             tvLanguage.text =
-                if (detailDataModel.original_language == "en") "English"
-                else if (detailDataModel.original_language == "ko") "Korea"
-                else if (detailDataModel.original_language == "ja") "Japan"
-                else if (detailDataModel.original_language == "fr") "France"
-                else if (detailDataModel.original_language == "ch") "China"
-                else detailDataModel.original_language
+                when (detailDataModel.original_language) {
+                    "en" -> "English"
+                    "ko" -> "Korea"
+                    "ja" -> "Japan"
+                    "fr" -> "France"
+                    "ch" -> "China"
+                    else -> detailDataModel.original_language
+                }
 
             genreItemAdapter.submitList(detailDataModel.genres)
 
-            //var add=getClickable()
-
-            bookMark.setOnClickListener {
-
-                 // val color = resources.getColor(R.color.lavender)
-                // bookMark.setBackgroundColor(color)
-                //putBackground(color)
-                /*  putClickable(add)
-
-                  if (viewModel.isAdd(detailDataModel)) {
-                      val color = resources.getColor(R.color.light_purple)
-                      bookMark.setBackgroundColor(color)
-                      putBackground(color)
-                      add =getBackground()+1
-                      addFav(detailDataModel)
-                  } else {
-                      val color = resources.getColor(R.color.white)
-                      bookMark.setBackgroundColor(color)
-                      putBackground(color)
-                      deleteFav(detailDataModel)
-                  }*/
-                if(detailDataModel.title.equals(appDatabase.movieDao().getByTitle(detailDataModel.title))){
-                    removeFav(detailDataModel)
-                }else
-                addFav(detailDataModel)
+            ivBookMark.setOnClickListener {
+                viewModel.toggleFavourite(detailDataModel)
             }
         }
     }
 
-    private fun addFav(detailDataModel: MovieDetailModel) {
-        binding.bookMark.setColorFilter(resources.getColor(R.color.lavender))
-        viewModel.addFavourite(
-            appDatabase = appDatabase,
-            model = detailDataModel
-        )
+    private fun getImageResourceId(isFavourite: Boolean): Int {
+        return if (isFavourite) R.drawable.ic_bookmark_filled_24 else R.drawable.ic_bookmark_border_gray
     }
-
-    private fun removeFav(detailDataModel: MovieDetailModel) {
-        binding.bookMark.setColorFilter(resources.getColor(R.color.black))
-        viewModel.removeFavourite(
-            appDatabase = appDatabase,
-            item = detailDataModel
-        )
-    }
-
-    /* private fun putBackground(color: Int) {
-         sharePreference.edit().putInt(KEY_BACKGROUND_COLOR, color).apply()
-     }
-
-     private fun getBackground(): Int {
-         return sharePreference.getInt(KEY_BACKGROUND_COLOR, 0)
-     }
-
-     private fun putClickable(click: Int) {
-         sharePreference.edit().putInt(KEY_CLICKABLE, click).apply()
-     }
-
-     private fun getClickable(): Int {
-         return sharePreference.getInt(KEY_CLICKABLE, 0)
-     }*/
 }

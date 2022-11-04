@@ -4,11 +4,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
-data class MovieEntity(
-
+@Entity(tableName = "favouriteMovieEntity")
+data class FavouriteMovieEntity(
     @PrimaryKey
-    val id: Int = 0,
+    val id: Long = 0,
     @ColumnInfo(name = "poster")
     val posterPath: String,
     @ColumnInfo(name = "title")

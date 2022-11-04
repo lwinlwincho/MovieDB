@@ -5,16 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.llc.moviebd.data.model.MovieDetailModel
-import com.llc.moviebd.data.model.MovieModel
-import com.llc.moviebd.database.MovieEntity
-import com.llc.moviebd.favourite_movie.FavouriteEvent
+import com.llc.moviebd.database.FavouriteMovieEntity
+import com.llc.moviebd.database.MovieDao
 import com.llc.moviebd.network.MovieAPI
 import com.llc.moviebd.singleEvent.Event
-import com.llc.moviebd.ui.home.MovieUpcomingEvent
 import com.llc.myinventory.database.MovieRoomDatabase
 import kotlinx.coroutines.launch
 
 class MovieDetailViewModel : ViewModel() {
+
+    private lateinit var movieDao: MovieDao
 
     private val _detailUIEvent = MutableLiveData<MovieDetailEvent>()
     val detailUIEvent: LiveData<MovieDetailEvent> = _detailUIEvent
@@ -22,8 +22,15 @@ class MovieDetailViewModel : ViewModel() {
     private val _favouriteAddEvent = MutableLiveData<Event<MovieDetailEvent>>()
     val favouriteAddEvent: LiveData<Event<MovieDetailEvent>> = _favouriteAddEvent
 
-    fun getMovieDetail(movieId: String) {
+    private val _favouriteStatusEvent = MutableLiveData<Event<Boolean>>()
+    val favouriteStatusEvent: LiveData<Event<Boolean>> = _favouriteStatusEvent
 
+
+    fun setAppDatabase(appDatabase: MovieRoomDatabase) {
+        this.movieDao = appDatabase.movieDao()
+    }
+
+    fun getMovieDetail(movieId: String) {
         viewModelScope.launch {
             _detailUIEvent.postValue(MovieDetailEvent.Loading)
             try {
@@ -33,9 +40,7 @@ class MovieDetailViewModel : ViewModel() {
                 _detailUIEvent.postValue(MovieDetailEvent.Error(e.message.toString()))
             }
         }
-    }
 
-    fun getCredits(movieId: String) {
         viewModelScope.launch {
             _detailUIEvent.postValue(MovieDetailEvent.Loading)
             try {
@@ -47,21 +52,20 @@ class MovieDetailViewModel : ViewModel() {
         }
     }
 
-    fun addFavourite(
-        appDatabase: MovieRoomDatabase,
+    private fun addFavourite(
         model: MovieDetailModel
     ) {
         viewModelScope.launch {
             try {
-                val entity = MovieEntity(
-                    id= model.id.toInt(),
+                val entity = FavouriteMovieEntity(
+                    id = model.id,
                     posterPath = model.poster_path,
                     title = model.title,
                     releaseDate = model.release_date.toString(),
                     voteAverage = model.vote_average.toString()
                 )
-                appDatabase.movieDao().insert(entity)
-                _favouriteAddEvent.postValue(Event(MovieDetailEvent.SuccessAdded("Successfully Added!")))
+                movieDao.insertFavouriteMovie(entity)
+                _favouriteAddEvent.postValue(Event(MovieDetailEvent.SuccessAdded("Added Bookmark!")))
 
             } catch (e: java.lang.Exception) {
                 _favouriteAddEvent.postValue(Event(MovieDetailEvent.Error(e.message.toString())))
@@ -69,20 +73,41 @@ class MovieDetailViewModel : ViewModel() {
         }
     }
 
-    fun removeFavourite(appDatabase: MovieRoomDatabase, item: MovieDetailModel) {
+    private fun removeFavourite(item: MovieDetailModel) {
         viewModelScope.launch {
             try {
-                val entity = MovieEntity(
-                    id= item.id.toInt(),
+                val entity = FavouriteMovieEntity(
+                    id = item.id,
                     posterPath = item.poster_path,
                     title = item.title,
                     releaseDate = item.release_date.toString(),
                     voteAverage = item.vote_average.toString()
                 )
-                appDatabase.movieDao().delete(entity)
-                _favouriteAddEvent.postValue(Event(MovieDetailEvent.SuccessRemoved("Successfully Removed!")))
+                movieDao.delete(entity)
+                _favouriteAddEvent.postValue(Event(MovieDetailEvent.SuccessRemoved("Removed Bookmark!")))
             } catch (e: Exception) {
                 _favouriteAddEvent.postValue(Event(MovieDetailEvent.Error(e.message.toString())))
+            }
+        }
+    }
+
+    fun checkFavouriteMovie(id: Long) {
+        viewModelScope.launch {
+            val favouriteMovie = movieDao.getFavouriteMovieById(id)
+            val isFavourite = favouriteMovie?.id == id
+            _favouriteStatusEvent.postValue(Event(isFavourite))
+        }
+    }
+
+    fun toggleFavourite(detailDataModel: MovieDetailModel) {
+        viewModelScope.launch {
+            val favouriteMovie = movieDao.getFavouriteMovieById(detailDataModel.id)
+            val isFavourite = favouriteMovie?.id == detailDataModel.id
+
+            if (isFavourite) {
+                removeFavourite(detailDataModel)
+            } else {
+                addFavourite(detailDataModel)
             }
         }
     }

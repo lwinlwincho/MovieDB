@@ -180,6 +180,9 @@ class MovieDetailFragment : Fragment() {
                       putBackground(color)
                       deleteFav(detailDataModel)
                   }*/
+                if(detailDataModel.title.equals(appDatabase.movieDao().getByTitle(detailDataModel.title))){
+                    removeFav(detailDataModel)
+                }else
                 addFav(detailDataModel)
             }
         }

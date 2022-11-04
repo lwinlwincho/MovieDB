@@ -5,21 +5,28 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.llc.moviebd.database.FavouriteMovieEntity
-import com.llc.myinventory.database.MovieRoomDatabase
+import com.llc.moviebd.database.MovieDao
+import com.llc.moviebd.database.MovieRoomDatabase
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
 class FavouriteViewModel : ViewModel() {
 
+    private lateinit var movieDao:MovieDao
+
     private val _favouriteUEvent = MutableLiveData<FavouriteEvent>()
     val favouriteUEvent: LiveData<FavouriteEvent> = _favouriteUEvent
 
-    fun getAllFavourite(appDatabase: MovieRoomDatabase) {
+    fun setAppDatabase(appDatabase: MovieRoomDatabase) {
+        this.movieDao = appDatabase.movieDao()
+    }
+
+    fun getAllFavourite() {
 
         viewModelScope.launch {
             try {
                 //get data from offline database
-                val result: List<FavouriteMovieEntity> = appDatabase.movieDao().getAllFavouriteMovie()
+                val result: List<FavouriteMovieEntity> = movieDao.getAllFavouriteMovie()
                 _favouriteUEvent.value = FavouriteEvent.Success(result)
             } catch (e: Exception) {
                 _favouriteUEvent.value = FavouriteEvent.Failure(e.message.toString())

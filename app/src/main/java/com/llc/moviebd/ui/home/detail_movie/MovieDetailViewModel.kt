@@ -7,9 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.llc.moviebd.data.model.MovieDetailModel
 import com.llc.moviebd.database.FavouriteMovieEntity
 import com.llc.moviebd.database.MovieDao
+import com.llc.moviebd.database.MovieRoomDatabase
 import com.llc.moviebd.network.MovieAPI
 import com.llc.moviebd.singleEvent.Event
-import com.llc.myinventory.database.MovieRoomDatabase
 import kotlinx.coroutines.launch
 
 class MovieDetailViewModel : ViewModel() {
@@ -24,7 +24,6 @@ class MovieDetailViewModel : ViewModel() {
 
     private val _favouriteStatusEvent = MutableLiveData<Event<Boolean>>()
     val favouriteStatusEvent: LiveData<Event<Boolean>> = _favouriteStatusEvent
-
 
     fun setAppDatabase(appDatabase: MovieRoomDatabase) {
         this.movieDao = appDatabase.movieDao()
@@ -52,9 +51,7 @@ class MovieDetailViewModel : ViewModel() {
         }
     }
 
-    private fun addFavourite(
-        model: MovieDetailModel
-    ) {
+    private fun addFavourite(model: MovieDetailModel) {
         viewModelScope.launch {
             try {
                 val entity = FavouriteMovieEntity(

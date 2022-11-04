@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.llc.moviebd.data.model.MovieDetailModel
 import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.database.MovieEntity
+import com.llc.moviebd.favourite_movie.FavouriteEvent
 import com.llc.moviebd.network.MovieAPI
 import com.llc.moviebd.singleEvent.Event
 import com.llc.moviebd.ui.home.MovieUpcomingEvent
@@ -20,7 +21,6 @@ class MovieDetailViewModel : ViewModel() {
 
     private val _favouriteAddEvent = MutableLiveData<Event<MovieDetailEvent>>()
     val favouriteAddEvent: LiveData<Event<MovieDetailEvent>> = _favouriteAddEvent
-
 
     fun getMovieDetail(movieId: String) {
 
@@ -64,6 +64,24 @@ class MovieDetailViewModel : ViewModel() {
                 _favouriteAddEvent.postValue(Event(MovieDetailEvent.SuccessAdded("Successfully Added!")))
 
             } catch (e: java.lang.Exception) {
+                _favouriteAddEvent.postValue(Event(MovieDetailEvent.Error(e.message.toString())))
+            }
+        }
+    }
+
+    fun removeFavourite(appDatabase: MovieRoomDatabase, item: MovieDetailModel) {
+        viewModelScope.launch {
+            try {
+                val entity = MovieEntity(
+                    id= item.id.toInt(),
+                    posterPath = item.poster_path,
+                    title = item.title,
+                    releaseDate = item.release_date.toString(),
+                    voteAverage = item.vote_average.toString()
+                )
+                appDatabase.movieDao().delete(entity)
+                _favouriteAddEvent.postValue(Event(MovieDetailEvent.SuccessRemoved("Successfully Removed!")))
+            } catch (e: Exception) {
                 _favouriteAddEvent.postValue(Event(MovieDetailEvent.Error(e.message.toString())))
             }
         }

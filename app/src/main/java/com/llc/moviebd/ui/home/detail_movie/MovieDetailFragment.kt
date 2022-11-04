@@ -1,5 +1,6 @@
 package com.llc.moviebd.ui.home.detail_movie
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -87,6 +88,7 @@ class MovieDetailFragment : Fragment() {
                     binding.detailProgressBar.visibility = View.VISIBLE
                 }
                 is MovieDetailEvent.SuccessAdded -> {
+                    binding.bookMark.setColorFilter(resources.getColor(R.color.lavender))
                     if (favouriteEvent.message.isNotBlank()) {
                         Toast.makeText(requireContext(), favouriteEvent.message, Toast.LENGTH_LONG)
                             .show()
@@ -158,7 +160,27 @@ class MovieDetailFragment : Fragment() {
 
             genreItemAdapter.submitList(detailDataModel.genres)
 
+            //var add=getClickable()
+
             bookMark.setOnClickListener {
+
+                 // val color = resources.getColor(R.color.lavender)
+                // bookMark.setBackgroundColor(color)
+                //putBackground(color)
+                /*  putClickable(add)
+
+                  if (viewModel.isAdd(detailDataModel)) {
+                      val color = resources.getColor(R.color.light_purple)
+                      bookMark.setBackgroundColor(color)
+                      putBackground(color)
+                      add =getBackground()+1
+                      addFav(detailDataModel)
+                  } else {
+                      val color = resources.getColor(R.color.white)
+                      bookMark.setBackgroundColor(color)
+                      putBackground(color)
+                      deleteFav(detailDataModel)
+                  }*/
                 addFav(detailDataModel)
             }
         }
@@ -170,4 +192,27 @@ class MovieDetailFragment : Fragment() {
             model = detailDataModel
         )
     }
+
+    private fun removeFav(detailDataModel: MovieDetailModel) {
+        viewModel.removeFavourite(
+            appDatabase = appDatabase,
+            item = detailDataModel
+        )
+    }
+
+    /* private fun putBackground(color: Int) {
+         sharePreference.edit().putInt(KEY_BACKGROUND_COLOR, color).apply()
+     }
+
+     private fun getBackground(): Int {
+         return sharePreference.getInt(KEY_BACKGROUND_COLOR, 0)
+     }
+
+     private fun putClickable(click: Int) {
+         sharePreference.edit().putInt(KEY_CLICKABLE, click).apply()
+     }
+
+     private fun getClickable(): Int {
+         return sharePreference.getInt(KEY_CLICKABLE, 0)
+     }*/
 }

@@ -39,7 +39,9 @@ android {
 
 dependencies {
 
-    //def nav_version = "2.5.2"
+    def preference_version = "1.2.0"
+
+    implementation "androidx.preference:preference-ktx:$preference_version"
 
     // Room
     implementation "androidx.room:room-runtime:$room_version"

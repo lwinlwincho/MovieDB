@@ -40,15 +40,20 @@
         <entry key="..\:/MovieBD/app/src/main/res/layout/movie_list.xml" value="0.16" />
         <entry key="..\:/MovieBD/app/src/main/res/menu/layout_menu.xml" value="0.16927083333333334" />
         <entry key="..\:/MovieDB/app/src/main/res/drawable/bg_favorite_round_shape.xml" value="0.1255" />
+        <entry key="..\:/MovieDB/app/src/main/res/drawable/bg_favorite_shape.xml" value="0.1405" />
+        <entry key="..\:/MovieDB/app/src/main/res/drawable/bg_genres.xml" value="0.1405" />
         <entry key="..\:/MovieDB/app/src/main/res/drawable/bg_seemore.xml" value="0.1255" />
+        <entry key="..\:/MovieDB/app/src/main/res/drawable/ic_baseline_bookmark_border_24.xml" value="0.1405" />
         <entry key="..\:/MovieDB/app/src/main/res/drawable/ic_bookmark_border_gray.xml" value="0.113" />
+        <entry key="..\:/MovieDB/app/src/main/res/drawable/ic_bookmarks.xml" value="0.1225" />
         <entry key="..\:/MovieDB/app/src/main/res/drawable/ripple.xml" value="0.1255" />
         <entry key="..\:/MovieDB/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/MovieDB/app/src/main/res/layout/fragment_favourite_movie.xml" value="0.25" />
         <entry key="..\:/MovieDB/app/src/main/res/layout/fragment_home_movie_list.xml" value="0.22" />
-        <entry key="..\:/MovieDB/app/src/main/res/layout/fragment_movie_detail.xml" value="0.10597826086956522" />
+        <entry key="..\:/MovieDB/app/src/main/res/layout/fragment_movie_detail.xml" value="0.33" />
         <entry key="..\:/MovieDB/app/src/main/res/layout/fragment_popular_lists.xml" value="0.21" />
         <entry key="..\:/MovieDB/app/src/main/res/layout/fragment_see_more.xml" value="0.22" />
+        <entry key="..\:/MovieDB/app/src/main/res/layout/item_genres.xml" value="0.1734375" />
         <entry key="..\:/MovieDB/app/src/main/res/layout/item_now_showing.xml" value="0.18" />
         <entry key="..\:/MovieDB/app/src/main/res/layout/item_popular.xml" value="0.33" />
         <entry key="..\:/MovieDB/app/src/main/res/menu/layout_menu.xml" value="0.21" />

@@ -88,7 +88,6 @@ class MovieDetailFragment : Fragment() {
                     binding.detailProgressBar.visibility = View.VISIBLE
                 }
                 is MovieDetailEvent.SuccessAdded -> {
-                    binding.bookMark.setColorFilter(resources.getColor(R.color.lavender))
                     if (favouriteEvent.message.isNotBlank()) {
                         Toast.makeText(requireContext(), favouriteEvent.message, Toast.LENGTH_LONG)
                             .show()
@@ -187,6 +186,7 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun addFav(detailDataModel: MovieDetailModel) {
+        binding.bookMark.setColorFilter(resources.getColor(R.color.lavender))
         viewModel.addFavourite(
             appDatabase = appDatabase,
             model = detailDataModel
@@ -194,6 +194,7 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun removeFav(detailDataModel: MovieDetailModel) {
+        binding.bookMark.setColorFilter(resources.getColor(R.color.black))
         viewModel.removeFavourite(
             appDatabase = appDatabase,
             item = detailDataModel

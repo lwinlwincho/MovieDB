@@ -8,7 +8,11 @@ import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.WorkRequest
 import com.llc.moviebd.databinding.ActivityMainBinding
+import com.llc.moviebd.worker.UploadWorker
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,6 +30,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setUpBottomNavigation()
+
+        setUpWorker()
+    }
+
+    private fun setUpWorker() {
+        val uploadWorkRequest: WorkRequest = OneTimeWorkRequestBuilder<UploadWorker>().build()
+
+        WorkManager
+            .getInstance(this)
+            .enqueue(uploadWorkRequest)
     }
 
     private fun setUpBottomNavigation() {

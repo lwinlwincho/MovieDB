@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -13,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.llc.moviebd.R
 import com.llc.moviebd.data.model.MovieDetailModel
+import com.llc.moviebd.database.MovieRoomDatabase
 import com.llc.moviebd.databinding.FragmentMovieDetailBinding
 import com.llc.moviebd.extension.loadFromUrl
 import com.llc.moviebd.extension.toHourMinute
@@ -20,7 +20,6 @@ import com.llc.moviebd.network.IMAGE_URL
 import com.llc.moviebd.singleEvent.observeEvent
 import com.llc.moviebd.ui.home.cast.CastItemAdapter
 import com.llc.moviebd.ui.home.genre.GenreItemAdapter
-import com.llc.myinventory.database.MovieRoomDatabase
 
 class MovieDetailFragment : Fragment() {
 
@@ -53,6 +52,7 @@ class MovieDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val movieId = args.movieId
         viewModel.setAppDatabase(appDatabase)
         viewModel.getMovieDetail(movieId)
@@ -69,11 +69,7 @@ class MovieDetailFragment : Fragment() {
                 }
                 is MovieDetailEvent.Error -> {
                     binding.detailProgressBar.visibility = View.GONE
-                    Toast.makeText(
-                        requireContext(),
-                        detailResult.error,
-                        Toast.LENGTH_LONG
-                    ).show()
+                    showMessage( detailResult.error)
                 }
                 is MovieDetailEvent.Credits -> {
                     castItemAdapter.submitList(detailResult.creditModel.cast)
@@ -128,6 +124,10 @@ class MovieDetailFragment : Fragment() {
             .show()
     }
 
+    private fun getImageResourceId(isFavourite: Boolean): Int {
+        return if (isFavourite) R.drawable.ic_bookmark_filled_24 else R.drawable.ic_bookmark_border_gray
+    }
+
     private fun bindDetailMovie(detailDataModel: MovieDetailModel) {
 
         //use this code in extension function
@@ -135,7 +135,6 @@ class MovieDetailFragment : Fragment() {
              .load(IMAGE_URL + detailDataModel.backdrop_path)
              .transition(DrawableTransitionOptions.withCrossFade())
              .into(binding.ivDetail)*/
-
 
         viewModel.checkFavouriteMovie(detailDataModel.id)
 
@@ -168,9 +167,5 @@ class MovieDetailFragment : Fragment() {
                 viewModel.toggleFavourite(detailDataModel)
             }
         }
-    }
-
-    private fun getImageResourceId(isFavourite: Boolean): Int {
-        return if (isFavourite) R.drawable.ic_bookmark_filled_24 else R.drawable.ic_bookmark_border_gray
     }
 }

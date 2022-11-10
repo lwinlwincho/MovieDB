@@ -1,4 +1,4 @@
-package com.llc.myinventory.database
+package com.llc.moviebd.database
 
 import android.app.Application
 

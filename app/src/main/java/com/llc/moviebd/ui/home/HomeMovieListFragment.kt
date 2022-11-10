@@ -3,16 +3,16 @@ package com.llc.moviebd.ui.home
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.databinding.FragmentHomeMovieListBinding
 import com.llc.moviebd.ui.home.now_showing.NowShowingItemAdapter
 import com.llc.moviebd.ui.home.popular.PopularItemAdapter
 
-class HomeMovieListFragment : Fragment(){
+class HomeMovieListFragment : Fragment() {
 
     private val viewModel: HomeMovieListViewModel by viewModels()
 
@@ -26,7 +26,7 @@ class HomeMovieListFragment : Fragment(){
     }
 
     private val popularItemAdapter: PopularItemAdapter by lazy {
-        PopularItemAdapter{ movieModel ->
+        PopularItemAdapter { movieModel ->
             goToDetails(movieModel)
         }
     }
@@ -48,6 +48,41 @@ class HomeMovieListFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.nowShowingUiEvent.observe(viewLifecycleOwner) { event ->
+            when (event) {
+                is MovieUpcomingEvent.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+                is MovieUpcomingEvent.Success -> {
+                    binding.scrollView.visibility = View.VISIBLE
+                    nowShowingItemAdapter.submitList(event.movieList)
+                    binding.progressBar.visibility = View.GONE
+                }
+                is MovieUpcomingEvent.Failure -> {
+                    showMessage(event.message)
+                    binding.progressBar.visibility = View.GONE
+                }
+                else -> {}
+            }
+        }
+
+        viewModel.popularUiEvent.observe(viewLifecycleOwner) { popularEvent ->
+            when (popularEvent) {
+                is MovieUpcomingEvent.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+                is MovieUpcomingEvent.Success -> {
+                    popularItemAdapter.submitList(popularEvent.movieList)
+                    binding.progressBar.visibility = View.GONE
+                }
+                is MovieUpcomingEvent.Failure -> {
+                    showMessage(popularEvent.message)
+                    binding.progressBar.visibility = View.GONE
+                }
+                else -> {}
+            }
+        }
 
         binding.tvNowShowingSeemore.setOnClickListener {
             val action =
@@ -72,41 +107,13 @@ class HomeMovieListFragment : Fragment(){
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             adapter = popularItemAdapter
         }
+    }
 
-        viewModel.nowShowingUiEvent.observe(viewLifecycleOwner) { event ->
-            when (event) {
-                is MovieUpcomingEvent.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
-                }
-                is MovieUpcomingEvent.Success -> {
-                    binding.scrollView.visibility = View.VISIBLE
-                    nowShowingItemAdapter.submitList(event.movieList)
-                    binding.progressBar.visibility = View.GONE
-                }
-                is MovieUpcomingEvent.Failure -> {
-                    Toast.makeText(requireContext(), event.message, Toast.LENGTH_LONG).show()
-                    binding.progressBar.visibility = View.GONE
-                }
-                else -> {}
-            }
-        }
-
-        viewModel.popularUiEvent.observe(viewLifecycleOwner) { popularEvent ->
-            when (popularEvent) {
-                is MovieUpcomingEvent.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
-                }
-                is MovieUpcomingEvent.Success -> {
-                    popularItemAdapter.submitList(popularEvent.movieList)
-                    binding.progressBar.visibility = View.GONE
-                }
-                is MovieUpcomingEvent.Failure -> {
-                    Toast.makeText(requireContext(), popularEvent.message, Toast.LENGTH_LONG).show()
-                    binding.progressBar.visibility = View.GONE
-                }
-                else -> {}
-            }
-        }
+    private fun showMessage(message: String) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setMessage(message)
+            .setPositiveButton("Ok") { _, _ -> }
+            .show()
     }
 
     override fun onDestroyView() {

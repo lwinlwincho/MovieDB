@@ -5,16 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.llc.moviebd.R
 import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.databinding.FragmentSeeMoreBinding
 import com.llc.moviebd.ui.home.Category
-import com.llc.moviebd.ui.home.now_showing.NowShowingItemAdapter
 
 class SeeMoreFragment : Fragment() {
 
@@ -59,15 +58,6 @@ class SeeMoreFragment : Fragment() {
             }
         }
 
-        binding.rvMoviesList.apply {
-            layoutManager = GridLayoutManager(requireContext(), 2)
-            adapter = seeMoreItemAdapter
-        }
-
-        binding.ivBack.setOnClickListener {
-            findNavController().navigateUp()
-        }
-
         viewModel.seeMoreUiEvent.observe(viewLifecycleOwner) { seeMoreEvent->
             when (seeMoreEvent) {
                 is SeeMoreEvent.Loading -> {
@@ -78,12 +68,27 @@ class SeeMoreFragment : Fragment() {
                     binding.progressBar.visibility = View.GONE
                 }
                 is SeeMoreEvent.Failure -> {
-                    Toast.makeText(requireContext(), seeMoreEvent.message, Toast.LENGTH_LONG)
-                        .show()
+                    showMessage(seeMoreEvent.message)
                     binding.progressBar.visibility = View.GONE
                 }
                 else -> {}
             }
         }
+
+        binding.rvMoviesList.apply {
+            layoutManager = GridLayoutManager(requireContext(), 2)
+            adapter = seeMoreItemAdapter
+        }
+
+        binding.ivBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+    }
+
+    private fun showMessage(message: String) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setMessage(message)
+            .setPositiveButton("Ok") { _, _ -> }
+            .show()
     }
 }

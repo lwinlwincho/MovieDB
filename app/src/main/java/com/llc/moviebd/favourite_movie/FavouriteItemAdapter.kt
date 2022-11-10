@@ -12,7 +12,7 @@ import com.llc.moviebd.extension.loadFromUrl
 import com.llc.moviebd.network.IMAGE_URL
 
 class FavouriteItemAdapter(private val onItemClickListener: (FavouriteMovieEntity) -> Unit) :
-    ListAdapter<FavouriteMovieEntity, FavouriteItemAdapter.FavouriteViewHolder>(diffCallBack) {
+    ListAdapter<FavouriteMovieEntity, FavouriteItemAdapter.FavouriteViewHolder>(DiffCallBack) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouriteViewHolder {
         return FavouriteViewHolder(
@@ -30,30 +30,34 @@ class FavouriteItemAdapter(private val onItemClickListener: (FavouriteMovieEntit
         private var binding: ItemNowShowingBinding,
         private val onItemClickListener: (FavouriteMovieEntity) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(favouriteMovieEntity: FavouriteMovieEntity) {
+        fun bind(favouriteMovieEntity: FavouriteMovieEntity) = with(binding) {
 
-            with(binding) {
-                ivPoster.loadFromUrl(IMAGE_URL + favouriteMovieEntity.posterPath)
-                tvMovieName.text = favouriteMovieEntity.title
-                tvStarRate.text = binding.root.context.getString(
-                    R.string.vote_average_format,
-                    favouriteMovieEntity.voteAverage.toString()
-                )
+            ivPoster.loadFromUrl(IMAGE_URL + favouriteMovieEntity.posterPath)
+            tvMovieName.text = favouriteMovieEntity.title
+            tvStarRate.text = binding.root.context.getString(
+                R.string.vote_average_format,
+                favouriteMovieEntity.voteAverage
+            )
 
-                root.setOnClickListener {
-                    onItemClickListener.invoke(favouriteMovieEntity)
-                }
+            root.setOnClickListener {
+                onItemClickListener.invoke(favouriteMovieEntity)
             }
         }
     }
 
-    companion object diffCallBack : DiffUtil.ItemCallback<FavouriteMovieEntity>() {
+    companion object DiffCallBack : DiffUtil.ItemCallback<FavouriteMovieEntity>() {
 
-        override fun areItemsTheSame(oldItem: FavouriteMovieEntity, newItem: FavouriteMovieEntity): Boolean {
+        override fun areItemsTheSame(
+            oldItem: FavouriteMovieEntity,
+            newItem: FavouriteMovieEntity
+        ): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: FavouriteMovieEntity, newItem: FavouriteMovieEntity): Boolean {
+        override fun areContentsTheSame(
+            oldItem: FavouriteMovieEntity,
+            newItem: FavouriteMovieEntity
+        ): Boolean {
             return oldItem == newItem
         }
     }

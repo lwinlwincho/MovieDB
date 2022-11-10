@@ -12,7 +12,7 @@ import com.llc.moviebd.extension.loadFromUrl
 import com.llc.moviebd.network.IMAGE_URL
 
 class NowShowingItemAdapter(private val onItemClickListener: (MovieModel) -> Unit) :
-    ListAdapter<MovieModel, NowShowingItemAdapter.NowShowingViewHolder>(diffCallBack) {
+    ListAdapter<MovieModel, NowShowingItemAdapter.NowShowingViewHolder>(DiffCallBack) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NowShowingViewHolder {
         return NowShowingViewHolder(
@@ -47,7 +47,7 @@ class NowShowingItemAdapter(private val onItemClickListener: (MovieModel) -> Uni
         }
     }
 
-    companion object diffCallBack : DiffUtil.ItemCallback<MovieModel>() {
+    companion object DiffCallBack : DiffUtil.ItemCallback<MovieModel>() {
 
         override fun areItemsTheSame(oldItem: MovieModel, newItem: MovieModel): Boolean {
             return oldItem.id == newItem.id

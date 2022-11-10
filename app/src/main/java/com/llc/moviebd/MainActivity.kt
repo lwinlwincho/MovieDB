@@ -51,8 +51,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            val hideBottonNav = destination.id != R.id.movieDetailFragment
-            binding.bottomNavView.isVisible = hideBottonNav
+            val hideBottomNav = destination.id != R.id.movieDetailFragment
+            binding.bottomNavView.isVisible = hideBottomNav
         }
     }
 

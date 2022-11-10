@@ -10,17 +10,6 @@ import com.llc.moviebd.databinding.ItemGenresBinding
 
 class GenreItemAdapter : ListAdapter<Genre, GenreItemAdapter.GenresViewHolder>(DiffCallBack) {
 
-    companion object DiffCallBack : DiffUtil.ItemCallback<Genre>() {
-
-        override fun areItemsTheSame(oldItem: Genre, newItem: Genre): Boolean {
-            return oldItem.id == newItem.id
-        }
-
-        override fun areContentsTheSame(oldItem: Genre, newItem: Genre): Boolean {
-            return oldItem == newItem
-        }
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenresViewHolder {
         return GenresViewHolder(ItemGenresBinding.inflate(LayoutInflater.from(parent.context)))
     }
@@ -34,6 +23,17 @@ class GenreItemAdapter : ListAdapter<Genre, GenreItemAdapter.GenresViewHolder>(D
         RecyclerView.ViewHolder(binding.root) {
         fun bind(genre: Genre) {
             binding.tvGenres.text = genre.name
+        }
+    }
+
+    companion object DiffCallBack : DiffUtil.ItemCallback<Genre>() {
+
+        override fun areItemsTheSame(oldItem: Genre, newItem: Genre): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Genre, newItem: Genre): Boolean {
+            return oldItem == newItem
         }
     }
 }

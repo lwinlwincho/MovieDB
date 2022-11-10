@@ -58,8 +58,6 @@ class HomeMovieListViewModel : ViewModel() {
 //You can store many data class and singleton obj in sealed class
 sealed class MovieUpcomingEvent {
     data class Success(val movieList: List<MovieModel>) : MovieUpcomingEvent()
-    data class SuccessRemoved(val message: String) : MovieUpcomingEvent()
-    data class SuccessAdded(val message: String) : MovieUpcomingEvent()
     data class Failure(val message: String) : MovieUpcomingEvent()
     object Loading : MovieUpcomingEvent()
 }

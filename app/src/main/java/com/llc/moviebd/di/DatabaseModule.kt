@@ -7,16 +7,16 @@ import com.llc.moviebd.database.MovieRoomDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import dagger.hilt.android.scopes.ViewModelScoped
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 object DatabaseModule {
 
     @Provides
-    @Singleton
+    @ViewModelScoped
     fun provideMovieRoomDatabase(@ApplicationContext context: Context): MovieRoomDatabase {
         return Room.databaseBuilder(
             context,
@@ -28,7 +28,7 @@ object DatabaseModule {
     }
 
     @Provides
-    @Singleton
+    @ViewModelScoped
     fun provideMovieDao(movieRoomDatabase: MovieRoomDatabase): MovieDao {
         return movieRoomDatabase.movieDao()
     }

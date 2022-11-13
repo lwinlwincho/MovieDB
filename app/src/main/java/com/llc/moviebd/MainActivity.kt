@@ -3,8 +3,6 @@ package com.llc.moviebd
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.view.isVisible
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -13,7 +11,9 @@ import androidx.work.WorkManager
 import androidx.work.WorkRequest
 import com.llc.moviebd.databinding.ActivityMainBinding
 import com.llc.moviebd.worker.UploadWorker
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.llc.moviebd.R
 import com.llc.moviebd.data.model.MovieDetailModel
-import com.llc.moviebd.database.MovieRoomDatabase
 import com.llc.moviebd.databinding.FragmentMovieDetailBinding
 import com.llc.moviebd.extension.loadFromUrl
 import com.llc.moviebd.extension.toHourMinute
@@ -20,7 +19,9 @@ import com.llc.moviebd.network.IMAGE_URL
 import com.llc.moviebd.singleEvent.observeEvent
 import com.llc.moviebd.ui.home.cast.CastItemAdapter
 import com.llc.moviebd.ui.home.genre.GenreItemAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MovieDetailFragment : Fragment() {
 
     private val viewModel: MovieDetailViewModel by viewModels()
@@ -29,10 +30,6 @@ class MovieDetailFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val args: MovieDetailFragmentArgs by navArgs()
-
-    private val appDatabase by lazy {
-        MovieRoomDatabase.getDatabase(requireContext())
-    }
 
     private val genreItemAdapter: GenreItemAdapter by lazy {
         GenreItemAdapter()
@@ -54,7 +51,6 @@ class MovieDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val movieId = args.movieId
-        viewModel.setAppDatabase(appDatabase)
         viewModel.getMovieDetail(movieId)
 
         viewModel.detailUIEvent.observe(viewLifecycleOwner) { detailResult ->

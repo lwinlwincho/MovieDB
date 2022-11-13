@@ -7,14 +7,16 @@ import androidx.lifecycle.viewModelScope
 import com.llc.moviebd.data.model.MovieDetailModel
 import com.llc.moviebd.database.FavouriteMovieEntity
 import com.llc.moviebd.database.MovieDao
-import com.llc.moviebd.database.MovieRoomDatabase
 import com.llc.moviebd.network.MovieAPI
 import com.llc.moviebd.singleEvent.Event
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.launch
 
-class MovieDetailViewModel : ViewModel() {
-
-    private lateinit var movieDao: MovieDao
+@HiltViewModel
+class MovieDetailViewModel @Inject constructor(
+   private val movieDao: MovieDao
+) : ViewModel() {
 
     private val _detailUIEvent = MutableLiveData<MovieDetailEvent>()
     val detailUIEvent: LiveData<MovieDetailEvent> = _detailUIEvent
@@ -24,10 +26,6 @@ class MovieDetailViewModel : ViewModel() {
 
     private val _favouriteStatusEvent = MutableLiveData<Event<Boolean>>()
     val favouriteStatusEvent: LiveData<Event<Boolean>> = _favouriteStatusEvent
-
-    fun setAppDatabase(appDatabase: MovieRoomDatabase) {
-        this.movieDao = appDatabase.movieDao()
-    }
 
     fun getMovieDetail(movieId: String) {
         viewModelScope.launch {

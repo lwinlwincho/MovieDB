@@ -5,6 +5,7 @@ buildscript {
         nav_version = "2.5.2"
         room_version = '2.4.2'
         work_version = "2.7.1"
+        loggingInterceptor = "4.9.3"
     }
     repositories {
         google()

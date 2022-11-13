@@ -11,7 +11,9 @@ import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.databinding.FragmentHomeMovieListBinding
 import com.llc.moviebd.ui.home.now_showing.NowShowingItemAdapter
 import com.llc.moviebd.ui.home.popular.PopularItemAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeMovieListFragment : Fragment() {
 
     private val viewModel: HomeMovieListViewModel by viewModels()

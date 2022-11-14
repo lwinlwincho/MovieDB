@@ -10,19 +10,16 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.llc.moviebd.database.FavouriteMovieEntity
-import com.llc.moviebd.database.MovieRoomDatabase
 import com.llc.moviebd.databinding.FragmentFavouriteMovieBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FavouriteMovieFragment : Fragment() {
 
     private val viewModel: FavouriteViewModel by viewModels()
 
     private var _binding: FragmentFavouriteMovieBinding? = null
     private val binding get() = _binding!!
-
-    private val appDatabase by lazy {
-        MovieRoomDatabase.getDatabase(requireContext())
-    }
 
     private val favouriteItemAdapter: FavouriteItemAdapter by lazy {
         FavouriteItemAdapter { movieEntity ->
@@ -47,7 +44,6 @@ class FavouriteMovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.setAppDatabase(appDatabase)
         viewModel.getAllFavourite()
         viewModel.favouriteUEvent.observe(viewLifecycleOwner) { favouriteEvent->
             when (favouriteEvent) {

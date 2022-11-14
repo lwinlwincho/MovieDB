@@ -8,6 +8,7 @@ import com.llc.moviebd.data.model.MovieDetailModel
 import com.llc.moviebd.database.FavouriteMovieEntity
 import com.llc.moviebd.database.MovieDao
 import com.llc.moviebd.network.MovieAPI
+import com.llc.moviebd.network.MovieAPIService
 import com.llc.moviebd.singleEvent.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -15,7 +16,7 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class MovieDetailViewModel @Inject constructor(
-   private val movieDao: MovieDao
+    private val movieDao: MovieDao, private val movieAPIService: MovieAPIService
 ) : ViewModel() {
 
     private val _detailUIEvent = MutableLiveData<MovieDetailEvent>()
@@ -31,7 +32,7 @@ class MovieDetailViewModel @Inject constructor(
         viewModelScope.launch {
             _detailUIEvent.postValue(MovieDetailEvent.Loading)
             try {
-                val result = MovieAPI.retrofitService.loadMovieDetail(movieId.toInt())
+                val result = movieAPIService.loadMovieDetail(movieId.toInt())
                 _detailUIEvent.postValue(MovieDetailEvent.Success(result!!))
             } catch (e: Exception) {
                 _detailUIEvent.postValue(MovieDetailEvent.Error(e.message.toString()))
@@ -41,7 +42,7 @@ class MovieDetailViewModel @Inject constructor(
         viewModelScope.launch {
             _detailUIEvent.postValue(MovieDetailEvent.Loading)
             try {
-                val result = MovieAPI.retrofitService.getCredits(movieId.toInt())
+                val result = movieAPIService.getCredits(movieId.toInt())
                 _detailUIEvent.postValue(MovieDetailEvent.Credits(result))
             } catch (e: Exception) {
                 _detailUIEvent.postValue(MovieDetailEvent.Error(e.message.toString()))

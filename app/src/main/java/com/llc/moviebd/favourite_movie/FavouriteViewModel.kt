@@ -6,20 +6,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.llc.moviebd.database.FavouriteMovieEntity
 import com.llc.moviebd.database.MovieDao
-import com.llc.moviebd.database.MovieRoomDatabase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.lang.Exception
+import javax.inject.Inject
 
-class FavouriteViewModel : ViewModel() {
-
-    private lateinit var movieDao:MovieDao
+@HiltViewModel
+class FavouriteViewModel @Inject constructor(
+    private val movieDao: MovieDao
+) : ViewModel() {
 
     private val _favouriteUEvent = MutableLiveData<FavouriteEvent>()
     val favouriteUEvent: LiveData<FavouriteEvent> = _favouriteUEvent
-
-    fun setAppDatabase(appDatabase: MovieRoomDatabase) {
-        this.movieDao = appDatabase.movieDao()
-    }
 
     fun getAllFavourite() {
 

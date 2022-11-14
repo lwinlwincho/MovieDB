@@ -13,6 +13,6 @@ data class MovieDetailModel(
     val release_date: String?,
     val runtime: Long,
     val title: String,
-    val vote_average: Double,
-    val vote_count: Long
+    val vote_average: Double
+    //val vote_count: Long
 )

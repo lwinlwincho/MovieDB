@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.llc.moviebd.data.model.MovieDetailModel
 import com.llc.moviebd.database.FavouriteMovieEntity
 import com.llc.moviebd.database.MovieDao
-import com.llc.moviebd.network.MovieAPI
 import com.llc.moviebd.network.MovieAPIService
 import com.llc.moviebd.singleEvent.Event
 import dagger.hilt.android.lifecycle.HiltViewModel

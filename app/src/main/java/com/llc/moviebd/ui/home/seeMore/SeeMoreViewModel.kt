@@ -5,11 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.llc.moviebd.data.model.MovieModel
-import com.llc.moviebd.network.MovieAPI
+import com.llc.moviebd.network.MovieAPIService
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.lang.Exception
+import javax.inject.Inject
 
-class SeeMoreViewModel : ViewModel() {
+@HiltViewModel
+class SeeMoreViewModel @Inject constructor(
+    private val movieAPIService: MovieAPIService
+) : ViewModel() {
 
     private val _seeMoreUiEvent = MutableLiveData<SeeMoreEvent>()
     val seeMoreUiEvent: LiveData<SeeMoreEvent> = _seeMoreUiEvent
@@ -20,7 +25,7 @@ class SeeMoreViewModel : ViewModel() {
             try {
                 //get data from web server
                 val result =
-                    MovieAPI.retrofitService.getNowPlaying().results.sortedByDescending { it.releaseDate }
+                    movieAPIService.getNowPlaying().results.sortedByDescending { it.releaseDate }
                 _seeMoreUiEvent.value = SeeMoreEvent.Success(result)
             } catch (e: Exception) {
                 _seeMoreUiEvent.value = SeeMoreEvent.Failure(e.message.toString())
@@ -35,7 +40,7 @@ class SeeMoreViewModel : ViewModel() {
                 //get data from web server
 
                 val popularResult =
-                    MovieAPI.retrofitService.getPopular().results.sortedByDescending { it.vote_average }
+                    movieAPIService.getPopular().results.sortedByDescending { it.vote_average }
                 _seeMoreUiEvent.value = SeeMoreEvent.Success(popularResult)
 
             } catch (e: Exception) {

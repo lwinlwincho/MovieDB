@@ -14,7 +14,9 @@ import com.llc.moviebd.R
 import com.llc.moviebd.data.model.MovieModel
 import com.llc.moviebd.databinding.FragmentSeeMoreBinding
 import com.llc.moviebd.ui.home.Category
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SeeMoreFragment : Fragment() {
 
     private val viewModel: SeeMoreViewModel by viewModels()

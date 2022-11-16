@@ -17,6 +17,7 @@
     <string name="label_favourite">Favourite</string>
     <string name="label_cast">Cast</string>
     <string name="label_save">Save</string>
+    <string name="label_seemore">See more</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

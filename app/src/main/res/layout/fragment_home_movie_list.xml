@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical"
-    tools:context=".ui.home.HomeMovieListFragment">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/rl_toolbar"
@@ -70,7 +69,7 @@
                 android:foreground="@drawable/btn_see_more_ripple"
                 android:paddingHorizontal="@dimen/margin_tiny"
                 android:paddingVertical="@dimen/margin_x_tiny"
-                android:text="See more"
+                android:text="@string/label_seemore"
                 android:textAppearance="@style/Theme.MovieBD.Seemore" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -110,7 +109,7 @@
                 android:foreground="@drawable/btn_see_more_ripple"
                 android:paddingHorizontal="@dimen/margin_tiny"
                 android:paddingVertical="@dimen/margin_x_tiny"
-                android:text="See more"
+                android:text="@string/label_seemore"
                 android:textAppearance="@style/Theme.MovieBD.Seemore" />
 
             <androidx.recyclerview.widget.RecyclerView

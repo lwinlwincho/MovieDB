@@ -11,7 +11,7 @@ class MovieRepositoryImpl @Inject constructor(
 ) : MovieRepository {
 
     override suspend fun getNowShowingMovies(): MoviesResponseModel<MovieModel> {
-        return movieAPIService.getNowPlaying(apiKey = API_KEY)
+        return movieAPIService.getNowPlaying()
     }
 
     override suspend fun getPopularMovies(): MoviesResponseModel<MovieModel> {

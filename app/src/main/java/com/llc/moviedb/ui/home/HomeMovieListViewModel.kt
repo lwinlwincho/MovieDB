@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.llc.moviedb.data.model.MovieModel
-import com.llc.moviedb.network.MovieAPIService
+import com.llc.moviedb.repository.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeMovieListViewModel @Inject constructor(
-    private val movieAPIService: MovieAPIService
+    private val movieRepository: MovieRepository
 ) : ViewModel() {
 
     private val _nowShowingUiEvent = MutableLiveData<MovieUpcomingEvent>()
@@ -33,9 +33,9 @@ class HomeMovieListViewModel @Inject constructor(
 
         viewModelScope.launch {
             try {
-                //get data from web server
+                //get data from repository
                 val result =
-                    movieAPIService.getNowPlaying().results.sortedByDescending { it.releaseDate }
+                    movieRepository.getNowShowingMovies().results.sortedByDescending { it.releaseDate }
                 _nowShowingUiEvent.value = MovieUpcomingEvent.Success(result)
             } catch (e: Exception) {
                 _nowShowingUiEvent.value = MovieUpcomingEvent.Failure(e.message.toString())
@@ -48,9 +48,9 @@ class HomeMovieListViewModel @Inject constructor(
 
         viewModelScope.launch {
             try {
-                //get data from web server
+                //get data from repository
                 val popularResult =
-                    movieAPIService.getPopular().results.sortedByDescending { it.vote_average }
+                    movieRepository.getPopularMovies().results.sortedByDescending { it.vote_average }
                 _popularUiEvent.value = MovieUpcomingEvent.Success(popularResult)
 
             } catch (e: Exception) {

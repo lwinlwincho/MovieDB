@@ -19,3 +19,31 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+##--------------- OKHTTP3 ------------
+#Source : https://github.com/square/okhttp/
+-dontwarn okhttp3.**
+-dontwarn okio.**
+-dontwarn javax.annotation.**
+# A resource is loaded with a relative path so the package of this class must be preserved.
+-keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
+##--------------- OKHTTP3 ------------
+
+##--------------- Retrofit2 ------------
+#Source : https://github.com/square/retrofit#proguard
+-dontwarn okio.**
+-dontwarn javax.annotation.**
+-keep class com.squareup.okhttp.** { *; }
+-keep interface com.squareup.okhttp.** { *; }
+##--------------- Retrofit2 ------------
+##--------------- Glide  -----------------
+#source https://github.com/bumptech/glide#proguard
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public class * extends com.bumptech.glide.module.AppGlideModule
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+##--------------- Glide  -----------------
+
+-keep class com.llc.moviedb.data.model.**{ *; }

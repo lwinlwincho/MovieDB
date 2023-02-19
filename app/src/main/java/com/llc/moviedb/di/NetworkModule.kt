@@ -1,6 +1,8 @@
 package com.llc.moviedb.di
 
-import com.llc.moviebd.BuildConfig
+import android.content.Context
+import androidx.viewbinding.BuildConfig
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.llc.moviedb.network.MOVIE_BASE_URL
 import com.llc.moviedb.network.MovieAPIService
 import com.squareup.moshi.Moshi
@@ -8,6 +10,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
@@ -30,8 +33,9 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideOkHttpClient(@ApplicationContext context:Context): OkHttpClient {
         return OkHttpClient.Builder()
+            .addInterceptor(ChuckerInterceptor(context))
             .also {
                 if (BuildConfig.DEBUG) {
                     it.addInterceptor(

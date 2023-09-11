@@ -53,7 +53,7 @@
             app:popExitAnim="@anim/slide_out" />
         <argument
             android:name="category"
-            app:argType="com.llc.moviedb.ui.home.Category" />
+            app:argType="com.llc.moviedb.ui.model.Category" />
     </fragment>
     <fragment
         android:id="@+id/favouriteMovieFragment"

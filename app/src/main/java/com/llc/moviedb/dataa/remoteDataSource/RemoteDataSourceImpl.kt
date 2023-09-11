@@ -2,7 +2,6 @@ package com.llc.moviedb.dataa.remoteDataSource
 
 import com.llc.moviedb.data.model.MovieModel
 import com.llc.moviedb.data.model.MoviesResponseModel
-import com.llc.moviedb.datastore.Movie
 import com.llc.moviedb.network.MovieAPIService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

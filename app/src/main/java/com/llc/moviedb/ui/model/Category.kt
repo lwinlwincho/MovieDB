@@ -1,4 +1,4 @@
-package com.llc.moviedb.ui.home
+package com.llc.moviedb.ui.model
 
 enum class Category {
     NOW_SHOWING,

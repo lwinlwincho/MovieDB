@@ -50,9 +50,9 @@ android {
     buildTypes {
         release {
             signingConfigs.release
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             debuggable false
-            shrinkResources false
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             resValue "string", "app_name", "Movie DB"

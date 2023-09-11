@@ -15,6 +15,7 @@ import com.llc.moviebd.databinding.FragmentHomeMovieListBinding
 import com.llc.moviedb.data.model.MovieModel
 import com.llc.moviedb.ui.home.now_showing.NowShowingItemAdapter
 import com.llc.moviedb.ui.home.popular.PopularItemAdapter
+import com.llc.moviedb.ui.model.Category
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

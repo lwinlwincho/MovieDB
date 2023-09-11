@@ -16,7 +16,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.llc.moviebd.R
 import com.llc.moviebd.databinding.FragmentSeeMoreBinding
 import com.llc.moviedb.data.model.MovieModel
-import com.llc.moviedb.ui.home.Category
+import com.llc.moviedb.ui.model.Category
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

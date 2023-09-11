@@ -1,9 +1,7 @@
 package com.llc.moviedb.dataa.remoteDataSource.localDataSource
 
 import android.content.Context
-import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
-import com.llc.moviedb.data.model.MovieModel
 import com.llc.moviedb.datastore.Movie
 import com.llc.moviedb.datastore.MovieListSerializer
 import dagger.hilt.android.qualifiers.ApplicationContext

@@ -47,3 +47,4 @@
 ##--------------- Glide  -----------------
 
 -keep class com.llc.moviedb.data.model.**{ *; }
+-keep class com.llc.moviedb.ui.model.**{ *; }

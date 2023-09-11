@@ -5,8 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.llc.moviedb.data.model.MovieModel
 import com.llc.moviedb.repository.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import javax.inject.Inject
 import kotlinx.coroutines.flow.SharingStarted

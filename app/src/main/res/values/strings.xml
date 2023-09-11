@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Movie DB</string>
     <string name="label_home">Home</string>
     <string name="description">Description</string>
     <string name="length">Length</string>

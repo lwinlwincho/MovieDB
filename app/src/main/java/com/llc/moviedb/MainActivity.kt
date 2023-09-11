@@ -2,10 +2,12 @@ package com.llc.moviedb
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.llc.moviebd.BuildConfig
 import com.llc.moviebd.R
 import com.llc.moviebd.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setUpBottomNavigation()
+        val baseUrl = BuildConfig.BASE_URL
     }
 
     private fun setUpBottomNavigation() {

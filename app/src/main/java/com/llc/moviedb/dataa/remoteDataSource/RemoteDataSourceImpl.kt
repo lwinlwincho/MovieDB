@@ -11,6 +11,10 @@ import javax.inject.Inject
 class RemoteDataSourceImpl @Inject constructor(
     private val movieAPIService: MovieAPIService
 ) : RemoteDataSource {
+    override val nowShowingMoviesFlow: Flow<MoviesResponseModel<MovieModel>>
+        get() = flow { emit(movieAPIService.getNowPlaying()) }
+    override val popularMoviesFlow: Flow<MoviesResponseModel<MovieModel>>
+        get() = flow { emit(movieAPIService.getPopular()) }
 
     override suspend fun getNowPlaying(): Flow<MoviesResponseModel<MovieModel>> {
         return flow { emit(movieAPIService.getNowPlaying()) }
@@ -20,11 +24,11 @@ class RemoteDataSourceImpl @Inject constructor(
         return flow { emit(movieAPIService.getPopular()) }
     }
 
-/*    override suspend fun getNowPlaying(): MoviesResponseModel<MovieModel>{
-        return movieAPIService.getNowPlaying()
-    }*/
+    /*    override suspend fun getNowPlaying(): MoviesResponseModel<MovieModel>{
+            return movieAPIService.getNowPlaying()
+        }*/
 
-/*    override suspend fun getPopular(): MoviesResponseModel<MovieModel> {
-        return movieAPIService.getPopular()
-    }*/
+    /*    override suspend fun getPopular(): MoviesResponseModel<MovieModel> {
+            return movieAPIService.getPopular()
+        }*/
 }

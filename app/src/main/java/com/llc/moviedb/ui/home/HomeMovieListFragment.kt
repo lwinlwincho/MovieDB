@@ -96,20 +96,19 @@ class HomeMovieListFragment : Fragment() {
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
-                viewModel.nowShowingUiEvent.collectLatest { nowShowingUiState ->
-                    when (nowShowingUiState) {
-                        is MovieUpcomingEvent.Loading -> {
+                viewModel.uiState.collectLatest { state ->
+                    when (state) {
+                        is MovieUpcomingUiState.Loading -> {
                             binding.progressBar.visibility = View.VISIBLE
                         }
-                        is MovieUpcomingEvent.Success -> {
-                            nowShowingItemAdapter.submitList(
-                                nowShowingUiState.movieList
-                            )
+                        is MovieUpcomingUiState.Success -> {
+                            nowShowingItemAdapter.submitList(state.nowShowingMovies)
+                            popularItemAdapter.submitList(state.popularMovies)
                             Toast.makeText(requireContext(),"Now showing", Toast.LENGTH_SHORT).show()
                             binding.progressBar.visibility = View.GONE
                         }
-                        is MovieUpcomingEvent.Failure -> {
-                            showMessage(nowShowingUiState.message)
+                        is MovieUpcomingUiState.Failure -> {
+                            showMessage(state.message)
                             binding.progressBar.visibility = View.GONE
                         }
                     }
@@ -117,27 +116,27 @@ class HomeMovieListFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launch {
+        /*lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
                 viewModel.popularUiEvent.collectLatest { popularUiState ->
                     when (popularUiState) {
-                        is MovieUpcomingEvent.Loading -> {
+                        is MovieUpcomingUiState.Loading -> {
                             binding.progressBar.visibility = View.VISIBLE
                         }
-                        is MovieUpcomingEvent.Success -> {
+                        is MovieUpcomingUiState.Success -> {
                             popularItemAdapter.submitList(
-                                popularUiState.movieList
+                                popularUiState.nowShowingMovies
                             )
                             binding.progressBar.visibility = View.GONE
                         }
-                        is MovieUpcomingEvent.Failure -> {
+                        is MovieUpcomingUiState.Failure -> {
                             showMessage(popularUiState.message)
                             binding.progressBar.visibility = View.GONE
                         }
                     }
                 }
             }
-        }
+        }*/
 
         binding.tvNowShowingSeemore.setOnClickListener {
             val action =
@@ -161,7 +160,6 @@ class HomeMovieListFragment : Fragment() {
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             adapter = popularItemAdapter
         }
-
     }
 
     private fun showMessage(message: String) {

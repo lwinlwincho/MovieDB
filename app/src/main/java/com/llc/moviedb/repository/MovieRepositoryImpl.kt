@@ -8,13 +8,7 @@ import com.llc.moviedb.dataa.remoteDataSource.localDataSource.LocalDataSource
 import com.llc.moviedb.datastore.Movie
 import com.llc.moviedb.extension.isNetworkAvailable
 import com.llc.moviedb.network.MovieAPIService
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
@@ -25,6 +19,10 @@ class MovieRepositoryImpl @Inject constructor(
 ) : MovieRepository {
 
     private val isOnline get() = connectivityManager.isNetworkAvailable()
+    override val nowShowingMoviesFlow: Flow<MoviesResponseModel<MovieModel>>
+        get() = remoteDataSource.nowShowingMoviesFlow
+    override val popularMoviesFlow: Flow<MoviesResponseModel<MovieModel>>
+        get() = remoteDataSource.popularMoviesFlow
 
     override suspend fun getNowShowingMovies(): Flow<MoviesResponseModel<MovieModel>> {
         /*return remoteDataSource.getNowPlaying().onEach {

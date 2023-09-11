@@ -48,16 +48,28 @@ class FavouriteMovieFragment : Fragment() {
         viewModel.favouriteUiEvent.observe(viewLifecycleOwner) { favouriteEvent->
             when (favouriteEvent) {
 
-                is FavouriteEvent.Success -> {
+                is LatestNewsUiState.Success -> {
                     favouriteItemAdapter.submitList(favouriteEvent.movieList)
                 }
-                is FavouriteEvent.Failure -> {
+                is LatestNewsUiState.Failure -> {
                    showMessage(favouriteEvent.message)
                 }
                 else -> {}
             }
         }
 
+
+        /*lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.favUiState.collect { favUiState->
+                    when (favUiState) {
+                        is LatestNewsUiState.Success -> favouriteItemAdapter.submitList(favUiState.movieList)
+                        is LatestNewsUiState.Failure  -> showMessage(favUiState.message)
+                    }
+                }
+            }
+        }
+*/
         binding.rvMoviesList.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = favouriteItemAdapter

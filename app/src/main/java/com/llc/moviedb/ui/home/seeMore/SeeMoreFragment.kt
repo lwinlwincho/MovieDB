@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,7 +17,10 @@ import com.llc.moviebd.R
 import com.llc.moviebd.databinding.FragmentSeeMoreBinding
 import com.llc.moviedb.data.model.MovieModel
 import com.llc.moviedb.ui.home.Category
+import com.llc.moviedb.ui.home.MovieUpcomingEvent
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SeeMoreFragment : Fragment() {
@@ -60,7 +66,7 @@ class SeeMoreFragment : Fragment() {
             }
         }
 
-        viewModel.seeMoreUiEvent.observe(viewLifecycleOwner) { seeMoreEvent->
+/*        viewModel.seeMoreUiEvent.observe(viewLifecycleOwner) { seeMoreEvent->
             when (seeMoreEvent) {
                 is SeeMoreEvent.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
@@ -74,6 +80,28 @@ class SeeMoreFragment : Fragment() {
                     binding.progressBar.visibility = View.GONE
                 }
                 else -> {}
+            }
+        }*/
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.seeMoreUiEvent.collectLatest { nowShowingUiState ->
+                    when (nowShowingUiState) {
+                        is SeeMoreEvent.Loading -> {
+                            binding.progressBar.visibility = View.VISIBLE
+                        }
+                        is SeeMoreEvent.Success -> {
+                            seeMoreItemAdapter.submitList(
+                                nowShowingUiState.movieList
+                            )
+                            binding.progressBar.visibility = View.GONE
+                        }
+                        is SeeMoreEvent.Failure -> {
+                            showMessage(nowShowingUiState.message)
+                            binding.progressBar.visibility = View.GONE
+                        }
+                    }
+                }
             }
         }
 

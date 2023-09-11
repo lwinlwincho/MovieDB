@@ -11,3 +11,4 @@ data class MovieModel(
     @Json(name = "release_date") val releaseDate: String,
     @Json(name = "vote_average") val vote_average: Double
 ) : Serializable
+

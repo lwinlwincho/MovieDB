@@ -7,6 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.llc.moviedb.data.model.MovieModel
 import com.llc.moviedb.repository.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
@@ -16,11 +20,20 @@ class HomeMovieListViewModel @Inject constructor(
     private val movieRepository: MovieRepository
 ) : ViewModel() {
 
+/*
     private val _nowShowingUiEvent = MutableLiveData<MovieUpcomingEvent>()
     val nowShowingUiEvent: LiveData<MovieUpcomingEvent> = _nowShowingUiEvent
 
     private val _popularUiEvent = MutableLiveData<MovieUpcomingEvent>()
-    val popularUiEvent: LiveData<MovieUpcomingEvent> = _popularUiEvent
+    val popularUiEvent: LiveData<MovieUpcomingEvent> = _popularUiEvent*/
+
+    private val _nowShowingUiEvent =
+        MutableStateFlow<MovieUpcomingEvent>(MovieUpcomingEvent.Loading)
+    val nowShowingUiEvent: StateFlow<MovieUpcomingEvent> = _nowShowingUiEvent
+
+    private val _popularUiEvent =
+        MutableStateFlow<MovieUpcomingEvent>(MovieUpcomingEvent.Loading)
+    val popularUiEvent: StateFlow<MovieUpcomingEvent> = _popularUiEvent
 
     init {
         getNowShowing()
@@ -32,14 +45,26 @@ class HomeMovieListViewModel @Inject constructor(
         _nowShowingUiEvent.value = MovieUpcomingEvent.Loading
 
         viewModelScope.launch {
+
+            //get data from repository
+/*
             try {
-                //get data from repository
                 val result =
                     movieRepository.getNowShowingMovies().results.sortedByDescending { it.releaseDate }
                 _nowShowingUiEvent.value = MovieUpcomingEvent.Success(result)
-            } catch (e: Exception) {
+            }
+            catch (e: Exception) {
                 _nowShowingUiEvent.value = MovieUpcomingEvent.Failure(e.message.toString())
             }
+*/
+
+            movieRepository.getNowShowingMovies()
+                .catch { e ->
+                    _nowShowingUiEvent.value = MovieUpcomingEvent.Failure(e.message.toString())
+                }
+                .collectLatest {
+                    _nowShowingUiEvent.value = MovieUpcomingEvent.Success(it.results)
+                }
         }
     }
 
@@ -47,7 +72,7 @@ class HomeMovieListViewModel @Inject constructor(
         _popularUiEvent.value = MovieUpcomingEvent.Loading
 
         viewModelScope.launch {
-            try {
+            /*try {
                 //get data from repository
                 val popularResult =
                     movieRepository.getPopularMovies().results.sortedByDescending { it.vote_average }
@@ -55,7 +80,15 @@ class HomeMovieListViewModel @Inject constructor(
 
             } catch (e: Exception) {
                 _popularUiEvent.value = MovieUpcomingEvent.Failure(e.message.toString())
-            }
+            }*/
+
+            movieRepository.getPopularMovies()
+                .catch { e ->
+                    _popularUiEvent.value = MovieUpcomingEvent.Failure(e.message.toString())
+                }
+                .collectLatest {
+                    _popularUiEvent.value = MovieUpcomingEvent.Success(it.results)
+                }
         }
     }
 }

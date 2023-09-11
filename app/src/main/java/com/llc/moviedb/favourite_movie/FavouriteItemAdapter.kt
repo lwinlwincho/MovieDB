@@ -30,17 +30,17 @@ class FavouriteItemAdapter(private val onItemClickListener: (FavouriteMovieEntit
         private var binding: ItemNowShowingBinding,
         private val onItemClickListener: (FavouriteMovieEntity) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(favouriteMovieEntity: FavouriteMovieEntity) = with(binding) {
+        fun bind(favouriteMovie: FavouriteMovieEntity) = with(binding) {
 
-            ivPoster.loadFromUrl(IMAGE_URL + favouriteMovieEntity.posterPath)
-            tvMovieName.text = favouriteMovieEntity.title
+            ivPoster.loadFromUrl(IMAGE_URL + favouriteMovie.posterPath)
+            tvMovieName.text = favouriteMovie.title
             tvStarRate.text = binding.root.context.getString(
                 R.string.vote_average_format,
-                favouriteMovieEntity.voteAverage
+                favouriteMovie.voteAverage
             )
 
             root.setOnClickListener {
-                onItemClickListener.invoke(favouriteMovieEntity)
+                onItemClickListener.invoke(favouriteMovie)
             }
         }
     }

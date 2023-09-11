@@ -4,6 +4,8 @@ import com.llc.moviedb.data.model.CreditModel
 import com.llc.moviedb.data.model.MovieDetailModel
 import com.llc.moviedb.data.model.MovieModel
 import com.llc.moviedb.data.model.MoviesResponseModel
+import com.llc.moviedb.datastore.Movie
+import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

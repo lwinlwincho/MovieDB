@@ -1,6 +1,7 @@
 package com.llc.moviedb.di
 
 import android.content.Context
+import android.net.ConnectivityManager
 import androidx.viewbinding.BuildConfig
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.llc.moviedb.network.MOVIE_BASE_URL
@@ -64,5 +65,11 @@ object NetworkModule {
     @Singleton
     fun provideMovieAPIService(retrofit: Retrofit): MovieAPIService {
         return retrofit.create(MovieAPIService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideConnectivityManager(@ApplicationContext context: Context): ConnectivityManager {
+        return context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     }
 }

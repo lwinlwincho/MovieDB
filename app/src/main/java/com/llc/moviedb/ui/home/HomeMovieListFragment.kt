@@ -2,8 +2,12 @@ package com.llc.moviedb.ui.home
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -12,6 +16,8 @@ import com.llc.moviedb.data.model.MovieModel
 import com.llc.moviedb.ui.home.now_showing.NowShowingItemAdapter
 import com.llc.moviedb.ui.home.popular.PopularItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeMovieListFragment : Fragment() {
@@ -51,7 +57,7 @@ class HomeMovieListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.nowShowingUiEvent.observe(viewLifecycleOwner) { event ->
+       /* viewModel.nowShowingUiEvent.observe(viewLifecycleOwner) { event ->
             when (event) {
                 is MovieUpcomingEvent.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
@@ -86,6 +92,53 @@ class HomeMovieListFragment : Fragment() {
             }
         }
 
+        */
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                viewModel.nowShowingUiEvent.collectLatest { nowShowingUiState ->
+                    when (nowShowingUiState) {
+                        is MovieUpcomingEvent.Loading -> {
+                            binding.progressBar.visibility = View.VISIBLE
+                        }
+                        is MovieUpcomingEvent.Success -> {
+                            nowShowingItemAdapter.submitList(
+                                nowShowingUiState.movieList
+                            )
+                            Toast.makeText(requireContext(),"Now showing", Toast.LENGTH_SHORT).show()
+                            binding.progressBar.visibility = View.GONE
+                        }
+                        is MovieUpcomingEvent.Failure -> {
+                            showMessage(nowShowingUiState.message)
+                            binding.progressBar.visibility = View.GONE
+                        }
+                    }
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                viewModel.popularUiEvent.collectLatest { popularUiState ->
+                    when (popularUiState) {
+                        is MovieUpcomingEvent.Loading -> {
+                            binding.progressBar.visibility = View.VISIBLE
+                        }
+                        is MovieUpcomingEvent.Success -> {
+                            popularItemAdapter.submitList(
+                                popularUiState.movieList
+                            )
+                            binding.progressBar.visibility = View.GONE
+                        }
+                        is MovieUpcomingEvent.Failure -> {
+                            showMessage(popularUiState.message)
+                            binding.progressBar.visibility = View.GONE
+                        }
+                    }
+                }
+            }
+        }
+
         binding.tvNowShowingSeemore.setOnClickListener {
             val action =
                 HomeMovieListFragmentDirections.actionMovieListFragmentToSeeMoreFragment(Category.NOW_SHOWING)
@@ -97,7 +150,6 @@ class HomeMovieListFragment : Fragment() {
                 HomeMovieListFragmentDirections.actionMovieListFragmentToSeeMoreFragment(Category.POPULAR)
             findNavController().navigate(action)
         }
-
         binding.rvNowShowingMovies.apply {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -109,6 +161,7 @@ class HomeMovieListFragment : Fragment() {
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             adapter = popularItemAdapter
         }
+
     }
 
     private fun showMessage(message: String) {

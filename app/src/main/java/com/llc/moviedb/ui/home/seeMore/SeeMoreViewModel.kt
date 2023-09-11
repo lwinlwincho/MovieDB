@@ -5,9 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.llc.moviedb.data.model.MovieModel
-import com.llc.moviedb.network.MovieAPIService
 import com.llc.moviedb.repository.MovieRepository
+import com.llc.moviedb.ui.home.MovieUpcomingEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
@@ -17,24 +21,57 @@ class SeeMoreViewModel @Inject constructor(
     private val movieRepository: MovieRepository
 ) : ViewModel() {
 
-    private val _seeMoreUiEvent = MutableLiveData<SeeMoreEvent>()
-    val seeMoreUiEvent: LiveData<SeeMoreEvent> = _seeMoreUiEvent
+    private val _seeMoreUiEvent = MutableStateFlow<SeeMoreEvent>(SeeMoreEvent.Loading)
+    val seeMoreUiEvent: StateFlow<SeeMoreEvent> = _seeMoreUiEvent
 
     fun getNowShowing() {
         _seeMoreUiEvent.value = SeeMoreEvent.Loading
+
+        viewModelScope.launch {
+            movieRepository.getNowShowingMovies()
+                .catch { e ->
+                    _seeMoreUiEvent.value = SeeMoreEvent.Failure(e.message.toString())
+                }
+                .collectLatest {
+                    _seeMoreUiEvent.value = SeeMoreEvent.Success(it.results)
+                }
+        }
+    }
+
+    fun getPopular() {
+        _seeMoreUiEvent.value = SeeMoreEvent.Loading
+
+        viewModelScope.launch {
+            movieRepository.getPopularMovies()
+                .catch { e ->
+                    _seeMoreUiEvent.value = SeeMoreEvent.Failure(e.message.toString())
+                }
+                .collectLatest {
+                    _seeMoreUiEvent.value = SeeMoreEvent.Success(it.results)
+                }
+        }
+
+    }
+
+/*
+    fun getNowShowing() {
+        _seeMoreUiEvent.value = SeeMoreEvent.Loading
+
         viewModelScope.launch {
             try {
                 //get data from web server
                 val nowShowingResult =
-                    movieRepository.getNowShowingMovies().results.sortedByDescending { it.releaseDate }
+                    movieRepository.getNowShowingMovies().results.sortedByDescending { it.vote_average }
                 _seeMoreUiEvent.value = SeeMoreEvent.Success(nowShowingResult)
+
             } catch (e: Exception) {
                 _seeMoreUiEvent.value = SeeMoreEvent.Failure(e.message.toString())
             }
         }
     }
+*/
 
-    fun getPopular() {
+    /*fun getPopular() {
         _seeMoreUiEvent.value = SeeMoreEvent.Loading
         viewModelScope.launch {
             try {
@@ -47,7 +84,7 @@ class SeeMoreViewModel @Inject constructor(
                 _seeMoreUiEvent.value = SeeMoreEvent.Failure(e.message.toString())
             }
         }
-    }
+    }*/
 }
 
 sealed class SeeMoreEvent {

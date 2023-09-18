@@ -65,6 +65,7 @@ class SeeMoreFragment : Fragment() {
             }
         }
 
+        //for live data
 /*        viewModel.seeMoreUiEvent.observe(viewLifecycleOwner) { seeMoreEvent->
             when (seeMoreEvent) {
                 is SeeMoreEvent.Loading -> {
@@ -84,7 +85,7 @@ class SeeMoreFragment : Fragment() {
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.seeMoreUiEvent.collectLatest { nowShowingUiState ->
+                viewModel.seeMoreUiState.collectLatest { nowShowingUiState ->
                     when (nowShowingUiState) {
                         is SeeMoreEvent.Loading -> {
                             binding.progressBar.visibility = View.VISIBLE

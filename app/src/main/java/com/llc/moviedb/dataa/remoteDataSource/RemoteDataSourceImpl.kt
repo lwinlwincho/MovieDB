@@ -10,24 +10,28 @@ import javax.inject.Inject
 class RemoteDataSourceImpl @Inject constructor(
     private val movieAPIService: MovieAPIService
 ) : RemoteDataSource {
+
+    //for combine state flow
     override val nowShowingMoviesFlow: Flow<MoviesResponseModel<MovieModel>>
         get() = flow { emit(movieAPIService.getNowPlaying()) }
     override val popularMoviesFlow: Flow<MoviesResponseModel<MovieModel>>
         get() = flow { emit(movieAPIService.getPopular()) }
 
-    override suspend fun getNowPlaying(): Flow<MoviesResponseModel<MovieModel>> {
+
+    //for state flow
+    override fun getNowPlaying(): Flow<MoviesResponseModel<MovieModel>> {
         return flow { emit(movieAPIService.getNowPlaying()) }
     }
 
-    override suspend fun getPopular(): Flow<MoviesResponseModel<MovieModel>> {
+    override fun getPopular(): Flow<MoviesResponseModel<MovieModel>> {
         return flow { emit(movieAPIService.getPopular()) }
     }
 
-    /*    override suspend fun getNowPlaying(): MoviesResponseModel<MovieModel>{
+    //for live data
+    /*    override fun getNowPlaying(): MoviesResponseModel<MovieModel>{
             return movieAPIService.getNowPlaying()
-        }*/
-
-    /*    override suspend fun getPopular(): MoviesResponseModel<MovieModel> {
+        }
+          override fun getPopular(): MoviesResponseModel<MovieModel> {
             return movieAPIService.getPopular()
         }*/
 }

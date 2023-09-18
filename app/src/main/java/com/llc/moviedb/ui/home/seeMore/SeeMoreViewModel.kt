@@ -17,70 +17,70 @@ class SeeMoreViewModel @Inject constructor(
     private val movieRepository: MovieRepository
 ) : ViewModel() {
 
-    private val _seeMoreUiEvent = MutableStateFlow<SeeMoreEvent>(SeeMoreEvent.Loading)
-    val seeMoreUiEvent: StateFlow<SeeMoreEvent> = _seeMoreUiEvent
+    //for live data
+    /*private val _seeMoreUiEvent = MutableLiveData<SeeMoreEvent>()
+    val seeMoreUiEvent : LiveData<SeeMoreEvent> = _seeMoreUiEvent */
 
+    //for state flow
+    private val _seeMoreUiState = MutableStateFlow<SeeMoreEvent>(SeeMoreEvent.Loading)
+    val seeMoreUiState: StateFlow<SeeMoreEvent> = _seeMoreUiState
+
+    //for state flow
     fun getNowShowing() {
-        _seeMoreUiEvent.value = SeeMoreEvent.Loading
-
         viewModelScope.launch {
             movieRepository.getNowShowingMovies()
                 .catch { e ->
-                    _seeMoreUiEvent.value = SeeMoreEvent.Failure(e.message.toString())
+                    _seeMoreUiState.value = SeeMoreEvent.Failure(e.message.toString())
                 }
                 .collectLatest {
-                    _seeMoreUiEvent.value = SeeMoreEvent.Success(it.results)
+                    _seeMoreUiState.value = SeeMoreEvent.Success(it.results)
                 }
         }
     }
 
     fun getPopular() {
-        _seeMoreUiEvent.value = SeeMoreEvent.Loading
-
         viewModelScope.launch {
             movieRepository.getPopularMovies()
                 .catch { e ->
-                    _seeMoreUiEvent.value = SeeMoreEvent.Failure(e.message.toString())
+                    _seeMoreUiState.value = SeeMoreEvent.Failure(e.message.toString())
                 }
                 .collectLatest {
-                    _seeMoreUiEvent.value = SeeMoreEvent.Success(it.results)
+                    _seeMoreUiState.value = SeeMoreEvent.Success(it.results)
                 }
         }
-
     }
 
-/*
-    fun getNowShowing() {
-        _seeMoreUiEvent.value = SeeMoreEvent.Loading
+    //for live data
+    /*
+        fun getNowShowing() {
+            _seeMoreUiEvent.value = SeeMoreEvent.Loading
 
-        viewModelScope.launch {
-            try {
-                //get data from web server
-                val nowShowingResult =
-                    movieRepository.getNowShowingMovies().results.sortedByDescending { it.vote_average }
-                _seeMoreUiEvent.value = SeeMoreEvent.Success(nowShowingResult)
-
-            } catch (e: Exception) {
-                _seeMoreUiEvent.value = SeeMoreEvent.Failure(e.message.toString())
+            viewModelScope.launch {
+                try {
+                    //get data from web server
+                    val nowShowingResult =
+                        movieRepository.getNowShowingMovies().results.sortedByDescending { it.vote_average }
+                    _seeMoreUiEvent.value = SeeMoreEvent.Success(nowShowingResult)
+                } catch (e: Exception) {
+                    _seeMoreUiEvent.value = SeeMoreEvent.Failure(e.message.toString())
+                }
             }
         }
-    }
-*/
 
-    /*fun getPopular() {
-        _seeMoreUiEvent.value = SeeMoreEvent.Loading
-        viewModelScope.launch {
-            try {
-                //get data from web server
-                val popularResult =
-                    movieRepository.getPopularMovies().results.sortedByDescending { it.vote_average }
-                _seeMoreUiEvent.value = SeeMoreEvent.Success(popularResult)
+     fun getPopular() {
+            _seeMoreUiEvent.value = SeeMoreEvent.Loading
+            viewModelScope.launch {
+                try {
+                    //get data from web server
+                    val popularResult =
+                        movieRepository.getPopularMovies().results.sortedByDescending { it.vote_average }
+                    _seeMoreUiEvent.value = SeeMoreEvent.Success(popularResult)
 
-            } catch (e: Exception) {
-                _seeMoreUiEvent.value = SeeMoreEvent.Failure(e.message.toString())
+                } catch (e: Exception) {
+                    _seeMoreUiEvent.value = SeeMoreEvent.Failure(e.message.toString())
+                }
             }
-        }
-    }*/
+        }*/
 }
 
 sealed class SeeMoreEvent {

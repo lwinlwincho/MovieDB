@@ -2,7 +2,6 @@ package com.llc.moviedb.ui.home
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -58,6 +57,7 @@ class HomeMovieListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //for live data
        /* viewModel.nowShowingUiEvent.observe(viewLifecycleOwner) { event ->
             when (event) {
                 is MovieUpcomingEvent.Loading -> {
@@ -91,10 +91,9 @@ class HomeMovieListFragment : Fragment() {
                 }
                 else -> {}
             }
-        }
+        }  */
 
-        */
-
+        //for state flow
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
                 viewModel.uiState.collectLatest { state ->
@@ -105,7 +104,6 @@ class HomeMovieListFragment : Fragment() {
                         is MovieUpcomingUiState.Success -> {
                             nowShowingItemAdapter.submitList(state.nowShowingMovies)
                             popularItemAdapter.submitList(state.popularMovies)
-                            Toast.makeText(requireContext(),"Now showing", Toast.LENGTH_SHORT).show()
                             binding.progressBar.visibility = View.GONE
                         }
                         is MovieUpcomingUiState.Failure -> {
@@ -119,7 +117,7 @@ class HomeMovieListFragment : Fragment() {
 
         /*lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
-                viewModel.popularUiEvent.collectLatest { popularUiState ->
+                viewModel.popularUiState.collectLatest { popularUiState ->
                     when (popularUiState) {
                         is MovieUpcomingUiState.Loading -> {
                             binding.progressBar.visibility = View.VISIBLE

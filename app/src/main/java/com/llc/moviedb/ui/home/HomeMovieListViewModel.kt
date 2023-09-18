@@ -14,19 +14,24 @@ import kotlinx.coroutines.flow.stateIn
 
 @HiltViewModel
 class HomeMovieListViewModel @Inject constructor(
-    private val movieRepository: MovieRepository
+    movieRepository: MovieRepository
 ) : ViewModel() {
 
-    /*
-        private val _nowShowingUiEvent = MutableLiveData<MovieUpcomingEvent>()
+    //for live data
+    /* private val _nowShowingUiEvent = MutableLiveData<MovieUpcomingEvent>()
         val nowShowingUiEvent: LiveData<MovieUpcomingEvent> = _nowShowingUiEvent
 
         private val _popularUiEvent = MutableLiveData<MovieUpcomingEvent>()
         val popularUiEvent: LiveData<MovieUpcomingEvent> = _popularUiEvent*/
 
+    //for state flow
     /* private val _nowShowingUiState =
          MutableStateFlow<MovieUpcomingUiState>(MovieUpcomingUiState.Loading)
-     val nowShowingUiStated: StateFlow<MovieUpcomingUiState> = _nowShowingUiState*/
+     val nowShowingUiState: StateFlow<MovieUpcomingUiState> = _nowShowingUiState
+
+    private val _popularUiState =
+        MutableStateFlow<MovieUpcomingUiState>(MovieUpcomingUiState.Loading)
+    val popularUiState: StateFlow<MovieUpcomingUiState> = _popularUiState*/
 
     val uiState = combine(
         movieRepository.nowShowingMoviesFlow.map { it.results },
@@ -38,39 +43,49 @@ class HomeMovieListViewModel @Inject constructor(
         )
     }.catch { e ->
         MovieUpcomingUiState.Failure(e.message.toString())
-    }.stateIn(
+    }.stateIn(//change hot flow to cold flow
         scope = viewModelScope,
         initialValue = MovieUpcomingUiState.Loading,
         started = SharingStarted.WhileSubscribed(5000L)
     )
-
-    /*private val _popularUiEvent =
-        MutableStateFlow<MovieUpcomingUiState>(MovieUpcomingUiState.Loading)
-    val popularUiEvent: StateFlow<MovieUpcomingUiState> = _popularUiEvent*/
 
     init {
         //  getNowShowing()
         // getPopular()
     }
 
-    /*private fun getNowShowing() {
-
+    //for live data
+/*    private fun getNowShowing() {
         _nowShowingUiState.value = MovieUpcomingUiState.Loading
-
         viewModelScope.launch {
+            try {
+                val result =
+                    movieRepository.getNowShowingMovies().results.sortedByDescending { it.releaseDate }
+                _nowShowingUiEvent.value = MovieUpcomingEvent.Success(result)
+            } catch (e: Exception) {
+                _nowShowingUiEvent.value = MovieUpcomingEvent.Failure(e.message.toString())
+            }
+        }
+    }
 
-            //get data from repository
-            *//*
-                        try {
-                            val result =
-                                movieRepository.getNowShowingMovies().results.sortedByDescending { it.releaseDate }
-                            _nowShowingUiEvent.value = MovieUpcomingEvent.Success(result)
-                        }
-                        catch (e: Exception) {
-                            _nowShowingUiEvent.value = MovieUpcomingEvent.Failure(e.message.toString())
-                        }
-            *//*
+    private fun getPopular() {
+        _popularUiEvent.value = MovieUpcomingUiState.Loading
+        viewModelScope.launch {
+            try {
+                //get data from repository
+                val popularResult =
+                    movieRepository.getPopularMovies().results.sortedByDescending { it.vote_average }
+                _popularUiEvent.value = MovieUpcomingEvent.Success(popularResult)
 
+            } catch (e: Exception) {
+                _popularUiEvent.value = MovieUpcomingEvent.Failure(e.message.toString())
+            }
+        }
+    }*/
+
+    //for state flow
+    /*private fun getNowShowing() {
+        viewModelScope.launch {
             movieRepository.getNowShowingMovies()
                 .catch { e ->
                     _nowShowingUiState.value = MovieUpcomingUiState.Failure(e.message.toString())
@@ -79,22 +94,10 @@ class HomeMovieListViewModel @Inject constructor(
                     _nowShowingUiState.value = MovieUpcomingUiState.Success(it.results)
                 }
         }
-    }*/
+    }
 
-    /*private fun getPopular() {
-        _popularUiEvent.value = MovieUpcomingUiState.Loading
-
+    private fun getPopular() {
         viewModelScope.launch {
-            *//*try {
-                //get data from repository
-                val popularResult =
-                    movieRepository.getPopularMovies().results.sortedByDescending { it.vote_average }
-                _popularUiEvent.value = MovieUpcomingEvent.Success(popularResult)
-
-            } catch (e: Exception) {
-                _popularUiEvent.value = MovieUpcomingEvent.Failure(e.message.toString())
-            }*//*
-
             movieRepository.getPopularMovies()
                 .catch { e ->
                     _popularUiEvent.value = MovieUpcomingUiState.Failure(e.message.toString())
@@ -112,6 +115,9 @@ sealed class MovieUpcomingUiState {
         val nowShowingMovies: List<MovieModel>,
         val popularMovies: List<MovieModel>
     ) : MovieUpcomingUiState()
+
+    //for live data and state flow
+  //  data class Success(val movieList: List<MovieModel>) : MovieUpcomingUiState()
 
     data class Failure(val message: String) : MovieUpcomingUiState()
     object Loading : MovieUpcomingUiState()

@@ -24,7 +24,7 @@ class MovieRepositoryImpl @Inject constructor(
     override val popularMoviesFlow: Flow<MoviesResponseModel<MovieModel>>
         get() = remoteDataSource.popularMoviesFlow
 
-    override suspend fun getNowShowingMovies(): Flow<MoviesResponseModel<MovieModel>> {
+    override fun getNowShowingMovies(): Flow<MoviesResponseModel<MovieModel>> {
         /*return remoteDataSource.getNowPlaying().onEach {
             val movieModelList: List<MovieModel> = it.results
             val movieList: List<Movie> = movieModelList.map {model ->
@@ -40,10 +40,9 @@ class MovieRepositoryImpl @Inject constructor(
         }*/
 
         return remoteDataSource.getNowPlaying()
-
     }
 
-    override suspend fun getPopularMovies(): Flow<MoviesResponseModel<MovieModel>> {
+    override fun getPopularMovies(): Flow<MoviesResponseModel<MovieModel>> {
 /*        return remoteDataSource.getPopular().onEach {
             val movieModelList: List<MovieModel> = it.results
             val movieList: List<Movie> = movieModelList.map {model ->
@@ -64,13 +63,11 @@ class MovieRepositoryImpl @Inject constructor(
 
     /*    override suspend fun getNowShowingMovies(): MoviesResponseModel<MovieModel>{
             return remoteDataSource.getNowPlaying()
-        }*/
+        }
 
-/*
     override suspend fun getPopularMovies(): MoviesResponseModel<MovieModel> {
         return remoteDataSource.getPopular()
-    }
-*/
+    }*/
 
     private suspend fun saveInCache(movieModels: List<Movie>) {
         localDataSource.saveNowPlaying(movieModels)

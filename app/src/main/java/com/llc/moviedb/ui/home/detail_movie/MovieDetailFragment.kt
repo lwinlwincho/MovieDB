@@ -11,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.llc.moviebd.R
+import com.llc.moviebd.databinding.FragmentMovieCollapseToolbarBinding
 import com.llc.moviebd.databinding.FragmentMovieDetailBinding
 import com.llc.moviedb.data.model.MovieDetailModel
 import com.llc.moviedb.extension.loadFromUrl
@@ -26,7 +27,7 @@ class MovieDetailFragment : Fragment() {
 
     private val viewModel: MovieDetailViewModel by viewModels()
 
-    private var _binding: FragmentMovieDetailBinding? = null
+    private var _binding: FragmentMovieCollapseToolbarBinding? = null
     private val binding get() = _binding!!
 
     private val args: MovieDetailFragmentArgs by navArgs()
@@ -43,7 +44,7 @@ class MovieDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMovieDetailBinding.inflate(inflater, container, false)
+        _binding = FragmentMovieCollapseToolbarBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -59,9 +60,10 @@ class MovieDetailFragment : Fragment() {
                     binding.detailProgressBar.visibility = View.VISIBLE
                 }
                 is MovieDetailEvent.Success -> {
-                    binding.detailScrollView.visibility = View.VISIBLE
-                    bindDetailMovie(detailResult.movieDetailModel)
+                   // binding.detailScrollView.visibility = View.VISIBLE
                     binding.detailProgressBar.visibility = View.GONE
+
+                    bindDetailMovie(detailResult.movieDetailModel)
                 }
                 is MovieDetailEvent.Error -> {
                     binding.detailProgressBar.visibility = View.GONE

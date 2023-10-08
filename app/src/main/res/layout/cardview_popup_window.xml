@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/light_purple">
+
+    <TextView
+        android:id="@+id/tv_popup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_tiny"
+        android:layout_centerInParent="true"
+        android:paddingHorizontal="@dimen/margin_small"
+        android:textColor="@color/white"
+        android:paddingVertical="@dimen/margin_x_tiny"
+        android:text="This is pop up"
+        android:textAppearance="@style/Theme.MovieBD.Popup"
+        tools:text="This is pop up" />
+
+</RelativeLayout>

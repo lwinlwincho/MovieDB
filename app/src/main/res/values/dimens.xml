@@ -11,4 +11,6 @@
     <dimen name="margin_normal">16dp</dimen>
     <dimen name="margin_medium">20dp</dimen>
     <dimen name="margin_big">24dp</dimen>
+    <dimen name="margin_26">26dp</dimen>
+
 </resources>

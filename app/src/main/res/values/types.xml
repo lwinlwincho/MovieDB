@@ -64,4 +64,11 @@
         <item name="android:letterSpacing">0.02</item>
         <item name="android:textColor"> #AAA9B1</item>
     </style>
+
+    <style name="Theme.MovieBD.Popup">
+        <item name="fontFamily">@font/mulish_bold</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textColor">@color/light_purple</item>
+    </style>
 </resources>
